@@ -21,11 +21,27 @@
 ![Frontend](https://img.shields.io/badge/Frontend-Flutter-informational?style=for-the-badge&logo=Flutter&logoColor=white&color=02569B)
 
 ## Status
+<img src="https://progress-bar.dev/5/" alt="5%" width="200px">
+
+Desctiption | Status
+--- | ---
+Project planing | ✔
+Setup backend | ❌
+Make API | ❌
+Make authentication | ❌
+Api hosting | ❌
+Setup frontend | ❌
+Create Frontend with dummy data | ❌
+Connect Frotnend with Api | ❌
+Testing phase | ❌
+More to come later | ❌
 
 ## Usage
 
 ### Prerequisites
+Soon...
 
 ### Setup
-
+Soon...
 ### Run
+Soon...
