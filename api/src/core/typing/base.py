@@ -1,15 +1,9 @@
 from django.db.models import QuerySet
-from typing import Iterator, Union, TypeVar, Generic
+from typing import Iterator, TypeVar, Generic
 
-T = TypeVar("T")
+_Z = TypeVar("_Z")
 
 
-class QuerysetType(Generic[T]):
-    def __iter__(self) -> Iterator[Union[T, QuerySet]]:
-        pass
-
-    def first(self):
-        pass
-
-    def count(self):
+class QuerysetType(Generic[_Z], QuerySet):
+    def __iter__(self) -> Iterator[_Z]:
         pass
