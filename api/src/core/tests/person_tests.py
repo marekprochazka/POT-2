@@ -1,18 +1,11 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
-from core.models.person import Person
+from core.tests.base import BaseTestCase
 
 
-# Tests if person instance is created on user creation
-class PersonCreateTestCase(TestCase):
+class PersonCreateTestCase(BaseTestCase):
 
-    def setUp(self):
-        User.objects.create_user(username="Igor")
-        User.objects.create_user(username="Zbysek")
-
+    # tests, if persons are properly created by signal
     def test_person_creation(self):
-        person1 = Person.objects.filter(user__username="Igor").first()
-        person2 = Person.objects.filter(user__username="Zbysek").first()
-
-        self.assertNotEqual(person1, None)
-        self.assertNotEqual(person2, None)
+        self.assertNotEqual(self.person_0, None)
+        self.assertNotEqual(self.person_1, None)
+        self.assertNotEqual(self.person_2, None)
+        self.assertEqual(self.person_none, None)

@@ -5,6 +5,9 @@ from django.db.models.signals import post_save
 from core.models.base_model import BaseModel
 from django.utils.translation import gettext_lazy as _
 
+from core.typing.base import QuerysetType
+from workout.models import TrainingPlan
+
 
 class Person(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('user'))
@@ -12,6 +15,15 @@ class Person(BaseModel):
     class Meta:
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
+
+    def add_plan(self, data: dict):
+        tmp_plan = TrainingPlan(owner=self)
+        for key, value in data.items():
+            setattr(tmp_plan, key, value)
+        tmp_plan.save()
+
+    def get_all_plans(self) -> QuerysetType[TrainingPlan]:
+        return TrainingPlan.objects.filter(owner=self)
 
     @staticmethod
     def create_person_from_user(user: User):
