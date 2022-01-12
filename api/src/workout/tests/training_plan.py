@@ -1,4 +1,3 @@
-from core.models.person import Person
 from core.tests.base import BaseTestCase
 
 
