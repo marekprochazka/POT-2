@@ -16,19 +16,27 @@ class Person(BaseModel):
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
 
-    def add_plan(self, data: dict):
-        tmp_plan = TrainingPlan(owner=self)
-        for key, value in data.items():
-            setattr(tmp_plan, key, value)
-        tmp_plan.save()
-
-    def get_all_plans(self) -> QuerysetType[TrainingPlan]:
-        return TrainingPlan.objects.filter(owner=self)
+    @property
+    def num_plans(self) -> int:
+        return self.get_all_plans().count()
 
     @staticmethod
     def create_person_from_user(user: User):
         person = Person(user=user)
         person.save()
+
+    # TrainingPlan related methods
+    def add_plan(self, data: dict) -> None:
+        tmp_plan = TrainingPlan(owner=self)
+        for key, value in data.items():
+            setattr(tmp_plan, key, value)
+        tmp_plan.save()
+
+    def remove_plan(self, plan_id: str) -> None:
+        TrainingPlan.objects.get(id=plan_id).delete()
+
+    def get_all_plans(self) -> QuerysetType[TrainingPlan]:
+        return TrainingPlan.objects.filter(owner=self)
 
     def __str__(self):
         return str(self.user.username)

@@ -11,3 +11,7 @@ class TrainingPlan(BaseModel):
         verbose_name = _('Training plan')
         verbose_name_plural = _('Training plans')
 
+    def update_data(self, data: dict) -> None:
+        for key, value in data.items():
+            setattr(self, key, value)
+        self.save()
