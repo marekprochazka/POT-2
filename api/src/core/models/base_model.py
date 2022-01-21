@@ -13,6 +13,11 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+    def update_data(self, data: dict) -> None:
+        for key, value in data.items():
+            setattr(self, key, value)
+        self.save()
+
 
 class BaseTypeModel(BaseModel):
     identifier = models.CharField(verbose_name=_("Identifier"), max_length=128, unique=True,

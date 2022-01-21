@@ -26,11 +26,12 @@ class Person(BaseModel):
         person.save()
 
     # TrainingPlan related methods
-    def add_plan(self, data: dict) -> None:
-        tmp_plan = TrainingPlan(owner=self)
+    def add_plan(self, data: dict) -> TrainingPlan:
+        plan = TrainingPlan(owner=self)
         for key, value in data.items():
-            setattr(tmp_plan, key, value)
-        tmp_plan.save()
+            setattr(plan, key, value)
+        plan.save()
+        return plan
 
     def remove_plan(self, plan_id: str) -> None:
         TrainingPlan.objects.get(id=plan_id).delete()
