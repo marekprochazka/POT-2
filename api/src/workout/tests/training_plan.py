@@ -1,7 +1,7 @@
-from core.tests.base import BaseTestCase
+from workout.tests.base import BaseWorkoutTestCase
 
 
-class TrainingPlanTestCases(BaseTestCase):
+class TrainingPlanTestCases(BaseWorkoutTestCase):
 
     # tests, if plans are correctly added to persons
     def test_add_plan_to_person(self):

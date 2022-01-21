@@ -12,13 +12,16 @@ from workout.models import TrainingPlan
 class Person(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('user'))
 
+    @property
+    def num_plans(self) -> int:
+        return self.get_all_plans().count()
+
     class Meta:
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
 
-    @property
-    def num_plans(self) -> int:
-        return self.get_all_plans().count()
+    def __str__(self):
+        return str(self.user.username)
 
     @staticmethod
     def create_person_from_user(user: User):
@@ -38,9 +41,6 @@ class Person(BaseModel):
 
     def get_all_plans(self) -> QuerysetType[TrainingPlan]:
         return TrainingPlan.objects.filter(owner=self)
-
-    def __str__(self):
-        return str(self.user.username)
 
 
 def create_person_on_user_save(sender, instance, created, **kwargs):
