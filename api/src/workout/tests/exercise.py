@@ -46,3 +46,20 @@ class ExerciseTestCases(BaseWorkoutTestCase):
         self.assertEqual(queryset[1].exercise_name, self.exercise_0_2.exercise_name)
         self.assertEqual(queryset[2].exercise_name, self.exercise_0_0.exercise_name)
 
+    def test_add_overload(self):
+        self.setup_exercises()
+        self.exercise_0_0.add_overload_value(11)
+        self.exercise_0_0.add_overload_value(12)
+        self.exercise_0_0.add_overload_value(15)
+        self.assertEqual(15, self.exercise_0_0.last_overload_value)
+        self.assertEqual([11, 12, 15], self.exercise_0_0.overload_history_list)
+
+    def test_remove_overload(self):
+        self.setup_exercises()
+        self.exercise_0_0.add_overload_value(11)
+        self.exercise_0_0.add_overload_value(12)
+        self.exercise_0_0.add_overload_value(15)
+        self.exercise_0_0.add_overload_value(16)
+        self.exercise_0_0.remove_overload_value_by_index(1)
+        self.exercise_0_0.remove_overload_value_by_index(2)
+        self.assertEqual([11, 15], self.exercise_0_0.overload_history_list)

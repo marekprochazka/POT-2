@@ -13,11 +13,14 @@ class Exercise(BaseModel):
     order = models.IntegerField(verbose_name=_('Order'))
 
     @property
-    def last_overload_value(self) -> str:
-        return str(self.overload_history).split(';')[-1]
+    def last_overload_value(self) -> int:
+        return int(str(self.overload_history).split(';')[-1])
 
     @property
     def overload_history_list(self) -> list:
+        return [int(value) for value in str(self.overload_history).split(';')]
+
+    def __get_overload_history_string_list(self) -> list:
         return str(self.overload_history).split(';')
 
     class Meta:
@@ -29,11 +32,14 @@ class Exercise(BaseModel):
         return f'{self.exercise_name} - {self.training.training_name}'
 
     def add_overload_value(self, value: int) -> None:
-        self.overload_history += f';{value}'
+        if self.overload_history:
+            self.overload_history += f';{value}'
+        else:
+            self.overload_history += f'{value}'
         self.save()
 
     def remove_overload_value_by_index(self, index: int):
-        tmp_list = self.overload_history_list
+        tmp_list = self.__get_overload_history_string_list()
         del tmp_list[index]
         self.overload_history = ';'.join(tmp_list)
         self.save()
