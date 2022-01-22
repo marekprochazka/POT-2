@@ -14,7 +14,8 @@ class BaseTestCase(APITestCase):
         self.setup_persons()
 
     def create_user(self, data: dict) -> None:
-        tmp_user = User(username=data['username'], password=data['password'])
+        tmp_user = User(username=data['username'])
+        tmp_user.set_password(data['password'])
         tmp_user.save()
 
     def setup_persons(self) -> None:
@@ -24,3 +25,6 @@ class BaseTestCase(APITestCase):
         self.person_0 = Person.objects.filter(user__username='person_0@email.cz').first()
         self.person_1 = Person.objects.filter(user__username='person_1@email.cz').first()
         self.person_2 = Person.objects.filter(user__username='person_2@email.cz').first()
+
+    def setup_api_token(self, token: str):
+        self.client.credentials(HTTP_AUTHORIZATION='TOKEN {}'.format(token))

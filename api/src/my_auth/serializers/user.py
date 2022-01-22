@@ -11,10 +11,13 @@ from core.utils.token import get_or_create_token
 
 
 class BaseUserAuthSerializer(serializers.Serializer):
-    token = None
+    token: Token = None
+    user: User = None
 
     def to_representation(self, instance):
         data = {'token': self.token}
+        if self.user:
+            data.update({'username': self.user.person.username, 'email': self.user.person.email})
         return data
 
 
@@ -50,6 +53,7 @@ class UserRegisterSerializer(BaseUserAuthSerializer):
         user.username = validated_data.get('email')
         user.set_password(validated_data.get('password1'))
         user.save()
+        self.user = user
         self.token = user.person.token.key
         return user
 
@@ -64,5 +68,6 @@ class UserLoginSerializer(BaseUserAuthSerializer):
         if not user:
             raise ValidationError(detail=dict(username=_("Login failed"), password=_("Login failed")))
         validated_data.update({'user': user})
+        self.user = user
         self.token = user.person.token.key
         return validated_data
