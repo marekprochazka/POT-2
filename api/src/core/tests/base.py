@@ -13,14 +13,14 @@ class BaseTestCase(APITestCase):
     def setUp(self) -> None:
         self.setup_persons()
 
-    def create_person(self, data: dict) -> None:
-        tmp_user = User(username=data['username'], password=data['password'], email=data['email'])
+    def create_user(self, data: dict) -> None:
+        tmp_user = User(username=data['username'], password=data['password'])
         tmp_user.save()
 
     def setup_persons(self) -> None:
-        for name in ['person_0', 'person_1', 'person_2']:
-            self.create_person(
-                data={'username': name, 'password': 'myEpicPassword', 'email': 'email@email.cz'})
-        self.person_0 = Person.objects.filter(user__username='person_0').first()
-        self.person_1 = Person.objects.filter(user__username='person_1').first()
-        self.person_2 = Person.objects.filter(user__username='person_2').first()
+        for name in ['person_0@email.cz', 'person_1@email.cz', 'person_2@email.cz']:
+            self.create_user(
+                data={'username': name, 'password': 'myEpicPassword'})
+        self.person_0 = Person.objects.filter(user__username='person_0@email.cz').first()
+        self.person_1 = Person.objects.filter(user__username='person_1@email.cz').first()
+        self.person_2 = Person.objects.filter(user__username='person_2@email.cz').first()

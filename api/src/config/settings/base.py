@@ -40,7 +40,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = ['rest_framework', 'drf_yasg']
 
-MY_APPS = ['core.apps.CoreConfig', 'workout.apps.WorkoutConfig', 'auth.apps.AuthConfig']
+MY_APPS = ['core.apps.CoreConfig', 'workout.apps.WorkoutConfig', 'my_auth.apps.AuthConfig']
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
@@ -77,18 +77,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
+
+AUTH_PWD_MODULE = "django.contrib.auth.password_validation."
+
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": f"{AUTH_PWD_MODULE}UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": f"{AUTH_PWD_MODULE}MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": f"{AUTH_PWD_MODULE}CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": f"{AUTH_PWD_MODULE}NumericPasswordValidator",
     },
 ]
 

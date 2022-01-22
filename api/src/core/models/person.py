@@ -6,7 +6,12 @@ from core.models.base_model import BaseModel
 from django.utils.translation import gettext_lazy as _
 
 from core.typing.base import QuerysetType
+from core.utils.token import get_or_create_token
 from workout.models import TrainingPlan
+
+from rest_framework.authtoken.models import Token
+
+from rest_framework import status
 
 
 class Person(BaseModel):
@@ -15,6 +20,18 @@ class Person(BaseModel):
     @property
     def num_plans(self) -> int:
         return self.get_all_plans().count()
+
+    @property
+    def username(self) -> str:
+        return self.user.first_name
+
+    @property
+    def email(self) -> str:
+        return self.user.username
+
+    @property
+    def token(self) -> Token:
+        return get_or_create_token(user=self.user)
 
     class Meta:
         verbose_name = _('Person')
@@ -27,6 +44,16 @@ class Person(BaseModel):
     def create_person_from_user(user: User):
         person = Person(user=user)
         person.save()
+
+    def logout(self) -> (int, str):
+        try:
+            Token.objects.get(user=self.user).delete()
+            msg = _('Logout successful')
+            num_status = status.HTTP_200_OK
+        except Token.DoesNotExist:
+            msg = _('Logout failed')
+            num_status = status.HTTP_403_FORBIDDEN
+        return num_status, msg
 
     # TrainingPlan related methods
     def add_plan(self, data: dict) -> TrainingPlan:
