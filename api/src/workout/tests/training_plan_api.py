@@ -5,7 +5,7 @@ from workout.tests.base import BaseWorkoutTestCase
 
 
 class TrainingPlanAPITestCases(BaseWorkoutTestCase):
-    def test_add_workout(self):
+    def test_add_training_plan(self):
         self.login(self.person_0)
         url = reverse('workout:training_plan')
         data = {'plan_name': 'plan 1'}
@@ -14,7 +14,7 @@ class TrainingPlanAPITestCases(BaseWorkoutTestCase):
         self.assertEqual(1, self.person_0.num_plans)
         self.assertEqual('plan 1', self.person_0.get_all_plans()[0].plan_name)
 
-    def test_get_workout_list(self):
+    def test_get_training_plan_list(self):
         self.login(self.person_0)
         url = reverse('workout:training_plan')
         self.person_0.add_plan({'plan_name': 'plan 1'})
@@ -25,7 +25,7 @@ class TrainingPlanAPITestCases(BaseWorkoutTestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(3, len(response.data))
 
-    def test_get_workout_detail(self):
+    def test_get_training_plan_detail(self):
         self.login(self.person_0)
         self.person_0.add_plan({'plan_name': 'plan 1'})
         self.person_0.add_plan({'plan_name': 'plan 2'})

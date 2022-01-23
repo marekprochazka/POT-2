@@ -8,10 +8,12 @@ from workout.serializers.training import TrainingSerializerLite
 class TrainingPlanSerializer(BaseSerializer):
     id = serializers.UUIDField(read_only=True)
     trainings = TrainingSerializerLite(read_only=True, many=True)
+    x_created = serializers.DateTimeField(read_only=True)
+    x_modified = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = TrainingPlan
-        fields = ['id', 'plan_name', 'trainings']
+        fields = ['id', 'plan_name', 'trainings', 'x_created', 'x_modified']
 
     def create(self, validated_data) -> TrainingPlan:
         instance = self.logged_person.add_plan(validated_data)
