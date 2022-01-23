@@ -37,7 +37,7 @@ class AuthTestCase(BaseTestCase):
         }
         self.login_data = {
             'username': self.person_0.email,
-            'password': 'myEpicPassword'
+            'password': self.universal_password
         }
         self.login_data_wrong_1 = {
             'username': self.person_0.email,

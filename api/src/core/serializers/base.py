@@ -1,15 +1,16 @@
 from rest_framework import serializers
 
-from core.utils import get_logged_person, get_lang
 from rest_framework.fields import empty
+
+from core.models import Person
 
 
 class BaseSerializer(serializers.ModelSerializer):
-    _logged_person = None
+    logged_person: Person = None
 
     def __init__(self, instance=None, data=empty, **kwargs):
         super(BaseSerializer, self).__init__(instance=instance, data=data, **kwargs)
-        self._logged_person = get_logged_person(self.context.get('request'))
+        self.logged_person = self.context.get('logged_person')
 
     def _get_language(self):
-        return get_lang(self.context.get('request'))
+        return self.context.get('lang')
