@@ -18,3 +18,9 @@ class TrainingSerializer(BaseSerializer):
     def update(self, instance: Training, validated_data) -> Training:
         instance.update_data(validated_data)
         return instance
+
+
+class TrainingSerializerLite(BaseSerializer):
+    class Meta:
+        model = Training
+        fields = ['id', 'training_name']

@@ -8,7 +8,7 @@ class Exercise(BaseModel):
     overload_type = models.ForeignKey('workout.TypeOverload', on_delete=models.PROTECT, verbose_name=_('Overload type'),
                                       null=True, blank=True)
     training = models.ForeignKey('workout.Training', on_delete=models.CASCADE, verbose_name=_('Training'), null=True,
-                                 blank=True)
+                                 blank=True, related_name='exercises')
     overload_history = models.CharField(verbose_name=_('Overload history'), max_length=1028, default='')
     order = models.IntegerField(verbose_name=_('Order'))
 

@@ -8,7 +8,8 @@ from workout.models.training import Training
 
 class TrainingPlan(BaseModel):
     plan_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
-    owner = models.ForeignKey('core.Person', on_delete=models.CASCADE, verbose_name=_('Owner'), null=True, blank=True)
+    owner = models.ForeignKey('core.Person', on_delete=models.CASCADE, verbose_name=_('Owner'), null=True, blank=True,
+                              related_name='plans')
 
     @property
     def num_trainings(self) -> int:
