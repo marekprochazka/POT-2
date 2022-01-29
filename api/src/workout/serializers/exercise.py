@@ -1,3 +1,5 @@
+from rest_framework.exceptions import ValidationError
+
 from core.serializers.base import BaseSerializer
 from rest_framework import serializers
 from typing import List
@@ -49,3 +51,21 @@ class ExerciseSerializerLite(BaseSerializer):
         if obj.last_overload_value:
             return f'{obj.last_overload_value} {obj.overload_type.unit}'
         return None
+
+
+class ExerciseOrderSerializer(serializers.Serializer):
+    index = serializers.IntegerField(min_value=0)
+
+    def validate(self, attrs):
+        validated_data = super(ExerciseOrderSerializer, self).validate(attrs)
+
+        training: Training = self.context.get('training')
+        exercise: Exercise = self.context.get('exercise')
+
+        if exercise.training != training:
+            raise ValidationError('Exercise is not part of this training')
+
+        if validated_data.get('index') >= training.num_exercises:
+            raise ValidationError('Invalid index')
+
+        return validated_data
