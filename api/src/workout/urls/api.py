@@ -1,6 +1,7 @@
 from django.urls import path
 
-from workout.views.exercise import ExerciseListCreateView, ExerciseView, ExerciseOverloadView, ExerciseOrderView
+from workout.views.exercise import ExerciseListCreateView, ExerciseView, ExerciseOverloadAddView, \
+    ExerciseOverloadRemoveView, ExerciseOrderView
 from workout.views.training import TrainingListCreateView, TrainingView
 from workout.views.training_plan import TrainingPlanListCreateView, TrainingPlanView
 
@@ -15,7 +16,8 @@ urlpatterns = [
 
     path('exercise/<uuid:training_id>', ExerciseListCreateView.as_view(), name='exercise'),
     path('exercise/<uuid:training_id>/<uuid:exercise_id>', ExerciseView.as_view(), name='exercise'),
-    path('exercise/<uuid:exercise_id>/overload', ExerciseOverloadView.as_view(), name='exercise_overload'),
-    path('exercise/<uuid:exercise_id>/<int:index>/overload', ExerciseOverloadView.as_view(), name='exercise_overload'),
+    path('exercise/<uuid:exercise_id>/overload', ExerciseOverloadAddView.as_view(), name='exercise_overload'),
+    path('exercise/<uuid:exercise_id>/<int:index>/overload', ExerciseOverloadRemoveView.as_view(),
+         name='exercise_overload'),
     path('exercise/<uuid:training_id>/<uuid:exercise_id>/order', ExerciseOrderView.as_view(), name='exercise_order')
 ]

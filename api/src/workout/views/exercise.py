@@ -35,17 +35,15 @@ class ExerciseView(RetrieveUpdateDestroyAPIView, BaseExerciseView):
     pass
 
 
-class ExerciseOverloadView(BaseAPIView):
+class BaseExerciseOverloadView(BaseAPIView):
     exercise: Exercise = None
 
     def initial(self, request, *args, **kwargs):
-        super(ExerciseOverloadView, self).initial(request, *args, **kwargs)
+        super(BaseExerciseOverloadView, self).initial(request, *args, **kwargs)
         self.exercise = Exercise.objects.get(id=self.kwargs.get('exercise_id'))
 
-    def validate_index(self, index: int) -> bool:
-        if index >= len(self.exercise.overload_history_list):
-            return False
-        return True
+
+class ExerciseOverloadAddView(BaseExerciseOverloadView):
 
     def post(self, request, *args, **kwargs):
         serializer = AddOverloadSerializer(data=request.data, context=self.get_serializer_context())
@@ -53,6 +51,14 @@ class ExerciseOverloadView(BaseAPIView):
             self.exercise.add_overload_value(serializer.data.get('value'))
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
+
+
+class ExerciseOverloadRemoveView(BaseExerciseOverloadView):
+
+    def validate_index(self, index: int) -> bool:
+        if index >= len(self.exercise.overload_history_list):
+            return False
+        return True
 
     def delete(self, request, *args, **kwargs):
         index = self.kwargs.get('index')
