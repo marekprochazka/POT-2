@@ -14,8 +14,6 @@
 
 ## POT-2
 
-### Technologies
-
 ## Technologies
 
 ![Python](https://img.shields.io/badge/Python-3.8-informational?style=for-the-badge&logo=Python&logoColor=white&color=092e20)
