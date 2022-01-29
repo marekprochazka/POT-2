@@ -25,7 +25,7 @@ class BaseTrainingView(BaseAPIView):
 
 class TrainingListCreateView(ListCreateAPIView, BaseTrainingView):
     def get_queryset(self):
-        return Training.objects.filter(training_plan=self.training_plan)
+        return self.training_plan.get_all_trainings()
 
 
 class TrainingView(RetrieveUpdateDestroyAPIView, BaseTrainingView):

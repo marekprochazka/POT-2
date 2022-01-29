@@ -51,8 +51,8 @@ class ExerciseTestCases(BaseWorkoutTestCase):
         self.exercise_0_0.add_overload_value(11)
         self.exercise_0_0.add_overload_value(12)
         self.exercise_0_0.add_overload_value(15)
-        self.assertEqual(15, self.exercise_0_0.last_overload_value)
-        self.assertEqual([11, 12, 15], self.exercise_0_0.overload_history_list)
+        self.assertEqual(15.0, self.exercise_0_0.last_overload_value)
+        self.assertEqual([11.0, 12.0, 15.0], self.exercise_0_0.overload_history_list)
 
     def test_remove_overload(self):
         self.setup_exercises()
@@ -62,4 +62,4 @@ class ExerciseTestCases(BaseWorkoutTestCase):
         self.exercise_0_0.add_overload_value(16)
         self.exercise_0_0.remove_overload_value_by_index(1)
         self.exercise_0_0.remove_overload_value_by_index(2)
-        self.assertEqual([11, 15], self.exercise_0_0.overload_history_list)
+        self.assertEqual([11.0, 15.0], self.exercise_0_0.overload_history_list)
