@@ -34,8 +34,8 @@ class BaseWorkoutTestCase(BaseTestCase):
         self.training_1_0 = self.training_plan_1.add_training({'training_name': 'training_1_0'})
 
     def setup_overload_types(self):
-        self.overload_type_0 = TypeOverload(identifier='overload_0', description='Overload 0', order=0)
-        self.overload_type_1 = TypeOverload(identifier='overload_1', description='Overload 1', order=0)
+        self.overload_type_0 = TypeOverload.objects.create(identifier='overload_0', description='Overload 0', order=0)
+        self.overload_type_1 = TypeOverload.objects.create(identifier='overload_1', description='Overload 1', order=0)
 
     def setup_exercises(self) -> None:
         self.exercise_0_0 = self.training_0_0.add_exercise(
