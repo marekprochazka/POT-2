@@ -2,6 +2,7 @@ from core.serializers.base import BaseSerializer
 from rest_framework import serializers
 from typing import List
 from workout.models import Exercise, Training
+from workout.serializers.types import TypeOverloadSerializer
 
 
 class ExerciseSerializer(BaseSerializer):
@@ -30,9 +31,10 @@ class ExerciseSerializer(BaseSerializer):
         instance.update_data(validated_data)
         return instance
 
-    def to_representation(self, instance):
+    def to_representation(self, instance: Exercise):
         representation = super(ExerciseSerializer, self).to_representation(instance)
-        # TODO overload type serializer
+        serializer = TypeOverloadSerializer(instance.overload_type)
+        representation.update(dict(overload_type=serializer.data))
         return representation
 
 
