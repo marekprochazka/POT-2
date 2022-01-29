@@ -2,13 +2,16 @@ from core.serializers.base import BaseSerializer
 from workout.models import Training, TrainingPlan
 from rest_framework import serializers
 
+from workout.serializers.exercise import ExerciseSerializerLite
+
 
 class TrainingSerializer(BaseSerializer):
     id = serializers.UUIDField(read_only=True)
+    exercises = ExerciseSerializerLite(many=True, read_only=True)
 
     class Meta:
         model = Training
-        fields = ['id', 'training_name']
+        fields = ['id', 'training_name', 'exercises']
 
     def create(self, validated_data) -> Training:
         plan: TrainingPlan = self.context.get('training_plan')

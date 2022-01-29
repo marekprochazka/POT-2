@@ -6,18 +6,20 @@ from workout.models import Exercise, Training
 
 class ExerciseSerializer(BaseSerializer):
     overload_history = serializers.SerializerMethodField(read_only=True)
-    last_overload_value = serializers.SerializerMethodField(read_only=True)
+    last_overload_value_string = serializers.SerializerMethodField(read_only=True)
     order = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Exercise
-        fields = ['id', 'exercise_name', 'overload_type', 'overload_history', 'last_overload_value', 'order']
+        fields = ['id', 'exercise_name', 'overload_type', 'overload_history', 'last_overload_value_string', 'order']
 
-    def get_overload_history(self, obj: Exercise) -> List[float]:
+    def get_overload_history(self, obj: Exercise) -> (List[float], None):
         return obj.overload_history_list
 
-    def get_last_overload_value(self, obj: Exercise) -> float:
-        return obj.last_overload_value
+    def get_last_overload_value_string(self, obj: Exercise) -> (str, None):
+        if obj.last_overload_value:
+            return f'{obj.last_overload_value} {obj.overload_type.unit}'
+        return None
 
     def create(self, validated_data: dict) -> Exercise:
         training: Training = self.context.get('training')
@@ -32,3 +34,16 @@ class ExerciseSerializer(BaseSerializer):
         representation = super(ExerciseSerializer, self).to_representation(instance)
         # TODO overload type serializer
         return representation
+
+
+class ExerciseSerializerLite(BaseSerializer):
+    last_overload_value_string = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Exercise
+        fields = ['id', 'exercise_name', 'last_overload_value_string', 'order']
+
+    def get_last_overload_value_string(self, obj: Exercise) -> (str, None):
+        if obj.last_overload_value:
+            return f'{obj.last_overload_value} {obj.overload_type.unit}'
+        return None
