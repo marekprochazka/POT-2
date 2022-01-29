@@ -4,6 +4,8 @@ from core.models.base_model import BaseModel
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 
+from django.db.models.signals import pre_delete
+
 
 class Exercise(BaseModel):
     exercise_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
@@ -51,3 +53,11 @@ class Exercise(BaseModel):
         del tmp_list[index]
         self.overload_history = ';'.join(tmp_list)
         self.save()
+
+
+def update_exercise_order_on_delete(sender, instance: Exercise, using, **kwargs):
+    training = instance.training
+    training.change_exercise_order(instance, training.num_exercises - 1)
+
+
+pre_delete.connect(update_exercise_order_on_delete, sender=Exercise)
