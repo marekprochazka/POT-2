@@ -1,15 +1,18 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
+from core.utils.permission_handler import BaseRight
+from core.utils.permissions import get_class_for_right
 from core.views.base import BaseAPIView
 from workout.models import Training, TrainingPlan
 from workout.serializers.training import TrainingSerializer
+from workout.utils.permission_handlers import TrainingPermissionHandler
 
 
 class BaseTrainingView(BaseAPIView):
     queryset = Training.objects.all()
     serializer_class = TrainingSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, get_class_for_right(TrainingPermissionHandler, BaseRight.VIEW)]
     lookup_url_kwarg = 'training_id'
     training_plan: TrainingPlan = None
 
