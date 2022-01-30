@@ -15,6 +15,7 @@ class Exercise(BaseModel):
                                  blank=True, related_name='exercises')
     overload_history = models.CharField(verbose_name=_('Overload history'), max_length=1028, default='')
     order = models.IntegerField(verbose_name=_('Order'))
+    description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
 
     @property
     def last_overload_value(self) -> (float, None):
