@@ -44,7 +44,7 @@ class Training(BaseModel):
     def get_all_exercises(self) -> QuerysetType[Exercise]:
         return Exercise.objects.filter(training=self)
 
-    def change_exercise_order(self, exercise_instance: Exercise, new_order: int):
+    def change_exercise_order(self, exercise_instance: Exercise, new_order: int) -> None:
         for exercise in self.get_all_exercises():
             if exercise_instance.order > new_order:
                 if new_order <= exercise.order < exercise_instance.order:
@@ -57,14 +57,5 @@ class Training(BaseModel):
         exercise_instance.order = new_order
         exercise_instance.save()
 
-        # orders = list(self.get_all_exercises().values_list('order', flat=True))
-        # tmp = orders[exercise.order]
-        # orders.pop(exercise.order)
-        # orders.insert(new_index, tmp)
-        #
-        # for index, exercise in enumerate(list(self.get_all_exercises())):
-        #     exercise.order = orders[index]
-        #     exercise.save()
-
-    def get_all_exercises_of_overload_type(self, type_overload: TypeOverload):
+    def get_all_exercises_of_overload_type(self, type_overload: TypeOverload) -> QuerysetType[Exercise]:
         return Exercise.objects.filter(training=self, type_overload=type_overload)
