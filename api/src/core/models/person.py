@@ -56,10 +56,11 @@ class Person(BaseModel):
         return num_status, msg
 
     # TrainingPlan related methods
-    def add_plan(self, data: dict) -> TrainingPlan:
+    def add_plan(self, **kwargs) -> TrainingPlan:
         plan = TrainingPlan(owner=self)
-        for key, value in data.items():
-            setattr(plan, key, value)
+        for key, value in kwargs.items():
+            if hasattr(plan, key):
+                setattr(plan, key, value)
         plan.save()
         return plan
 

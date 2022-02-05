@@ -23,10 +23,10 @@ class TrainingAPITestCases(BaseWorkoutTestCase):
 
     def test_get_trainings_list(self):
         self.login(self.person_0)
-        self.training_plan_0.add_training({'training_name': 'training 0'})
-        self.training_plan_0.add_training({'training_name': 'training 1'})
-        self.training_plan_1.add_training({'training_name': 'training 2'})
-        self.training_plan_2.add_training({'training_name': 'training 3'})
+        self.training_plan_0.add_training(training_name='training 0')
+        self.training_plan_0.add_training(training_name='training 1')
+        self.training_plan_1.add_training(training_name='training 2')
+        self.training_plan_2.add_training(training_name='training 3')
 
         url = self.get_url(dict(training_plan_id=self.training_plan_0.id))
         response = self.client.get(url)
@@ -36,8 +36,8 @@ class TrainingAPITestCases(BaseWorkoutTestCase):
 
     def test_get_training_detail(self):
         self.login(self.person_0)
-        self.training_0_0 = self.training_plan_0.add_training({'training_name': 'training_0_0'})
-        self.training_0_1 = self.training_plan_0.add_training({'training_name': 'training_0_1'})
+        self.training_0_0 = self.training_plan_0.add_training(training_name='training_0_0')
+        self.training_0_1 = self.training_plan_0.add_training(training_name='training_0_1')
 
         url = self.get_url(dict(training_plan_id=self.training_plan_0.id, training_id=self.training_0_0.id))
         response = self.client.get(url)
@@ -47,7 +47,7 @@ class TrainingAPITestCases(BaseWorkoutTestCase):
 
     def test_update_training(self):
         self.login(self.person_0)
-        self.training_0_0 = self.training_plan_0.add_training({'training_name': 'training_0_0'})
+        self.training_0_0 = self.training_plan_0.add_training(training_name='training_0_0')
 
         url = self.get_url(dict(training_plan_id=self.training_plan_0.id, training_id=self.training_0_0.id))
         data = {'training_name': 'new_name'}
@@ -59,7 +59,7 @@ class TrainingAPITestCases(BaseWorkoutTestCase):
 
     def test_delete_training(self):
         self.login(self.person_0)
-        self.training_0_0 = self.training_plan_0.add_training({'plan_name': 'training_0_0'})
+        self.training_0_0 = self.training_plan_0.add_training(plan_name='training_0_0')
 
         url = self.get_url(dict(training_plan_id=self.training_plan_0.id, training_id=self.training_0_0.id))
         response = self.client.delete(url)

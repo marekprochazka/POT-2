@@ -27,11 +27,11 @@ class ExerciseSerializer(BaseSerializer):
 
     def create(self, validated_data: dict) -> Exercise:
         training: Training = self.context.get('training')
-        instance = training.add_exercise(validated_data)
+        instance = training.add_exercise(**validated_data)
         return instance
 
     def update(self, instance: Exercise, validated_data: dict) -> Exercise:
-        instance.update_data(validated_data)
+        instance.update_data(**validated_data)
         return instance
 
     def to_representation(self, instance: Exercise):

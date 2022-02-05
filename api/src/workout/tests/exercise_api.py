@@ -22,10 +22,10 @@ class ExerciseApiTestCases(BaseWorkoutTestCase):
 
     def test_get_exercises_list(self) -> None:
         self.login(self.person_0)
-        self.exercise_0_0 = self.training_0_0.add_exercise(
-            dict(exercise_name='exercise_0_0', overload_type=self.overload_type_0))
-        self.exercise_0_1 = self.training_0_0.add_exercise(
-            dict(exercise_name='exercise_0_1', overload_type=self.overload_type_0))
+        self.exercise_0_0 = self.training_0_0.add_exercise(exercise_name='exercise_0_0',
+                                                           overload_type=self.overload_type_0)
+        self.exercise_0_1 = self.training_0_0.add_exercise(exercise_name='exercise_0_1',
+                                                           overload_type=self.overload_type_0)
 
         url = reverse('workout:exercise', kwargs=dict(training_id=str(self.training_0_0.id)))
         response = self.client.get(url)
@@ -36,9 +36,8 @@ class ExerciseApiTestCases(BaseWorkoutTestCase):
 
     def test_get_exercise_detail(self) -> None:
         self.login(self.person_0)
-        self.exercise_0_0 = self.training_0_0.add_exercise(
-            dict(exercise_name='exercise_0_0', overload_type=self.overload_type_0)
-        )
+        self.exercise_0_0 = self.training_0_0.add_exercise(exercise_name='exercise_0_0',
+                                                           overload_type=self.overload_type_0)
 
         url = reverse('workout:exercise',
                       kwargs=dict(training_id=str(self.training_0_0.id), exercise_id=str(self.exercise_0_0.id)))
@@ -49,9 +48,8 @@ class ExerciseApiTestCases(BaseWorkoutTestCase):
 
     def test_update_exercise(self) -> None:
         self.login(self.person_0)
-        self.exercise_0_0 = self.training_0_0.add_exercise(
-            dict(exercise_name='exercise_0_0', overload_type=self.overload_type_0)
-        )
+        self.exercise_0_0 = self.training_0_0.add_exercise(exercise_name='exercise_0_0',
+                                                           overload_type=self.overload_type_0)
 
         url = reverse('workout:exercise',
                       kwargs=dict(training_id=str(self.training_0_0.id), exercise_id=str(self.exercise_0_0.id)))
@@ -63,9 +61,8 @@ class ExerciseApiTestCases(BaseWorkoutTestCase):
 
     def test_delete_exercise(self) -> None:
         self.login(self.person_0)
-        self.exercise_0_0 = self.training_0_0.add_exercise(
-            dict(exercise_name='exercise_0_0', overload_type=self.overload_type_0)
-        )
+        self.exercise_0_0 = self.training_0_0.add_exercise(exercise_name='exercise_0_0',
+                                                           overload_type=self.overload_type_0)
 
         url = reverse('workout:exercise',
                       kwargs=dict(training_id=str(self.training_0_0.id), exercise_id=str(self.exercise_0_0.id)))

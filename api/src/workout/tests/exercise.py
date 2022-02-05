@@ -9,11 +9,11 @@ class ExerciseTestCases(BaseWorkoutTestCase):
 
     def test_add_and_remove_exercise(self):
         self.exercise_0_0 = self.training_0_0.add_exercise(
-            {'exercise_name': 'squat', 'overload_type': self.overload_type_0})
+            exercise_name='squat', overload_type=self.overload_type_0)
         self.exercise_0_1 = self.training_0_0.add_exercise(
-            {'exercise_name': 'bench', 'overload_type': self.overload_type_0})
+            exercise_name='bench', overload_type=self.overload_type_0)
         self.exercise_1_0 = self.training_0_1.add_exercise(
-            {'exercise_name': 'deadlift', 'overload_type': self.overload_type_0})
+            exercise_name='deadlift', overload_type=self.overload_type_0)
 
         self.assertEqual(2, self.training_0_0.num_exercises)
         self.assertEqual(1, self.training_0_1.num_exercises)

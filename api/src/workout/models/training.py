@@ -29,10 +29,11 @@ class Training(BaseModel):
         return str(self.training_name)
 
     # Exercise related methods
-    def add_exercise(self, data: dict) -> Exercise:
+    def add_exercise(self, **kwargs) -> Exercise:
         exercise = Exercise(training=self)
-        for key, value in data.items():
-            setattr(exercise, key, value)
+        for key, value in kwargs.items():
+            if hasattr(exercise, key):
+                setattr(exercise, key, value)
         exercise.order = self.num_exercises
         exercise.save()
         return exercise

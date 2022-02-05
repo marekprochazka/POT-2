@@ -23,10 +23,11 @@ class TrainingPlan(BaseModel):
         return str(self.plan_name)
 
     # Trainings related methods
-    def add_training(self, data: dict) -> Training:
+    def add_training(self, **kwargs) -> Training:
         training = Training(training_plan=self)
-        for key, value in data.items():
-            setattr(training, key, value)
+        for key, value in kwargs.items():
+            if hasattr(training, key):
+                setattr(training, key, value)
         training.save()
         return training
 

@@ -15,11 +15,11 @@ class TrainingSerializer(BaseSerializer):
 
     def create(self, validated_data) -> Training:
         plan: TrainingPlan = self.context.get('training_plan')
-        instance = plan.add_training(validated_data)
+        instance = plan.add_training(**validated_data)
         return instance
 
     def update(self, instance: Training, validated_data) -> Training:
-        instance.update_data(validated_data)
+        instance.update_data(**validated_data)
         return instance
 
 

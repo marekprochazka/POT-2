@@ -13,9 +13,10 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-    def update_data(self, data: dict) -> None:
-        for key, value in data.items():
-            setattr(self, key, value)
+    def update_data(self, **kwargs) -> None:
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
         self.save()
 
 

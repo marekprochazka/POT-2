@@ -16,9 +16,9 @@ class TrainingPlanSerializer(BaseSerializer):
         fields = ['id', 'plan_name', 'trainings', 'x_created', 'x_modified']
 
     def create(self, validated_data) -> TrainingPlan:
-        instance = self.logged_person.add_plan(validated_data)
+        instance = self.logged_person.add_plan(**validated_data)
         return instance
 
     def update(self, instance: TrainingPlan, validated_data) -> TrainingPlan:
-        instance.update_data(validated_data)
+        instance.update_data(**validated_data)
         return instance
