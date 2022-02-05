@@ -14,6 +14,10 @@ class Training(BaseModel):
                                       null=True, blank=True, related_name='trainings')
 
     @property
+    def owner(self):
+        return self.training_plan.owner
+
+    @property
     def num_exercises(self) -> int:
         return self.get_all_exercises().count()
 

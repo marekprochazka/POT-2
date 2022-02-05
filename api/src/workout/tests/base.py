@@ -21,6 +21,7 @@ class BaseWorkoutTestCase(BaseTestCase):
     exercise_1_0: Exercise = None
     exercise_1_1: Exercise = None
     exercise_2_0: Exercise = None
+    exercise_1_1_1: Exercise = None
 
     def setup_training_plans(self) -> None:
         self.training_plan_0 = self.person_0.add_plan({'plan_name': 'training_plan_0'})
@@ -50,3 +51,5 @@ class BaseWorkoutTestCase(BaseTestCase):
             {'exercise_name': 'exercise_1_1', 'overload_type': self.overload_type_0})
         self.exercise_2_0 = self.training_0_2.add_exercise(
             {'exercise_name': 'exercise_2_0', 'overload_type': self.overload_type_0})
+        self.exercise_1_1_1 = self.training_1_0.add_exercise(
+            {'exercise_name': 'exercise_1_1_1', 'overload_type': self.overload_type_0})

@@ -18,6 +18,10 @@ class Exercise(BaseModel):
     description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
 
     @property
+    def owner(self):
+        return self.training.training_plan.owner
+
+    @property
     def last_overload_value(self) -> (float, None):
         if self.overload_history:
             return float(str(self.overload_history).split(';')[-1])

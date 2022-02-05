@@ -25,17 +25,65 @@ class PermissionsTestCases(BaseWorkoutTestCase):
 
         self.assertEqual(status.HTTP_403_FORBIDDEN, response_2.status_code)
 
+    def base_test_EDIT(self, url: str, data: dict) -> None:
+        self.login(self.person_0)
+        response_1 = self.client.put(url, data)
+        response_2 = self.client.patch(url, data)
+
+        self.login(self.person_1)
+        response_3 = self.client.put(url, data)
+        response_4 = self.client.patch(url, data)
+
+        for response in (response_1, response_2):
+            self.assertEqual(status.HTTP_200_OK, response.status_code)
+
+        for response in (response_3, response_4):
+            self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
+
+    def base_test_DELETE(self, url_1: str, url_2: str) -> None:
+        self.login(self.person_0)
+        response_1 = self.client.delete(url_1)
+        self.login(self.person_2)
+        response_2 = self.client.delete(url_2)
+        self.assertEqual(status.HTTP_204_NO_CONTENT, response_1.status_code)
+        self.assertEqual(status.HTTP_403_FORBIDDEN, response_2.status_code)
+
     def test_training_plan_permission_VIEW(self) -> None:
         url = reverse('workout:training_plan',
                       kwargs=dict(training_plan_id=str(self.training_plan_0.id))
                       )
         self.base_test_VIEW(url)
 
+    def test_training_plan_permission_EDIT(self) -> None:
+        url = reverse('workout:training_plan',
+                      kwargs=dict(training_plan_id=str(self.training_plan_0.id))
+                      )
+        data = {'plan_name': 'new_name'}
+        self.base_test_EDIT(url, data)
+
+    def test_training_plan_permission_DELETE(self) -> None:
+        url_1 = reverse('workout:training_plan', kwargs=dict(training_plan_id=str(self.training_plan_0.id)))
+        url_2 = reverse('workout:training_plan', kwargs=dict(training_plan_id=str(self.training_plan_1.id)))
+        self.base_test_DELETE(url_1, url_2)
+
     def test_training_permission_VIEW(self) -> None:
         url = reverse('workout:training',
                       kwargs=dict(training_plan_id=str(self.training_plan_0.id), training_id=str(self.training_0_0.id))
                       )
         self.base_test_VIEW(url)
+
+    def test_training_permission_EDIT(self) -> None:
+        url = reverse('workout:training',
+                      kwargs=dict(training_plan_id=self.training_plan_0.id, training_id=self.training_0_0.id))
+        data = {'training_name': 'new_name'}
+        self.base_test_EDIT(url, data)
+
+    def test_training_permission_DELETE(self) -> None:
+        url_1 = reverse('workout:training',
+                        kwargs=dict(training_plan_id=self.training_plan_0.id, training_id=self.training_0_0.id))
+        url_2 = reverse('workout:training',
+                        kwargs=dict(training_plan_id=self.training_plan_1.id, training_id=self.training_1_0.id))
+        self.base_test_DELETE(url_1, url_2)
 
     def test_exercise_permission_VIEW(self) -> None:
         url = reverse('workout:exercise',
@@ -44,6 +92,22 @@ class PermissionsTestCases(BaseWorkoutTestCase):
         self.base_test_VIEW(url)
 
     def test_exercise_permission_EDIT(self) -> None:
+        url = reverse('workout:exercise',
+                      kwargs=dict(training_id=str(self.training_0_0.id), exercise_id=str(self.exercise_0_0.id))
+                      )
+        data = {'exercise_name': 'new_name'}
+        self.base_test_EDIT(url, data)
+
+    def test_exercise_permission_DELETE(self) -> None:
+        url_1 = reverse('workout:exercise',
+                        kwargs=dict(training_id=str(self.training_0_0.id), exercise_id=str(self.exercise_0_0.id))
+                        )
+        url_2 = reverse('workout:exercise',
+                        kwargs=dict(training_id=str(self.training_1_0.id), exercise_id=str(self.exercise_1_1_1.id))
+                        )
+        self.base_test_DELETE(url_1, url_2)
+
+    def test_exercise_permission_EDIT_special(self) -> None:
         url_add_overload = reverse('workout:exercise_overload', kwargs=dict(exercise_id=str(self.exercise_0_0.id)))
         data_add_overload = {'value': 15}
         url_remove_overload = reverse('workout:exercise_overload',

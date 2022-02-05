@@ -7,6 +7,7 @@ from core.views.base import BaseAPIView
 from workout.models import TrainingPlan
 from workout.serializers.training_plan import TrainingPlanSerializer
 from workout.utils.permission_handlers import TrainingPLanPermissionHandler
+from core.utils import decorators
 
 
 class BaseTrainingPlanView(BaseAPIView):
@@ -22,4 +23,20 @@ class TrainingPlanListCreateView(ListCreateAPIView, BaseTrainingPlanView):
 
 
 class TrainingPlanView(RetrieveUpdateDestroyAPIView, BaseTrainingPlanView):
-    pass
+    training_plan: TrainingPlan = None
+
+    def initial(self, request, *args, **kwargs):
+        super(TrainingPlanView, self).initial(request, *args, **kwargs)
+        self.training_plan = self.get_object()
+
+    @decorators.has_right(TrainingPLanPermissionHandler, 'training_plan', BaseRight.EDIT)
+    def put(self, request, *args, **kwargs):
+        return super(TrainingPlanView, self).put(request, *args, **kwargs)
+
+    @decorators.has_right(TrainingPLanPermissionHandler, 'training_plan', BaseRight.EDIT)
+    def patch(self, request, *args, **kwargs):
+        return super(TrainingPlanView, self).patch(request, *args, **kwargs)
+
+    @decorators.has_right(TrainingPLanPermissionHandler, 'training_plan', BaseRight.DELETE)
+    def delete(self, request, *args, **kwargs):
+        return super(TrainingPlanView, self).delete(request, *args, **kwargs)

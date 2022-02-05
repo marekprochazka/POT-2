@@ -36,7 +36,23 @@ class ExerciseListCreateView(ListCreateAPIView, BaseExerciseView):
 
 
 class ExerciseView(RetrieveUpdateDestroyAPIView, BaseExerciseView):
-    pass
+    exercise: Exercise = None
+
+    def initial(self, request, *args, **kwargs):
+        super(ExerciseView, self).initial(request, *args, **kwargs)
+        self.exercise = self.get_object()
+
+    @decorators.has_right(ExercisePermissionHandler, 'exercise', BaseRight.EDIT)
+    def put(self, request, *args, **kwargs):
+        return super(ExerciseView, self).put(request, *args, **kwargs)
+
+    @decorators.has_right(ExercisePermissionHandler, 'exercise', BaseRight.EDIT)
+    def patch(self, request, *args, **kwargs):
+        return super(ExerciseView, self).patch(request, *args, **kwargs)
+
+    @decorators.has_right(ExercisePermissionHandler, 'exercise', BaseRight.DELETE)
+    def delete(self, request, *args, **kwargs):
+        return super(ExerciseView, self).delete(request, *args, **kwargs)
 
 
 class BaseExerciseOverloadView(BaseAPIView):
