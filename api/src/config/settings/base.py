@@ -22,7 +22,6 @@ env.read_env(str(PROJECT_DIR / ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('SECRET_KEY')
 
-
 ALLOWED_HOSTS = [env.str('ALLOWED_HOST')]
 
 # Application definition
@@ -38,7 +37,7 @@ DJANGO_APPS = [
     'rest_framework.authtoken',
 ]
 
-THIRD_PARTY_APPS = ['rest_framework', 'drf_yasg']
+THIRD_PARTY_APPS = ['rest_framework', 'drf_yasg', 'django_dart_reverse']
 
 MY_APPS = ['core.apps.CoreConfig', 'workout.apps.WorkoutConfig', 'my_auth.apps.AuthConfig']
 
@@ -72,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'    
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -131,3 +130,5 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
+
+DART_REVERSE_PATH = os.path.join(PROJECT_DIR.parent, *['app', 'lib', 'reverse'])
