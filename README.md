@@ -39,17 +39,5 @@
 | Testing phase                   | ❌      |
 | More to come later              | ❌      |
 
-## Usage
 
-### Prerequisites
-
-Soon...
-
-### Setup
-
-Soon...
-
-### Run
-
-Soon...
 
