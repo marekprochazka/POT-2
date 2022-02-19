@@ -14,3 +14,6 @@
     // RUN
     python manage.py runserver
 ```
+
+## API documentation 
+- localhost:8000 or localhost:8000/swagger
