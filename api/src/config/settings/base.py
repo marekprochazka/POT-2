@@ -14,6 +14,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PROJECT_DIR = BASE_DIR.parent
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'data', 'media')
 env = environ.Env()
 env.read_env(str(PROJECT_DIR / ".env"))
 # Quick-start development settings - unsuitable for production
