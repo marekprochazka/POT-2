@@ -25,6 +25,8 @@ SECRET_KEY = env.str('SECRET_KEY')
 
 ALLOWED_HOSTS = [env.str('ALLOWED_HOST')]
 
+MEDIA_URL = env('MEDIA_URL', default='/media/')
+
 # Application definition
 
 DJANGO_APPS = [

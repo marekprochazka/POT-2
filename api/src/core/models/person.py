@@ -6,6 +6,7 @@ from core.models.base_model import BaseModel
 from django.utils.translation import gettext_lazy as _
 
 from core.typing.base import QuerysetType
+from core.utils.get_upload_dir import get_upload_dir
 from core.utils.token import get_or_create_token
 from workout.models import TrainingPlan
 
@@ -14,8 +15,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 
 
+def upload_dir_profile_picture(instance, filename):
+    return get_upload_dir('profile_picture', instance, filename)
+
+
 class Person(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('user'))
+    profile_picture = models.FileField(null=True, blank=True, upload_to=upload_dir_profile_picture,
+                                       verbose_name=_('Profile picture'))
 
     @property
     def num_plans(self) -> int:

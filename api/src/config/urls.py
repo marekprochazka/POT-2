@@ -3,6 +3,8 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.conf.urls.static import static
+from django.conf import settings
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,3 +29,5 @@ urlpatterns = [
     path('api/workout/', include('workout.urls.api')),
     path('api/my_auth/', include('my_auth.urls.api'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
