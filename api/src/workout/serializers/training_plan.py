@@ -13,7 +13,7 @@ class TrainingPlanSerializer(BaseSerializer):
 
     class Meta:
         model = TrainingPlan
-        fields = ['id', 'plan_name', 'trainings', 'x_created', 'x_modified']
+        fields = ['id', 'plan_name', 'trainings', 'x_created', 'x_modified', 'plan_image']
 
     def create(self, validated_data) -> TrainingPlan:
         instance = self.logged_person.add_plan(**validated_data)

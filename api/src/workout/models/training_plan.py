@@ -3,13 +3,20 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 from core.typing.base import QuerysetType
+from core.utils.get_upload_dir import get_upload_dir
 from workout.models.training import Training
+
+
+def upload_dir_plan_picture(instance, filename):
+    return get_upload_dir('training_plan', instance, filename)
 
 
 class TrainingPlan(BaseModel):
     plan_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
     owner = models.ForeignKey('core.Person', on_delete=models.CASCADE, verbose_name=_('Owner'), null=True, blank=True,
                               related_name='plans')
+    plan_image = models.FileField(null=True, blank=True, upload_to=upload_dir_plan_picture,
+                                    verbose_name=_('Plan picture'))
 
     @property
     def num_trainings(self) -> int:
