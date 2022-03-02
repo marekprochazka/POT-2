@@ -1,6 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/src/pages/homePage/HomePage.dart';
-import 'package:app/states/loginState.dart';
+import 'package:app/providers/loginState.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

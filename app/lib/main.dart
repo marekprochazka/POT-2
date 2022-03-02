@@ -1,6 +1,6 @@
 import 'package:app/models/environment.dart';
 import 'package:app/router.dart';
-import 'package:app/states/loginState.dart';
+import 'package:app/providers/loginState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
