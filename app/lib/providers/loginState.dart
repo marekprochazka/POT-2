@@ -19,7 +19,6 @@ class LoginState extends ChangeNotifier {
   }
 
   void checkLoggedIn() {
-    // loggedIn = prefs.getBool(PrefsNames.loggedInKey) ?? false; TODO uncomment after login logic is implemented
-    loggedIn = true;
+    loggedIn = prefs.getBool(PrefsNames.loggedInKey) ?? false; 
   }
 }
