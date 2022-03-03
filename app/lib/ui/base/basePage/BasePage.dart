@@ -1,7 +1,10 @@
 
 
-import 'package:flutter/cupertino.dart';
+import 'package:app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+
 
 class BasePage extends StatelessWidget {
 
@@ -11,15 +14,18 @@ class BasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          color: Colors.white
-        ),
-        child: SafeArea(child: child),
-      )
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(statusBarColor: POTColors.primary),
+      child: Scaffold(
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: POTColors.white,
+          ),
+          child: SafeArea(child: child),
+        )
+      ),
     );
   }
 }

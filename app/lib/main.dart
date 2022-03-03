@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/loginState.dart';
@@ -37,7 +38,11 @@ class MyApp extends StatelessWidget {
           routerDelegate: router.routerDelegate,
           debugShowCheckedModeBanner: false,
           title: 'POT',
-          theme: ThemeData(primarySwatch: Colors.blue),
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: POTColors.primary
+            ),
+            primarySwatch: Colors.blue),
         );
       }),
     );
