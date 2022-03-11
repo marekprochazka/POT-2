@@ -10,7 +10,6 @@ class TrainingPlanSerializer(BaseSerializer):
     trainings = TrainingSerializerLite(read_only=True, many=True)
     x_created = serializers.DateTimeField(read_only=True)
     x_modified = serializers.DateTimeField(read_only=True)
-    plan_image = serializers.CharField(source='plan_image.url')
 
     class Meta:
         model = TrainingPlan
@@ -23,3 +22,8 @@ class TrainingPlanSerializer(BaseSerializer):
     def update(self, instance: TrainingPlan, validated_data) -> TrainingPlan:
         instance.update_data(**validated_data)
         return instance
+
+    def to_representation(self, instance: TrainingPlan):
+        representation = super(TrainingPlanSerializer, self).to_representation(instance)
+        representation['plan_image'] = instance.plan_image.url if representation['plan_image'] else None
+        return representation
