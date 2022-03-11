@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class RouteNames {
   static const homePage = 'HOMEPAGE';
@@ -23,4 +24,12 @@ class POTColors {
 }
 
 class POTAssets {
+}
+
+class POTTextStyles {
+  static const TextStyle largeTitle = TextStyle(fontWeight: FontWeight.bold, fontSize: 32, fontFamily: 'Roboto', color: POTColors.white);
+}
+
+class POTEnvironment {
+  static String get apiUrl => dotenv.env['API_URL'] ?? '';
 }

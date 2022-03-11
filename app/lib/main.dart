@@ -1,5 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
+import 'package:app/models/user.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/loginState.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: Environ.fileName);
-  final loginState = LoginState(await SharedPreferences.getInstance());
+  final prefs = await SharedPreferences.getInstance();
+  final loginState = LoginState(prefs);
+  final user = User('Gigachad', 'giga@chad.com', '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png');
   loginState.checkLoggedIn();
-  runApp(MyApp(loginState: loginState));
+  runApp(MyApp(loginState: loginState, user: user,));
 }
 
 class MyApp extends StatelessWidget {
   final LoginState loginState;
-  const MyApp({Key? key, required this.loginState}) : super(key: key);
+  final User user;
+
+  const MyApp({Key? key, required this.loginState, required this.user}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -29,7 +34,10 @@ class MyApp extends StatelessWidget {
         Provider<POTRouter>(
           lazy: false,
           create: (BuildContext createContext) => POTRouter(loginState),
-        )
+        ),
+        Provider<User>(
+          lazy: false,
+          create: (BuildContext createContext) => user)
       ],
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;

@@ -1,11 +1,16 @@
 import 'package:app/constants.dart';
+import 'package:app/models/user.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
   const Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context, listen: false);
+
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -16,10 +21,7 @@ class Header extends StatelessWidget {
           ),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: POTColors.primary50,
-              blurRadius: 5,
-              offset: Offset(0, 9)
-            )
+                color: POTColors.primary50, blurRadius: 5, offset: Offset(0, 9))
           ],
           gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -27,7 +29,19 @@ class Header extends StatelessWidget {
               colors: <Color>[POTColors.primary, POTColors.secondary],
               stops: [0.0, 1.0])),
       child: Column(
-        children: const <Widget>[Text('Hlavicka lol')],
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Center(
+                child: Text(
+              user.username,
+              style: POTTextStyles.largeTitle,
+            )),
+          ),
+          CircleAvatar(
+            backgroundImage: CachedNetworkImageProvider(user.profilePicture),
+          )
+        ],
       ),
     );
   }
