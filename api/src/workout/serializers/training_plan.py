@@ -10,6 +10,7 @@ class TrainingPlanSerializer(BaseSerializer):
     trainings = TrainingSerializerLite(read_only=True, many=True)
     x_created = serializers.DateTimeField(read_only=True)
     x_modified = serializers.DateTimeField(read_only=True)
+    plan_image = serializers.CharField(source='plan_image.url')
 
     class Meta:
         model = TrainingPlan
