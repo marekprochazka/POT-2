@@ -1,5 +1,7 @@
 # Django-rest API for POT-2
 
+version: 1.0.0
+
 ## Run API on localhost
 ```console
     // INSTALL
