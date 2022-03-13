@@ -23,6 +23,8 @@
 ![Frontend](https://img.shields.io/badge/Frontend-Flutter-informational?style=for-the-badge&logo=Flutter&logoColor=white&color=02569B)
 
 ## Status
+- api version: __1.0.0__
+- app version: __0.0.0__
 
 <img src="https://progress-bar.dev/30/" alt="30%" width="200px">
 
