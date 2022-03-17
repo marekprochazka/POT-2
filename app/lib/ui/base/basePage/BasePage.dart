@@ -1,6 +1,7 @@
 
 
 import 'package:app/constants.dart';
+import 'package:app/ui/shared/header/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +10,9 @@ import 'package:flutter/services.dart';
 class BasePage extends StatelessWidget {
 
   final Widget child;
+  final bool header;
 
-  const BasePage({ required this.child, Key? key }) : super(key: key); 
+  const BasePage({ required this.child, this.header=true, Key? key }) : super(key: key); 
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,12 @@ class BasePage extends StatelessWidget {
           decoration: const BoxDecoration(
             color: POTColors.white,
           ),
-          child: SafeArea(child: child),
+          child: SafeArea(child: header? 
+            Column(children: [
+              const Expanded(flex:2,child: Header()),
+              Expanded(flex:8,child: child),
+            ],)
+          :child),
         )
       ),
     );
