@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
-import 'package:app/ui/pages/homePage/HomePage.dart';
-import 'package:app/providers/loginState.dart';
-import 'package:app/ui/pages/logIn/LogInPage.dart';
-import 'package:app/ui/pages/signIn/SignInPage.dart';
+import 'package:app/providers/login_state.dart';
+import 'package:app/ui/pages/home_page/home_page.dart';
+import 'package:app/ui/pages/log_in/login_page.dart';
+import 'package:app/ui/pages/sign_in/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
