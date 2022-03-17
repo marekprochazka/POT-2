@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
-import 'package:app/models/user.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:app/ui/shared/header/components/header_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:app/models/user.dart';
 
 class Header extends StatelessWidget {
   const Header({Key? key}) : super(key: key);
@@ -38,9 +38,7 @@ class Header extends StatelessWidget {
               style: POTTextStyles.largeTitle,
             )),
           ),
-          CircleAvatar(
-            backgroundImage: CachedNetworkImageProvider(user.profilePicture),
-          )
+          Container(width: double.infinity,child: HeaderContent(user.profilePicture))
         ],
       ),
     );

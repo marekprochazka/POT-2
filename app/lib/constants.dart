@@ -28,6 +28,8 @@ class POTAssets {
 
 class POTTextStyles {
   static const TextStyle largeTitle = TextStyle(fontWeight: FontWeight.bold, fontSize: 32, fontFamily: 'Roboto', color: POTColors.white);
+  static const TextStyle navbarText = TextStyle(fontWeight: FontWeight.bold, fontSize: 14, fontFamily: 'Roboto', color: POTColors.white);
+  static const TextStyle navbarText__active = TextStyle(fontWeight: FontWeight.bold, fontSize: 14, fontFamily: 'Roboto', color: POTColors.tertiary);
 }
 
 class POTEnvironment {
