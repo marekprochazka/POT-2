@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/models/header_icons.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,16 +21,12 @@ class HeaderContent extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            NavbarText(
-                name: 'Homepage',
-                route: '',
-                icon: HeaderIcons.home,
-                active: true),
-            SizedBox(
+          children:  <Widget>[
+            NavbarText(name: 'Homepage', route: RouteNames.homePage.name, icon: HeaderIcons.home),
+            const SizedBox(
               height: 20,
             ),
-            NavbarText(name: 'Settings', route: '', icon: HeaderIcons.category)
+            NavbarText(name: 'Settings', route: RouteNames.settingsPage.name ,icon: HeaderIcons.category)
           ],
         ),
         const SizedBox(
@@ -37,12 +34,12 @@ class HeaderContent extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            NavbarText(name: 'User info', route: '', icon: HeaderIcons.profile),
-            SizedBox(
+          children:  <Widget>[
+            NavbarText(name: 'User info', route: RouteNames.userInfoPage.name, icon: HeaderIcons.profile),
+            const SizedBox(
               height: 20,
             ),
-            NavbarText(name: 'Messages', route: '', icon: HeaderIcons.notify)
+            NavbarText(name: 'Messages', route: RouteNames.messagesPage.name, icon: HeaderIcons.notify)
           ],
         ),
       ],

@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
             padding: EdgeInsets.only(top: 60.0),
             child: Text('Sign in page'),
           ),
-          TextButton(onPressed: () => context.goNamed(RouteNames.loginPage) , child: const Text('log in'))
+          TextButton(onPressed: () => context.goNamed(RouteNames.loginPage.name) , child: const Text('log in'))
           
         ],
       ),
