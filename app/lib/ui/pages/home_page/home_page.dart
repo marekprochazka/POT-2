@@ -1,6 +1,5 @@
 import 'package:app/providers/login_state.dart';
-import 'package:app/ui/base/basePage/BasePage.dart';
-import 'package:app/ui/shared/header/header.dart';
+import 'package:app/ui/base/base_page/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
