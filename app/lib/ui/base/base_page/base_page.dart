@@ -27,7 +27,7 @@ class BasePage extends StatelessWidget {
           ),
           child: SafeArea(child: header? 
             Column(children: [
-              const Expanded(flex:2,child: Header()),
+              const Expanded(flex:3,child: Header()),
               Expanded(flex:8,child: child),
             ],)
           :child),

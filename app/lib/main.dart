@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/models/user.dart';
-import 'package:app/providers/active_page.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +38,6 @@ class MyApp extends StatelessWidget {
         Provider<User>(
           lazy: false,
           create: (BuildContext createContext) => user),
-        Provider<ActivePage>(
-          lazy: false,
-          create: (BuildContext createContext) => ActivePage(pageName:RouteNames.homePage.name)),
       ],
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;
