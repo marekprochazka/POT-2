@@ -1,5 +1,7 @@
+import 'package:app/constants.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:app/ui/base/base_page/base_page.dart';
+import 'package:app/ui/pages/homepage/components/training_plans_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,12 +10,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BasePage(
+    return  BasePage(
       header: true,
       child: FractionallySizedBox(
         child: Padding(
-          padding: EdgeInsets.only(top: 60.0),
-          child: Text('Hello world'),
+          padding: const EdgeInsets.only(top: 14.0),
+          child: Column(
+            children: const [
+              Text('Training plans', style: POTTextStyles.pageTitle,),
+              TrainingPlansList()
+            ],
+          ),
         ),
       ),
     );

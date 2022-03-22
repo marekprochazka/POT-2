@@ -2,7 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/ui/shared/header/components/header_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:app/models/user.dart';
+import 'package:app/models/data/user.dart';
 
 class Header extends StatelessWidget {
   const Header({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class Header extends StatelessWidget {
             child: Center(
                 child: Text(
               user.username,
-              style: POTTextStyles.largeTitle,
+              style: POTTextStyles.navbarTitle,
             )),
           ),
           Container(width: double.infinity,child: HeaderContent(user.profilePicture))

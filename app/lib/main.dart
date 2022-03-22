@@ -1,6 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
-import 'package:app/models/user.dart';
+import 'package:app/models/data/user.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';

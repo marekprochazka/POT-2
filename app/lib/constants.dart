@@ -54,7 +54,7 @@ class POTColors {
 class POTAssets {}
 
 class POTTextStyles {
-  static const TextStyle largeTitle = TextStyle(
+  static const TextStyle navbarTitle = TextStyle(
       fontWeight: FontWeight.bold,
       fontSize: 32,
       fontFamily: 'Roboto',
@@ -69,6 +69,12 @@ class POTTextStyles {
       fontSize: 14,
       fontFamily: 'Roboto',
       color: POTColors.tertiary);
+  static const TextStyle pageTitle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 36,
+    fontFamily: 'Roboto',
+    color: POTColors.primary
+  );
 }
 
 class POTEnvironment {
