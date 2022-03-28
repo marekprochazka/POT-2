@@ -5,6 +5,7 @@ import 'package:app/ui/pages/log_in/login_page.dart';
 import 'package:app/ui/pages/messages/messages_page.dart';
 import 'package:app/ui/pages/settings/settings_page.dart';
 import 'package:app/ui/pages/sign_in/login_page.dart';
+import 'package:app/ui/pages/training_plan/training_plan_page.dart';
 import 'package:app/ui/pages/user_info/user_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -54,6 +55,15 @@ class POTRouter {
             child: const SignInPage(), 
           ),
         ),
+        GoRoute(
+          name: RouteNames.trainingPlanPage.name,
+          path: RouteNames.trainingPlanPage.path,
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: TrainingPlanPage(trainingPlanId: state.params['id']!,), 
+          ),
+          
+        )
       ],
       errorBuilder: (context, state) => const HomePage(), 
       redirect: (state) {

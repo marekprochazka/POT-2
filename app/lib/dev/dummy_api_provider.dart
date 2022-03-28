@@ -44,4 +44,17 @@ class POTDummyAPI {
 
     ];
   }
+
+  static Future<TrainingPlan> getPlan(String id) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return TrainingPlan(
+        id: id,
+        planName: 'Prvni plan',
+        trainings: [],
+        xCreated: '2022-11-1',
+        xModified: '2022-11-1',
+        planImage:
+            '/media/training_plan/2022/03/28/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.png',
+            description: 'Some short description');
+  }
 }

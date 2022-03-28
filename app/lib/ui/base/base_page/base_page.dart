@@ -11,8 +11,9 @@ class BasePage extends StatelessWidget {
 
   final Widget child;
   final bool header;
+  final Widget? customHeader;
 
-  const BasePage({ required this.child, this.header=true, Key? key }) : super(key: key); 
+  const BasePage({ required this.child, this.header=true, this.customHeader, Key? key }) : super(key: key); 
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class BasePage extends StatelessWidget {
           ),
           child: SafeArea(child: header? 
             Column(children: [
-              const Expanded(flex:3,child: Header()),
+              Expanded(flex:3,child: customHeader != null ? customHeader!:const Header()),
               Expanded(flex:8,child: child),
             ],)
           :child),

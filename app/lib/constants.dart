@@ -17,6 +17,8 @@ class RouteNames {
   static final messagesPage = Route(name: 'MESSAGESPAGE', path: '/messages');
   static final settingsPage = Route(name: 'SETTINGSPAGE', path: '/settings');
   static final userInfoPage = Route(name: 'USERINFOPAGE', path: '/userInfo');
+  static final trainingPlanPage = Route(name: 'TRAININGPLANPAGE', path: '/trainingPlan/:id');
+
 
   static String getNameFromPath(String path) {
     List routes = <Route>[
