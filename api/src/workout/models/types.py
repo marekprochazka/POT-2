@@ -11,3 +11,13 @@ class TypeOverload(BaseTypeModel):
         ordering = ['order']
         verbose_name = _('Overload type')
         verbose_name_plural = _('Overload types')
+
+
+class TypeExerciseState(BaseTypeModel):
+
+    state = models.CharField(max_length=32, verbose_name=_('State'), null=True, blank=True)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = _('Exercise state')
+        verbose_name_plural = _('Exercise states')

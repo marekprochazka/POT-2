@@ -11,7 +11,8 @@ class POTDummyAPI {
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
-              '/media/training_plan/2022/02/27/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.jfif'),
+              '/media/training_plan/2022/03/28/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.png',
+              description: 'Some short description'),
       TrainingPlan(
           id: '2',
           planName: 'Druhy plan',
@@ -19,7 +20,8 @@ class POTDummyAPI {
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
-              '/media/training_plan/2022/02/27/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.jfif'),
+              '/media/training_plan/2022/03/28/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.png',
+              description: 'Some short description'),
       TrainingPlan(
           id: '3',
           planName: 'Treti plan',
@@ -27,7 +29,8 @@ class POTDummyAPI {
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
-              '/media/training_plan/2022/02/27/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.jfif'),
+              '/media/training_plan/2022/03/28/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.png',
+              description: 'Some short description'),
       TrainingPlan(
           id: '4',
           planName: 'Ctvrty plan',
@@ -35,7 +38,10 @@ class POTDummyAPI {
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
-              '/media/training_plan/2022/02/27/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.jfif'),
+              '/media/training_plan/2022/03/28/c871eb13-8b1b-4ef2-acd2-91eb2aa55463.png',
+              description: 'Some veeery long description, Some veeery long description,Some veeery long description,Some veeery long description,Some veeery long description'),
+              // description: 'Some short description'),
+
     ];
   }
 }

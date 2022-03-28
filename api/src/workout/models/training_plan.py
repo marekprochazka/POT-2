@@ -17,6 +17,7 @@ class TrainingPlan(BaseModel):
                               related_name='plans')
     plan_image = models.FileField(null=True, blank=True, upload_to=upload_dir_plan_picture,
                                     verbose_name=_('Plan picture'))
+    description = models.TextField(verbose_name=_('Description'), null=True, blank=True)
 
     @property
     def num_trainings(self) -> int:

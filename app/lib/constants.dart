@@ -70,11 +70,15 @@ class POTTextStyles {
       fontFamily: 'Roboto',
       color: POTColors.tertiary);
   static const TextStyle pageTitle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 36,
-    fontFamily: 'Roboto',
-    color: POTColors.primary
-  );
+      fontWeight: FontWeight.bold,
+      fontSize: 36,
+      fontFamily: 'Roboto',
+      color: POTColors.primary);
+
+  static TextStyle dynamicText(double size, FontWeight weight, Color color) {
+    return TextStyle(
+        fontWeight: weight, fontSize: size, fontFamily: 'Roboto', color: color);
+  }
 }
 
 class POTEnvironment {

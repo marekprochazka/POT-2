@@ -7,6 +7,7 @@ class TrainingPlan {
   final String xCreated;
   final String xModified;
   final String planImage;
+  final String description;
 
   TrainingPlan(
       {required this.id,
@@ -14,5 +15,6 @@ class TrainingPlan {
       required this.trainings,
       required this.xCreated,
       required this.xModified,
-      required this.planImage});
+      required this.planImage,
+      required this.description});
 }
