@@ -42,7 +42,7 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:view_on_site',
-    'url':(Map? params)=> (params?["content_type_id"] != null) &&(params?["object_id"] != null) && true ? 'r/${params?["content_type_id"]}/${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['content_type_id'] != null) &&(params?['object_id'] != null) && true ? 'r/${params?["content_type_id"]}/${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':2},
     
     {
@@ -57,22 +57,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:sites_site_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:sites_site_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:sites_site_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -87,22 +87,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:auth_group_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:auth_group_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:auth_group_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -122,22 +122,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:auth_user_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:auth_user_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:auth_user_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -152,22 +152,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:authtoken_tokenproxy_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:authtoken_tokenproxy_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:authtoken_tokenproxy_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -182,22 +182,52 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:core_person_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:core_person_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:core_person_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
+    'num_params':1},
+    
+    {
+    'name':'admin:core_typedefaultavatar_changelist',
+    'url':(Map? params)=>  '',
+    'num_params':0},
+    
+    {
+    'name':'admin:core_typedefaultavatar_add',
+    'url':(Map? params)=>  'add/',
+    'num_params':0},
+    
+    {
+    'name':'admin:core_typedefaultavatar_history',
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
+    'num_params':1},
+    
+    {
+    'name':'admin:core_typedefaultavatar_delete',
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
+    'num_params':1},
+    
+    {
+    'name':'admin:core_typedefaultavatar_change',
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
+    'num_params':1},
+    
+    {
+    'name':'admin',
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -212,22 +242,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:workout_trainingplan_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_trainingplan_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_trainingplan_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -242,22 +272,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:workout_training_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_training_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_training_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -272,22 +302,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:workout_exercise_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_exercise_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_exercise_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -302,22 +332,22 @@ String? reverse(String name, [Map? params]) {
     
     {
     'name':'admin:workout_typeoverload_history',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/history/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_typeoverload_delete',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/delete/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin:workout_typeoverload_change',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/change/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'admin',
-    'url':(Map? params)=> (params?["object_id"] != null) && true ? '${params?["object_id"]}/': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
@@ -351,48 +381,58 @@ String? reverse(String name, [Map? params]) {
     'num_params':0},
     
     {
+    'name':'core:profile_picture',
+    'url':(Map? params)=>  'profile/picture',
+    'num_params':0},
+    
+    {
+    'name':'core:default_avatars',
+    'url':(Map? params)=>  'defaults/avatars',
+    'num_params':0},
+    
+    {
     'name':'workout:training_plan',
     'url':(Map? params)=>  'plan',
     'num_params':0},
     
     {
     'name':'workout:training_plan',
-    'url':(Map? params)=> (params?["training_plan_id"] != null) && true ? 'plan/${params?["training_plan_id"]}': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_plan_id'] != null) && true ? 'plan/${params?["training_plan_id"]}': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'workout:training',
-    'url':(Map? params)=> (params?["training_plan_id"] != null) && true ? 'training/${params?["training_plan_id"]}': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_plan_id'] != null) && true ? 'training/${params?["training_plan_id"]}': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'workout:training',
-    'url':(Map? params)=> (params?["training_plan_id"] != null) &&(params?["training_id"] != null) && true ? 'training/${params?["training_plan_id"]}/${params?["training_id"]}': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_plan_id'] != null) &&(params?['training_id'] != null) && true ? 'training/${params?["training_plan_id"]}/${params?["training_id"]}': throw InvalidReverseParamsException(),
     'num_params':2},
     
     {
     'name':'workout:exercise',
-    'url':(Map? params)=> (params?["training_id"] != null) && true ? 'exercise/${params?["training_id"]}': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_id'] != null) && true ? 'exercise/${params?["training_id"]}': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'workout:exercise',
-    'url':(Map? params)=> (params?["training_id"] != null) &&(params?["exercise_id"] != null) && true ? 'exercise/${params?["training_id"]}/${params?["exercise_id"]}': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_id'] != null) &&(params?['exercise_id'] != null) && true ? 'exercise/${params?["training_id"]}/${params?["exercise_id"]}': throw InvalidReverseParamsException(),
     'num_params':2},
     
     {
     'name':'workout:exercise_overload',
-    'url':(Map? params)=> (params?["exercise_id"] != null) && true ? 'exercise/${params?["exercise_id"]}/overload': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['exercise_id'] != null) && true ? 'exercise/${params?["exercise_id"]}/overload': throw InvalidReverseParamsException(),
     'num_params':1},
     
     {
     'name':'workout:exercise_overload',
-    'url':(Map? params)=> (params?["exercise_id"] != null) &&(params?["index"] != null) && true ? 'exercise/${params?["exercise_id"]}/${params?["index"]}/overload': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['exercise_id'] != null) &&(params?['index'] != null) && true ? 'exercise/${params?["exercise_id"]}/${params?["index"]}/overload': throw InvalidReverseParamsException(),
     'num_params':2},
     
     {
     'name':'workout:exercise_order',
-    'url':(Map? params)=> (params?["training_id"] != null) &&(params?["exercise_id"] != null) && true ? 'exercise/${params?["training_id"]}/${params?["exercise_id"]}/order': throw new InvalidReverseParamsException(),
+    'url':(Map? params)=> (params?['training_id'] != null) &&(params?['exercise_id'] != null) && true ? 'exercise/${params?["training_id"]}/${params?["exercise_id"]}/order': throw InvalidReverseParamsException(),
     'num_params':2},
     
     {
@@ -408,6 +448,11 @@ String? reverse(String name, [Map? params]) {
     {
     'name':'my_auth:logout',
     'url':(Map? params)=>  'logout',
+    'num_params':0},
+    
+    {
+    'name':'',
+    'url':(Map? params)=>  '^media/(?P<path>.*)\$',
     'num_params':0},
      ];
     for (var value in data) {
