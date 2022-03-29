@@ -5,7 +5,7 @@ class POTButton extends StatelessWidget {
   final double width;
   final double height;
   final String text;
-  final Function callback;
+  final Function() callback;
   final bool red;
   final TextStyle textStyle;
 
