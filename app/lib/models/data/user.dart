@@ -1,7 +1,6 @@
 
 
 import 'package:app/constants.dart';
-import 'package:app/models/environment.dart';
 
 class User {
   final String username;

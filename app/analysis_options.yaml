@@ -12,7 +12,12 @@ include: package:flutter_lints/flutter.yaml
 analyzer: 
   errors: 
     prefer_single_quotes: error
+    always_use_package_imports: error
     avoid_dynamic_calls: error
+    avoid_relative_lib_imports: error
+    prefer_const_constructors: error
+    prefer_const_declarations: error
+    exhaustive_cases: error
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -30,6 +35,10 @@ linter:
     prefer_single_quotes: true
     always_use_package_imports: true
     avoid_dynamic_calls: true
+    avoid_relative_lib_imports: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    exhaustive_cases: true
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

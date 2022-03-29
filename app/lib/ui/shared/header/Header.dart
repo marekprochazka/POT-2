@@ -38,7 +38,7 @@ class Header extends StatelessWidget {
               style: POTTextStyles.navbarTitle,
             )),
           ),
-          Container(width: double.infinity,child: HeaderContent(user.profilePicture))
+          SizedBox(width: double.infinity,child: HeaderContent(user.profilePicture))
         ],
       ),
     );

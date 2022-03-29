@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/header_icons.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
-import 'package:app/ui/shared/header/components/create_training_plan_button.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

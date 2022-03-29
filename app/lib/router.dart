@@ -7,7 +7,6 @@ import 'package:app/ui/pages/settings/settings_page.dart';
 import 'package:app/ui/pages/sign_in/login_page.dart';
 import 'package:app/ui/pages/training_plan/training_plan_page.dart';
 import 'package:app/ui/pages/user_info/user_info_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class POTRouter {
