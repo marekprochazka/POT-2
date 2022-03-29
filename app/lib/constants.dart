@@ -76,6 +76,11 @@ class POTTextStyles {
       fontSize: 36,
       fontFamily: 'Roboto',
       color: POTColors.primary);
+  static const TextStyle defaultButtonText = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 8,
+      fontFamily: 'Roboto',
+      color: POTColors.white);
 
   static TextStyle dynamicText(double size, FontWeight weight, Color color) {
     return TextStyle(
