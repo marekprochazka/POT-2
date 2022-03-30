@@ -3,7 +3,7 @@ import 'package:app/models/data/training.dart';
 class TrainingPlan {
   final String id;
   final String planName;
-  final List<Training> trainings;
+  final List<TrainingLite> trainings;
   final String xCreated;
   final String xModified;
   final String planImage;

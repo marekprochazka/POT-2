@@ -1,6 +1,7 @@
 import 'package:app/dev/dummy_api_provider.dart';
+import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_plan.dart';
-import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded.dart';
+import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/training_plan_page_loaded.dart';
 import 'package:flutter/material.dart';
 
 class TrainingPlanPage extends StatefulWidget {
@@ -14,22 +15,28 @@ class TrainingPlanPage extends StatefulWidget {
 
 class _TrainingPlanPageState extends State<TrainingPlanPage> {
   late Future<TrainingPlan> futureTrainingPlan;
+  late Future<List<Training>> futureTrainings;
 
   @override
   void initState() {
     super.initState();
     futureTrainingPlan = _getTrainingPlan();
+    futureTrainings = _getTrainings();
   }
 
   Future<TrainingPlan> _getTrainingPlan() async {
     return await POTDummyAPI.getPlan(widget.trainingPlanId);
   }
 
+  Future<List<Training>> _getTrainings() async {
+    return await POTDummyAPI.getTrainings(widget.trainingPlanId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: futureTrainingPlan,
-      builder: (context, AsyncSnapshot<TrainingPlan> snapshot) {
+      future: Future.wait([futureTrainingPlan, futureTrainings]),
+      builder: (context, AsyncSnapshot<List> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return const Text('No data');
@@ -38,7 +45,7 @@ class _TrainingPlanPageState extends State<TrainingPlanPage> {
             return const Text('Loading');
           case ConnectionState.done:
             if (snapshot.hasData) {
-              return TrainingPlanPageLoaded(trainingPlan: snapshot.data!);
+              return TrainingPlanPageLoaded(trainingPlan: snapshot.data![0], trainings: snapshot.data![1]);
             }
             return const Text('No data');
         }
