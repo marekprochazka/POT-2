@@ -55,42 +55,6 @@ class ExerciseView(RetrieveUpdateDestroyAPIView, BaseExerciseView):
         return super(ExerciseView, self).delete(request, *args, **kwargs)
 
 
-class BaseExerciseOverloadView(BaseAPIView):
-    exercise: Exercise = None
-    permission_classes = [IsAuthenticated]
-
-    def initial(self, request, *args, **kwargs):
-        super(BaseExerciseOverloadView, self).initial(request, *args, **kwargs)
-        self.exercise = Exercise.objects.get(id=self.kwargs.get('exercise_id'))
-
-
-class ExerciseOverloadAddView(BaseExerciseOverloadView):
-
-    @decorators.has_right(ExercisePermissionHandler, 'exercise', BaseRight.EDIT)
-    def post(self, request, *args, **kwargs):
-        serializer = AddOverloadSerializer(data=request.data, context=self.get_serializer_context())
-        if serializer.is_valid():
-            self.exercise.add_overload_value(serializer.data.get('value'))
-            return Response(status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
-
-
-class ExerciseOverloadRemoveView(BaseExerciseOverloadView):
-
-    def validate_index(self, index: int) -> bool:
-        if index >= len(self.exercise.overload_history_list):
-            return False
-        return True
-
-    @decorators.has_right(ExercisePermissionHandler, 'exercise', BaseRight.DELETE)
-    def delete(self, request, *args, **kwargs):
-        index = self.kwargs.get('index')
-        if self.validate_index(index):
-            self.exercise.remove_overload_value_by_index(index)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_400_BAD_REQUEST, data='Invalid index')
-
-
 class ExerciseOrderView(BaseExerciseView):
     exercise: Exercise = None
     serializer_class = ExerciseOrderSerializer
