@@ -8,17 +8,13 @@ from workout.serializers.types import TypeOverloadSerializer
 
 
 class ExerciseSerializer(BaseSerializer):
-    overload_history = serializers.SerializerMethodField(read_only=True)
     last_overload_value_string = serializers.SerializerMethodField(read_only=True)
     order = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Exercise
-        fields = ['id', 'exercise_name', 'overload_type', 'overload_history', 'last_overload_value_string', 'order',
+        fields = ['id', 'exercise_name', 'overload_type', 'last_overload_value_string', 'order',
                   'description', 'default_add_overload_value']
-
-    def get_overload_history(self, obj: Exercise) -> (List[float], None):
-        return obj.overload_history_list
 
     def get_last_overload_value_string(self, obj: Exercise) -> (str, None):
         if obj.last_overload_value:

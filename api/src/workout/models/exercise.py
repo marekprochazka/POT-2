@@ -29,6 +29,12 @@ class Exercise(BaseModel):
         return list(self.overloads.all())
 
     @property
+    def last_overload_value(self) -> Union[int, None]:
+        if self.overloads.count() > 0:
+            return self.overloads.first().value
+        return None
+
+    @property
     def num_overloads(self):
         return self.overloads.count()
 

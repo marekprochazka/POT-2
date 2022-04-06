@@ -37,7 +37,7 @@ class TrainingActive(BaseModel):
             overload = self.overloads.get(exercise=exercise)
             overload.value = value
         except Overload.DoesNotExist:
-            overload = Overload(exercise=exercise, value=value, training_active=self, order=self.overloads.count())
+            overload = Overload(exercise=exercise, value=value, training_active=self, order=exercise.num_overloads)
         overload.save()
         return overload
 
