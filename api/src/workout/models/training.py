@@ -3,8 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 
 from core.typing.base import QuerysetType
+from workout.models.training_active import TrainingActive
 from workout.models.exercise import Exercise
-from workout.models.types import TypeOverload
+from workout.models.types import TypeOverload, TypeTrainingState
 
 
 class Training(BaseModel):
@@ -20,6 +21,10 @@ class Training(BaseModel):
     @property
     def num_exercises(self) -> int:
         return self.get_all_exercises().count()
+
+    @property
+    def num_trainings_active(self) -> int:
+        return self.trainings_active.count()
 
     class Meta:
         verbose_name = _('Training')
@@ -59,3 +64,12 @@ class Training(BaseModel):
 
     def get_all_exercises_of_overload_type(self, type_overload: TypeOverload) -> QuerysetType[Exercise]:
         return Exercise.objects.filter(training=self, type_overload=type_overload)
+
+    def create_training_active(self, **kwargs) -> TrainingActive:
+        training_active = TrainingActive(training=self,
+                                         state=TypeTrainingState.objects.get(identifier=TypeTrainingState.NEW))
+        for key, value in kwargs.items():
+            if hasattr(training_active, key):
+                setattr(training_active, key, value)
+        training_active.save()
+        return training_active

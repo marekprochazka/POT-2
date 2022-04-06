@@ -6,6 +6,8 @@ from django.db import models
 
 from django.db.models.signals import pre_delete
 
+from core.typing.base import QuerysetType
+
 
 class Exercise(BaseModel):
     exercise_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
@@ -13,7 +15,6 @@ class Exercise(BaseModel):
                                       null=True, blank=True)
     training = models.ForeignKey('workout.Training', on_delete=models.CASCADE, verbose_name=_('Training'), null=True,
                                  blank=True, related_name='exercises')
-    overload_history = models.CharField(verbose_name=_('Overload history'), max_length=1028, default='')
     order = models.IntegerField(verbose_name=_('Order'))
     description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
     default_add_overload_value = models.IntegerField(blank=True, null=True,
@@ -24,21 +25,12 @@ class Exercise(BaseModel):
         return self.training.training_plan.owner
 
     @property
-    def last_overload_value(self) -> Union[float, None]:
-        if self.overload_history:
-            return float(str(self.overload_history).split(';')[-1])
-        return None
+    def overloads_history_list(self) -> List:
+        return list(self.overloads.all())
 
     @property
-    def overload_history_list(self) -> Union[List[float], None]:
-        if self.overload_history:
-            return [float(value) for value in str(self.overload_history).split(';')]
-        return None
-
-    def __get_overload_history_string_list(self) -> Union[List[str], None]:
-        if self.overload_history:
-            return str(self.overload_history).split(';')
-        return None
+    def num_overloads(self):
+        return self.overloads.count()
 
     class Meta:
         verbose_name = _('Exercise')
@@ -48,18 +40,8 @@ class Exercise(BaseModel):
     def __str__(self):
         return f'{self.exercise_name} - {self.training.training_name}'
 
-    def add_overload_value(self, value: float) -> None:
-        if self.overload_history:
-            self.overload_history += f';{value}'
-        else:
-            self.overload_history += f'{value}'
-        self.save()
-
-    def remove_overload_value_by_index(self, index: int) -> None:
-        tmp_list = self.__get_overload_history_string_list()
-        del tmp_list[index]
-        self.overload_history = ';'.join(tmp_list)
-        self.save()
+    def get_overloads_history(self) -> QuerysetType:
+        return self.overloads.all()
 
 
 def update_exercise_order_on_delete(sender, instance: Exercise, using, **kwargs):

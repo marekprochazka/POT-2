@@ -25,3 +25,9 @@ class TrainingTestCases(BaseWorkoutTestCase):
         self.setup_trainings()
         self.training_0_0.update_data(training_name='new name')
         self.assertEqual('new name', self.training_0_0.training_name)
+
+    def test_create_training_active(self):
+        self.setup_trainings()
+        self.setup_training_states()
+        self.training_0_0.create_training_active()
+        self.assertEqual(1, self.training_0_0.num_trainings_active)

@@ -1,5 +1,5 @@
 from core.tests.base import BaseTestCase
-from workout.models import TrainingPlan, Training, Exercise, TypeOverload
+from workout.models import TrainingPlan, Training, Exercise, TypeOverload, TrainingActive, Overload, TypeTrainingState
 
 
 class BaseWorkoutTestCase(BaseTestCase):
@@ -22,6 +22,11 @@ class BaseWorkoutTestCase(BaseTestCase):
     exercise_1_1: Exercise = None
     exercise_2_0: Exercise = None
     exercise_1_1_1: Exercise = None
+
+    training_active_0: TrainingActive = None
+
+    overload_0: Overload = None
+    overload_1: Overload = None
 
     def setup_training_plans(self) -> None:
         self.training_plan_0 = self.person_0.add_plan(plan_name='training_plan_0')
@@ -53,3 +58,15 @@ class BaseWorkoutTestCase(BaseTestCase):
             exercise_name='exercise_2_0', overload_type=self.overload_type_0)
         self.exercise_1_1_1 = self.training_1_0.add_exercise(
             exercise_name='exercise_1_1_1', overload_type=self.overload_type_0)
+
+    def setup_training_active(self) -> None:
+        self.training_active_0 = self.training_0_0.create_training_active()
+
+    def setup_training_states(self) -> None:
+        TypeTrainingState(identifier=TypeTrainingState.NEW, description='New', order=0).save()
+        TypeTrainingState(identifier=TypeTrainingState.IN_PROGRESS, description='In progress', order=1).save()
+        TypeTrainingState(identifier=TypeTrainingState.FINISHED, description='Finished', order=2).save()
+
+    def setup_overloads(self) -> None:
+        self.overload_0 = self.training_active_0.set_overload(self.exercise_0_0, 10)
+        self.overload_1 = self.training_active_0.set_overload(self.exercise_0_1, 20)

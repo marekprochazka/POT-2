@@ -13,9 +13,10 @@ class TypeOverload(BaseTypeModel):
         verbose_name_plural = _('Overload types')
 
 
-class TypeExerciseState(BaseTypeModel):
-
-    state = models.CharField(max_length=32, verbose_name=_('State'), null=True, blank=True)
+class TypeTrainingState(BaseTypeModel):
+    NEW = 'new'
+    IN_PROGRESS = 'in_progress'
+    FINISHED = 'finished'
 
     class Meta:
         ordering = ['order']
