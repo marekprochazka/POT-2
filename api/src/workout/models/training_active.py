@@ -18,12 +18,18 @@ class TrainingActive(BaseModel):
     class Meta:
         verbose_name = _('Active training')
         verbose_name_plural = _('Active trainings')
+        ordering = ('x_modified',)
 
     @property
     def overloads_list(self) -> List[Overload]:
         result = []
         for exercise in self.training.exercises.all():
-            result.append(self.overloads.filter(exercise=exercise).first())
+            try:
+                result.append(self.overloads.get(exercise=exercise, training_active=self))
+            except Overload.DoesNotExist:
+                new_overload = Overload(exercise=exercise, training_active=self, order=exercise.num_overloads)
+                new_overload.save()
+                result.append(new_overload)
         return result
 
     def __update_state(self):

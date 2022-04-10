@@ -73,3 +73,11 @@ class Training(BaseModel):
                 setattr(training_active, key, value)
         training_active.save()
         return training_active
+
+    def get_training_active_in_progress_or_new(self) -> TrainingActive:
+        training_active = TrainingActive.objects.filter(training=self).last()
+        if training_active is None:
+            training_active = self.create_training_active()
+        elif training_active.state.identifier == TypeTrainingState.FINISHED:
+            training_active = self.create_training_active()
+        return training_active

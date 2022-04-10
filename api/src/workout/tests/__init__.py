@@ -6,3 +6,4 @@ from .training_plan import TrainingPlanTestCases
 from .training_plan_api import TrainingPlanAPITestCases
 from .permissions import PermissionsTestCases
 from .training_active import TrainingActiveTestCases
+from .training_active_api import TrainingActiveAPITestCases

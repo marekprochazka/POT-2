@@ -9,10 +9,16 @@ class PermissionsTestCases(BaseWorkoutTestCase):
         super(PermissionsTestCases, self).setUp()
         self.setup_training_plans()
         self.setup_trainings()
-        self.setup_exercises()
         self.setup_overload_types()
+        self.setup_exercises()
+        self.setup_training_states()
+        self.setup_training_active()
 
     def base_test_VIEW(self, url: str) -> None:
+        self.response_unauthorized = self.client.get(url)
+
+        self.assertEqual(status.HTTP_401_UNAUTHORIZED, self.response_unauthorized.status_code)
+
         self.login(self.person_0)
 
         response = self.client.get(url)
@@ -124,3 +130,7 @@ class PermissionsTestCases(BaseWorkoutTestCase):
 
         for response in [response_order_2]:
             self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
+
+    def test_training_active_permission_EDIT(self) -> None:
+        url = reverse('workout:training_active', kwargs=dict(training_id=str(self.training_0_0.id)))
+        self.base_test_VIEW(url)

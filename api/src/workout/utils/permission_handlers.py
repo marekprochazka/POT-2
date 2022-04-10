@@ -1,13 +1,13 @@
 from core.models import Person
 from core.utils.permission_handler import PermissionHandler
-from workout.models import TrainingPlan, Training, Exercise
+from workout.models import TrainingPlan, Training, Exercise, TrainingActive
 
 
-class TrainingPLanPermissionHandler(PermissionHandler):
+class TrainingPlanPermissionHandler(PermissionHandler):
     instance: TrainingPlan = None
 
     def __init__(self, person: Person, instance: TrainingPlan) -> None:
-        super(TrainingPLanPermissionHandler, self).__init__(person, instance)
+        super(TrainingPlanPermissionHandler, self).__init__(person, instance)
         self.i_am_owner = self.instance.owner == self.person
         self.i_have_access = False
 

@@ -17,8 +17,8 @@ class Exercise(BaseModel):
                                  blank=True, related_name='exercises')
     order = models.IntegerField(verbose_name=_('Order'))
     description = models.CharField(verbose_name=_('Description'), max_length=255, null=True, blank=True)
-    default_add_overload_value = models.IntegerField(blank=True, null=True,
-                                                     verbose_name=_('Default add overload value'))
+    default_add_overload_value = models.FloatField(blank=True, null=True,
+                                                   verbose_name=_('Default add overload value'))
 
     @property
     def owner(self):
@@ -31,7 +31,7 @@ class Exercise(BaseModel):
     @property
     def last_overload_value(self) -> Union[int, None]:
         if self.overloads.count() > 0:
-            return self.overloads.first().value
+            return self.overloads.last().value
         return None
 
     @property

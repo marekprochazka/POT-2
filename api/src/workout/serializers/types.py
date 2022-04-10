@@ -6,3 +6,4 @@ class TypeOverloadSerializer(BaseSerializer):
     class Meta:
         model = TypeOverload
         fields = ['id', 'identifier', 'description', 'unit']
+

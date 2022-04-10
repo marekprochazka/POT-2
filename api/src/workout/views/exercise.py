@@ -9,7 +9,6 @@ from core.views.base import BaseAPIView
 from core.utils import decorators
 from workout.models import Exercise, Training
 from workout.serializers.exercise import ExerciseSerializer, ExerciseOrderSerializer
-from workout.serializers.overload import AddOverloadSerializer
 from workout.utils.permission_handlers import ExercisePermissionHandler
 
 

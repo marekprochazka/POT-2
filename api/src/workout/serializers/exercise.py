@@ -4,22 +4,21 @@ from core.serializers.base import BaseSerializer
 from rest_framework import serializers
 from typing import List
 from workout.models import Exercise, Training
+from workout.serializers.overload import OverloadSerializerLite
 from workout.serializers.types import TypeOverloadSerializer
 
 
 class ExerciseSerializer(BaseSerializer):
-    last_overload_value_string = serializers.SerializerMethodField(read_only=True)
+    overload_values = serializers.SerializerMethodField(read_only=True)
     order = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Exercise
-        fields = ['id', 'exercise_name', 'overload_type', 'last_overload_value_string', 'order',
-                  'description', 'default_add_overload_value']
+        fields = ['id', 'exercise_name', 'overload_type', 'order',
+                  'description', 'default_add_overload_value', 'overload_values',]
 
-    def get_last_overload_value_string(self, obj: Exercise) -> (str, None):
-        if obj.last_overload_value:
-            return f'{obj.last_overload_value} {obj.overload_type.unit}'
-        return None
+    def get_overload_values(self, obj: Exercise) -> (str, None):
+        return OverloadSerializerLite(obj.overloads_history_list, many=True).data
 
     def create(self, validated_data: dict) -> Exercise:
         training: Training = self.context.get('training')
