@@ -38,23 +38,24 @@ class TrainingActive(BaseModel):
             self.save()
 
     def set_overload(self, exercise: Exercise, value) -> Overload:
-        self.__update_state()
         try:
             overload = self.overloads.get(exercise=exercise)
             overload.value = value
         except Overload.DoesNotExist:
             overload = Overload(exercise=exercise, value=value, training_active=self, order=exercise.num_overloads)
         overload.save()
+        self.__update_state()
         return overload
 
     def set_overloads(self, overloads: List[dict]) -> List[Overload]:
-        self.__update_state()
         for overload_data in overloads:
+            exercise = Exercise.objects.get(id=overload_data['exercise_id'])
             try:
-                overload = self.overloads.get(exercise__id=overload_data['exercise_id'])
+                overload = self.overloads.get(exercise=exercise)
                 overload.value = overload_data['value']
             except Overload.DoesNotExist:
-                overload = Overload(exercise_id=overload_data['exercise_id'], value=overload_data['value'],
+                overload = Overload(exercise=exercise, value=overload_data['value'],
                                     training_active=self, order=self.overloads.count())
             overload.save()
+        self.__update_state()
         return self.overloads_list

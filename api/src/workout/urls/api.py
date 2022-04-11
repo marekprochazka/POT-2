@@ -2,7 +2,7 @@ from django.urls import path
 
 from workout.views.exercise import ExerciseListCreateView, ExerciseView, ExerciseOrderView
 from workout.views.training import TrainingListCreateView, TrainingView
-from workout.views.training_active import LastTrainingActiveView
+from workout.views.training_active import LastTrainingActiveView, TrainingActiveSetOneOverloadView
 from workout.views.training_plan import TrainingPlanListCreateView, TrainingPlanView
 
 app_name = 'workout'
@@ -15,6 +15,8 @@ urlpatterns = [
     path('training/<uuid:training_plan_id>/<uuid:training_id>', TrainingView.as_view(), name='training'),
 
     path('training-active/<uuid:training_id>', LastTrainingActiveView.as_view(), name='training_active'),
+    path('training-active/<uuid:training_active_id>/set-overload/one', TrainingActiveSetOneOverloadView.as_view(),
+         name='training_active_set_one_overload'),
 
     path('exercise/<uuid:training_id>', ExerciseListCreateView.as_view(), name='exercise'),
     path('exercise/<uuid:training_id>/<uuid:exercise_id>', ExerciseView.as_view(), name='exercise'),

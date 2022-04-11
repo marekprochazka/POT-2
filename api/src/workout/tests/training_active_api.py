@@ -1,6 +1,8 @@
+import uuid
+
 from rest_framework import status
 
-from workout.models import TypeTrainingState, TrainingActive
+from workout.models import TypeTrainingState, TrainingActive, Overload
 from workout.tests.base import BaseWorkoutTestCase
 from django.urls import reverse
 
@@ -30,3 +32,22 @@ class TrainingActiveAPITestCases(BaseWorkoutTestCase):
         response3 = self.client.get(url)
 
         self.assertNotEqual(response2.data['id'], response3.data['id'])
+
+    def test_set_one_overload(self):
+        self.login(self.person_0)
+        url = reverse('workout:training_active_set_one_overload',
+                      kwargs=dict(training_active_id=str(self.training_active_0.id)))
+        data = dict(exercise_id=str(self.exercise_0_0.id), value=50)
+        response = self.client.put(url, data=data)
+
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(50, self.exercise_0_0.last_overload_value)
+
+        data2 = dict(exercise_id=str(uuid.uuid4()), value=50)
+        response2 = self.client.put(url, data=data2)
+
+        self.assertEqual(status.HTTP_404_NOT_FOUND, response2.status_code)
+
+        data3 = dict()
+        response3 = self.client.put(url, data=data3)
+        self.assertEqual(status.HTTP_400_BAD_REQUEST, response3.status_code)
