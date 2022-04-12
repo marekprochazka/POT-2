@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-12 08:56+0200\n"
+"PO-Revision-Date: 2022-04-12 09:03+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
+"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"X-Generator: Poedit 3.0\n"
+
+#: .\workout\models\exercise.py:13 .\workout\models\training_plan.py:15
+msgid "Plan name"
+msgstr "Název plánu"
+
+#: .\workout\models\exercise.py:14 .\workout\models\types.py:12
+msgid "Overload type"
+msgstr "Typ přetížení"
+
+#: .\workout\models\exercise.py:16 .\workout\models\training.py:30
+#: .\workout\models\training_active.py:14
+msgid "Training"
+msgstr "Trénink"
+
+#: .\workout\models\exercise.py:18 .\workout\models\overload.py:12
+msgid "Order"
+msgstr "Pořadí"
+
+#: .\workout\models\exercise.py:19 .\workout\models\training.py:13
+#: .\workout\models\training_plan.py:20
+msgid "Description"
+msgstr "Popis"
+
+#: .\workout\models\exercise.py:21
+msgid "Default add overload value"
+msgstr "Základní hodnota přidání přetížení"
+
+#: .\workout\models\exercise.py:42 .\workout\models\overload.py:8
+msgid "Exercise"
+msgstr "Cvičení"
+
+#: .\workout\models\exercise.py:43
+msgid "Exercises"
+msgstr "Cvičení"
+
+#: .\workout\models\overload.py:9
+msgid "Value"
+msgstr "Hodnota"
+
+#: .\workout\models\overload.py:11
+msgid "Training active"
+msgstr "Aktivní trénink"
+
+#: .\workout\models\overload.py:15
+msgid "Overload"
+msgstr "Přetížení"
+
+#: .\workout\models\overload.py:16
+msgid "Overloads"
+msgstr "Přetížení"
+
+#: .\workout\models\training.py:12
+msgid "Training name"
+msgstr "Název tréninku"
+
+#: .\workout\models\training.py:14 .\workout\models\training_plan.py:27
+msgid "Training plan"
+msgstr "Tréninkový plán"
+
+#: .\workout\models\training.py:31
+msgid "Trainings"
+msgstr "Tréninky"
+
+#: .\workout\models\training_active.py:16
+msgid "State"
+msgstr "Stav"
+
+#: .\workout\models\training_active.py:19
+msgid "Active training"
+msgstr "Aktivní trénink"
+
+#: .\workout\models\training_active.py:20
+msgid "Active trainings"
+msgstr "Aktivní tréninky"
+
+#: .\workout\models\training_plan.py:16
+msgid "Owner"
+msgstr "Vlastník"
+
+#: .\workout\models\training_plan.py:19
+msgid "Plan picture"
+msgstr "Obrázek plánu"
+
+#: .\workout\models\training_plan.py:28
+msgid "Training plans"
+msgstr "Tréninkové plány"
+
+#: .\workout\models\types.py:8
+msgid "Unit"
+msgstr "Jednotka"
+
+#: .\workout\models\types.py:13
+msgid "Overload types"
+msgstr "Typy přetížení"
+
+#: .\workout\models\types.py:23
+msgid "Training state"
+msgstr "Stav tréninku"
+
+#: .\workout\models\types.py:24
+msgid "Training states"
+msgstr "Stavy tréninků"
+
+#: .\workout\views\training_active.py:52 .\workout\views\training_active.py:66
+msgid "Exercise not found"
+msgstr "Cvičení nenalezeno"
