@@ -329,6 +329,66 @@ String? reverse(String name, [Map? params]) {
     numParams:1),
     
     RouteValue(
+    name:'admin:workout_overload_changelist',
+    url:(Map? params)=>  '',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_overload_add',
+    url:(Map? params)=>  'add/',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_overload_history',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_overload_delete',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_overload_change',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_trainingactive_changelist',
+    url:(Map? params)=>  '',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_trainingactive_add',
+    url:(Map? params)=>  'add/',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_trainingactive_history',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_trainingactive_delete',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_trainingactive_change',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
     name:'admin:workout_typeoverload_changelist',
     url:(Map? params)=>  '',
     numParams:0),
@@ -350,6 +410,36 @@ String? reverse(String name, [Map? params]) {
     
     RouteValue(
     name:'admin:workout_typeoverload_change',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_typetrainingstate_changelist',
+    url:(Map? params)=>  '',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_typetrainingstate_add',
+    url:(Map? params)=>  'add/',
+    numParams:0),
+    
+    RouteValue(
+    name:'admin:workout_typetrainingstate_history',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/history/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_typetrainingstate_delete',
+    url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/delete/': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'admin:workout_typetrainingstate_change',
     url:(Map? params)=> (params?['object_id'] != null) && true ? '${params?["object_id"]}/change/': throw InvalidReverseParamsException(),
     numParams:1),
     
@@ -419,6 +509,26 @@ String? reverse(String name, [Map? params]) {
     numParams:2),
     
     RouteValue(
+    name:'workout:training_active',
+    url:(Map? params)=> (params?['training_id'] != null) && true ? 'training-active/${params?["training_id"]}': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'workout:training_active_set_one_overload',
+    url:(Map? params)=> (params?['training_active_id'] != null) && true ? 'training-active/${params?["training_active_id"]}/set-overload/one': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'workout:training_active_set_multiple_overloads',
+    url:(Map? params)=> (params?['training_active_id'] != null) && true ? 'training-active/${params?["training_active_id"]}/set-overload/multiple': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
+    name:'workout:training_active_finish',
+    url:(Map? params)=> (params?['training_active_id'] != null) && true ? 'training-active/${params?["training_active_id"]}/finish': throw InvalidReverseParamsException(),
+    numParams:1),
+    
+    RouteValue(
     name:'workout:exercise',
     url:(Map? params)=> (params?['training_id'] != null) && true ? 'exercise/${params?["training_id"]}': throw InvalidReverseParamsException(),
     numParams:1),
@@ -426,16 +536,6 @@ String? reverse(String name, [Map? params]) {
     RouteValue(
     name:'workout:exercise',
     url:(Map? params)=> (params?['training_id'] != null) &&(params?['exercise_id'] != null) && true ? 'exercise/${params?["training_id"]}/${params?["exercise_id"]}': throw InvalidReverseParamsException(),
-    numParams:2),
-    
-    RouteValue(
-    name:'workout:exercise_overload',
-    url:(Map? params)=> (params?['exercise_id'] != null) && true ? 'exercise/${params?["exercise_id"]}/overload': throw InvalidReverseParamsException(),
-    numParams:1),
-    
-    RouteValue(
-    name:'workout:exercise_overload',
-    url:(Map? params)=> (params?['exercise_id'] != null) &&(params?['index'] != null) && true ? 'exercise/${params?["exercise_id"]}/${params?["index"]}/overload': throw InvalidReverseParamsException(),
     numParams:2),
     
     RouteValue(
