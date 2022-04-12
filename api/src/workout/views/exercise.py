@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -10,6 +10,7 @@ from core.utils import decorators
 from workout.models import Exercise, Training
 from workout.serializers.exercise import ExerciseSerializer, ExerciseOrderSerializer
 from workout.utils.permission_handlers import ExercisePermissionHandler
+from rest_framework import filters
 
 
 class BaseExerciseView(BaseAPIView):
@@ -75,3 +76,16 @@ class ExerciseOrderView(BaseExerciseView):
             self.training.change_exercise_order(self.exercise, serializer.data.get('index'))
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
+
+
+class ExerciseAutocompleteListView(BaseAPIView, ListAPIView):
+    permission_classes = [IsAuthenticated]
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('exercise_name',)
+
+    def get_queryset(self):
+        return Exercise.objects.filter(training__training_plan__owner=self.logged_person)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset()).values_list('exercise_name', flat=True)
+        return Response(status=status.HTTP_200_OK, data=queryset)

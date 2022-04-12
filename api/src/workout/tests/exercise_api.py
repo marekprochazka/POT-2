@@ -1,6 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 
+from workout.models import Exercise
 from workout.tests.base import BaseWorkoutTestCase
 
 
@@ -101,3 +102,16 @@ class ExerciseApiTestCases(BaseWorkoutTestCase):
         response_3 = self.client.patch(url_2, data_3)
 
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response_3.status_code)
+
+    def test_get_autocomplete_list(self) -> None:
+        self.login(self.person_0)
+        self.setup_exercises()
+        url = reverse('workout:exercise_autocomplete')
+        response = self.client.get(url)
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(Exercise.objects.filter(training__training_plan__owner=self.person_0).count(),
+                         len(response.data))
+        url_2 = '%s?search=%s' % (reverse('workout:exercise_autocomplete'), self.exercise_0_0.exercise_name)
+        response_2 = self.client.get(url_2)
+        self.assertEqual(status.HTTP_200_OK, response_2.status_code)
+        self.assertEqual(1, len(response_2.data))
