@@ -2,7 +2,7 @@ from typing import List
 
 from core.models.base_model import BaseModel
 from django.utils.translation import gettext_lazy as _
-from django.db import models
+from django.db import models, transaction
 
 from workout.models.overload import Overload
 from workout.models.exercise import Exercise
@@ -47,6 +47,7 @@ class TrainingActive(BaseModel):
         self.__update_state()
         return overload
 
+    @transaction.atomic
     def set_overloads(self, overloads: List[dict]) -> List[Overload]:
         for overload_data in overloads:
             exercise = Exercise.objects.get(id=overload_data['exercise_id'])

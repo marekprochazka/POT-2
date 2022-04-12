@@ -21,6 +21,15 @@ class TrainingPermissionHandler(PermissionHandler):
         self.i_have_access = False
 
 
+class TrainingActivePermissionHandled(PermissionHandler):
+    instance: TrainingActive = None
+
+    def __init__(self, person: Person, instance: TrainingActive) -> None:
+        super(TrainingActivePermissionHandled, self).__init__(person, instance)
+        self.i_am_owner = self.instance.training.owner == self.person
+        self.i_have_access = False
+
+
 class ExercisePermissionHandler(PermissionHandler):
     instance: Exercise = None
 

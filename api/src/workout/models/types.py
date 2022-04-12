@@ -20,5 +20,5 @@ class TypeTrainingState(BaseTypeModel):
 
     class Meta:
         ordering = ['order']
-        verbose_name = _('Exercise state')
-        verbose_name_plural = _('Exercise states')
+        verbose_name = _('Training state')
+        verbose_name_plural = _('Training states')

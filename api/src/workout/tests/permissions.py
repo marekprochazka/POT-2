@@ -1,3 +1,6 @@
+import json
+from typing import Union
+
 from workout.tests.base import BaseWorkoutTestCase
 
 from django.urls import reverse
@@ -31,20 +34,22 @@ class PermissionsTestCases(BaseWorkoutTestCase):
 
         self.assertEqual(status.HTTP_403_FORBIDDEN, response_2.status_code)
 
-    def base_test_EDIT(self, url: str, data: dict) -> None:
+    def base_test_EDIT(self, url: str, data: Union[dict, list], put=True, patch=True) -> None:
         self.login(self.person_0)
-        response_1 = self.client.put(url, data)
-        response_2 = self.client.patch(url, data)
+        response_1 = self.client.put(url, json.dumps(data), content_type='application/json')
+        response_2 = self.client.patch(url, json.dumps(data), content_type='application/json')
 
         self.login(self.person_1)
-        response_3 = self.client.put(url, data)
-        response_4 = self.client.patch(url, data)
+        response_3 = self.client.put(url, json.dumps(data), content_type='application/json')
+        response_4 = self.client.patch(url, json.dumps(data), content_type='application/json')
 
-        for response in (response_1, response_2):
-            self.assertEqual(status.HTTP_200_OK, response.status_code)
+        if put:
+            self.assertEqual(status.HTTP_200_OK, response_1.status_code)
+            self.assertEqual(status.HTTP_403_FORBIDDEN, response_3.status_code)
 
-        for response in (response_3, response_4):
-            self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
+        if patch:
+            self.assertEqual(status.HTTP_200_OK, response_2.status_code)
+            self.assertEqual(status.HTTP_403_FORBIDDEN, response_4.status_code)
 
     def base_test_DELETE(self, url_1: str, url_2: str) -> None:
         self.login(self.person_0)
@@ -131,6 +136,21 @@ class PermissionsTestCases(BaseWorkoutTestCase):
         for response in [response_order_2]:
             self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
-    def test_training_active_permission_EDIT(self) -> None:
+    def test_training_active_permission_GET(self) -> None:
         url = reverse('workout:training_active', kwargs=dict(training_id=str(self.training_0_0.id)))
         self.base_test_VIEW(url)
+
+    def test_set_one_overload_permission_EDIT(self) -> None:
+        url = reverse('workout:training_active_set_one_overload',
+                      kwargs=dict(training_active_id=str(self.training_active_0.id)))
+        data = dict(exercise_id=str(self.exercise_0_0.id), value=50)
+        self.base_test_EDIT(url, data, patch=False)
+
+    def test_set_multiple_overloads_permission_edit(self) -> None:
+        url = reverse('workout:training_active_set_multiple_overloads',
+                      kwargs=dict(training_active_id=str(self.training_active_0.id)))
+        data = [
+            dict(exercise_id=str(self.exercise_0_0.id), value=50),
+            dict(exercise_id=str(self.exercise_0_1.id), value=75),
+        ]
+        self.base_test_EDIT(url, data, patch=False)
