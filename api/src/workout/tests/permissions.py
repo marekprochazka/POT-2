@@ -8,6 +8,9 @@ from rest_framework import status
 
 
 class PermissionsTestCases(BaseWorkoutTestCase):
+    """
+    Tests if the permissions and unauthorized situations are handled correctly.
+    """
     def setUp(self) -> None:
         super(PermissionsTestCases, self).setUp()
         self.setup_training_plans()
@@ -35,6 +38,13 @@ class PermissionsTestCases(BaseWorkoutTestCase):
         self.assertEqual(status.HTTP_403_FORBIDDEN, response_2.status_code)
 
     def base_test_EDIT(self, url: str, data: Union[dict, list], put=True, patch=True) -> None:
+        response_unauthorized1 = self.client.put(url, data=json.dumps(data), content_type='application/json')
+        response_unauthorized2 = self.client.patch(url, data=json.dumps(data), content_type='application/json')
+        if put:
+            self.assertEqual(status.HTTP_401_UNAUTHORIZED, response_unauthorized1.status_code)
+        if patch:
+            self.assertEqual(status.HTTP_401_UNAUTHORIZED, response_unauthorized2.status_code)
+
         self.login(self.person_0)
         response_1 = self.client.put(url, json.dumps(data), content_type='application/json')
         response_2 = self.client.patch(url, json.dumps(data), content_type='application/json')
@@ -154,3 +164,7 @@ class PermissionsTestCases(BaseWorkoutTestCase):
             dict(exercise_id=str(self.exercise_0_1.id), value=75),
         ]
         self.base_test_EDIT(url, data, patch=False)
+
+    def test_finish_training_active_permission_GET(self) -> None:
+        url = reverse('workout:training_active_finish', kwargs=dict(training_active_id=str(self.training_active_0.id)))
+        self.base_test_VIEW(url)

@@ -3,7 +3,7 @@ from django.urls import path
 from workout.views.exercise import ExerciseListCreateView, ExerciseView, ExerciseOrderView
 from workout.views.training import TrainingListCreateView, TrainingView
 from workout.views.training_active import LastTrainingActiveView, TrainingActiveSetOneOverloadView, \
-    TrainingActiveSetMultipleOverloadsView
+    TrainingActiveSetMultipleOverloadsView, FinishTrainingActiveView
 from workout.views.training_plan import TrainingPlanListCreateView, TrainingPlanView
 
 app_name = 'workout'
@@ -20,6 +20,8 @@ urlpatterns = [
          name='training_active_set_one_overload'),
     path('training-active/<uuid:training_active_id>/set-overload/multiple',
          TrainingActiveSetMultipleOverloadsView.as_view(), name='training_active_set_multiple_overloads'),
+    path('training-active/<uuid:training_active_id>/finish', FinishTrainingActiveView.as_view(),
+         name='training_active_finish'),
 
     path('exercise/<uuid:training_id>', ExerciseListCreateView.as_view(), name='exercise'),
     path('exercise/<uuid:training_id>/<uuid:exercise_id>', ExerciseView.as_view(), name='exercise'),

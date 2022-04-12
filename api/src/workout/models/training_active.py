@@ -37,6 +37,10 @@ class TrainingActive(BaseModel):
             self.state = TypeTrainingState.objects.get(identifier=TypeTrainingState.IN_PROGRESS)
             self.save()
 
+    def finish(self):
+        self.state = TypeTrainingState.objects.get(identifier=TypeTrainingState.FINISHED)
+        self.save()
+
     def set_overload(self, exercise: Exercise, value) -> Overload:
         try:
             overload = self.overloads.get(exercise=exercise)

@@ -90,3 +90,13 @@ class TrainingActiveAPITestCases(BaseWorkoutTestCase):
         self.assertEqual(status.HTTP_404_NOT_FOUND, response_exercise_doesnt_exist.status_code)
         self.assertEqual(50, self.exercise_0_0.last_overload_value)
         self.assertEqual(75, self.exercise_0_1.last_overload_value)
+
+    def test_finish_training_active(self):
+        self.login(self.person_0)
+        url = reverse('workout:training_active_finish',
+                      kwargs=dict(training_active_id=str(self.training_active_0.id)))
+        response = self.client.get(url)
+
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(TypeTrainingState.objects.get(identifier=TypeTrainingState.FINISHED),
+                         TrainingActive.objects.get(id=self.training_active_0.id).state)

@@ -29,20 +29,16 @@ class LastTrainingActiveView(BaseAPIView):
         return Response(status=status.HTTP_200_OK, data=serializer.data)
 
 
-class TrainingActiveBaseUpdateOverloadView(BaseAPIView, ABC):
+class TrainingActiveBaseView(BaseAPIView, ABC):
     training_active: TrainingActive = None
-    permission_classes = (IsAuthenticated, get_class_for_right(TrainingActivePermissionHandled, BaseRight.EDIT))
+    permission_classes = (IsAuthenticated, get_class_for_right(TrainingActivePermissionHandled, BaseRight.VIEW))
 
     def initial(self, request, *args, **kwargs):
         super().initial(request, *args, **kwargs)
         self.training_active = TrainingActive.objects.get(id=self.kwargs.get('training_active_id'))
 
-    @abstractmethod
-    def put(self, request, *args, **kwargs):
-        pass
 
-
-class TrainingActiveSetOneOverloadView(TrainingActiveBaseUpdateOverloadView):
+class TrainingActiveSetOneOverloadView(TrainingActiveBaseView):
     @decorators.has_right(TrainingActivePermissionHandled, 'training_active', BaseRight.EDIT)
     def put(self, request, *args, **kwargs):
         serializer = SetOverloadSerializer(data=request.data)
@@ -58,7 +54,7 @@ class TrainingActiveSetOneOverloadView(TrainingActiveBaseUpdateOverloadView):
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'detail': serializer.errors})
 
 
-class TrainingActiveSetMultipleOverloadsView(TrainingActiveBaseUpdateOverloadView):
+class TrainingActiveSetMultipleOverloadsView(TrainingActiveBaseView):
     @decorators.has_right(TrainingActivePermissionHandled, 'training_active', BaseRight.EDIT)
     def put(self, request, *args, **kwargs):
         serializer = SetOverloadSerializer(data=request.data, many=True)
@@ -69,3 +65,10 @@ class TrainingActiveSetMultipleOverloadsView(TrainingActiveBaseUpdateOverloadVie
             except Exercise.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND, data={'detail': _('Exercise not found')})
         return Response(status=status.HTTP_400_BAD_REQUEST, data={'detail': serializer.errors})
+
+
+class FinishTrainingActiveView(TrainingActiveBaseView):
+    @decorators.has_right(TrainingActivePermissionHandled, 'training_active', BaseRight.VIEW)
+    def get(self, request, *args, **kwargs):
+        self.training_active.finish()
+        return Response(status=status.HTTP_200_OK)
