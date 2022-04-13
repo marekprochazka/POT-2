@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from workout.models import TrainingPlan, Training, Exercise, TypeOverload, TypeTrainingState, Overload, TrainingActive
+from workout.models import TrainingPlan, Training, Exercise, TypeOverload, TypeTrainingState, Overload, TrainingActive, \
+    DefaultPlanImage
 
 
 @admin.register(TrainingPlan)
@@ -36,4 +37,9 @@ class TypeOverloadPlanAdmin(admin.ModelAdmin):
 
 @admin.register(TypeTrainingState)
 class TypeTrainingStateAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(DefaultPlanImage)
+class DefaultPlanImageAdmin(admin.ModelAdmin):
     pass

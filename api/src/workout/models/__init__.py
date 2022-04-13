@@ -4,3 +4,4 @@ from .types import TypeOverload, TypeTrainingState
 from .exercise import Exercise
 from .overload import Overload
 from .training_active import TrainingActive
+from .default_plan_image import DefaultPlanImage
