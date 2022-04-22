@@ -90,3 +90,11 @@ class POTTextStyles {
 class POTEnvironment {
   static String get apiUrl => dotenv.env['API_URL'] ?? '';
 }
+
+class POTGradients {
+  static const LinearGradient defaultGradient = LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[POTColors.primary, POTColors.secondary],
+              stops: [0.0, 1.0]);
+}

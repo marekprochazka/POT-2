@@ -15,19 +15,16 @@ class Header extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10.0),
-            bottomRight: Radius.circular(10.0),
-          ),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: POTColors.primary50, blurRadius: 5, offset: Offset(0, 9))
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[POTColors.primary, POTColors.secondary],
-              stops: [0.0, 1.0])),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10.0),
+          bottomRight: Radius.circular(10.0),
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: POTColors.primary50, blurRadius: 5, offset: Offset(0, 9))
+        ],
+        gradient: POTGradients.defaultGradient,
+      ),
       child: Column(
         children: <Widget>[
           Padding(
@@ -38,7 +35,8 @@ class Header extends StatelessWidget {
               style: POTTextStyles.navbarTitle,
             )),
           ),
-          SizedBox(width: double.infinity,child: HeaderContent(user.profilePicture))
+          SizedBox(
+              width: double.infinity, child: HeaderContent(user.profilePicture))
         ],
       ),
     );

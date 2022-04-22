@@ -22,3 +22,4 @@ class TypeTrainingState(BaseTypeModel):
         ordering = ['order']
         verbose_name = _('Training state')
         verbose_name_plural = _('Training states')
+

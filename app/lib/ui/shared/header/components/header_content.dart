@@ -1,7 +1,9 @@
 import 'package:app/constants.dart';
 import 'package:app/models/header_icons.dart';
+import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
+import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -92,7 +94,12 @@ class HeaderContent extends StatelessWidget {
                       width: 180,
                       height: 22,
                       text: 'Create new training plan',
-                      callback: () {},
+                      callback: () => showModal(
+                          context,
+                          BaseModal(
+                            child: const Text('Create new training plan'),
+                            height: MediaQuery.of(context).size.height * 0.8,
+                          )),
                       red: true,
                       textStyle: POTTextStyles.navbarText__active,
                     ),
