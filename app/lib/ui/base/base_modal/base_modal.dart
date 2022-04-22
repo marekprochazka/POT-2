@@ -1,11 +1,12 @@
 import 'package:app/constants.dart';
+import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:flutter/material.dart';
 
-class BaseModal extends StatelessWidget {
-  final Widget child;
+class BaseFormModal extends StatelessWidget {
+  final BaseForm child;
   final double? height;
 
-  const BaseModal({Key? key, required this.child, required this.height})
+  const BaseFormModal({Key? key, required this.child, required this.height})
       : super(key: key);
 
   // TODO close button switch (closs button on click callback should be Navigator.pop(context))
@@ -35,6 +36,9 @@ class BaseModal extends StatelessWidget {
                     children: <Widget>[child]))
           ]),
         ),
-        onWillPop: () => Future.value(true)); // TODO pop handler here
+        onWillPop: () async {
+          await child.handlePopOut();
+          return true;
+        }); // TODO pop handler here
   }
 }
