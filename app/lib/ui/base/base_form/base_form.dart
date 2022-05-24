@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 abstract class BaseForm extends StatefulWidget {
   final Widget child;
+  final GlobalKey<FormState> formKeyRoot;
 
-  const BaseForm({ Key? key, required this.child }) : super(key: key);
+  const BaseForm({ Key? key, required this.child, required this.formKeyRoot }) : super(key: key);
 
   @override
   State<BaseForm> createState() => _BaseFormState();
@@ -13,12 +14,10 @@ abstract class BaseForm extends StatefulWidget {
 
 class _BaseFormState extends State<BaseForm> {
 
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: widget.formKeyRoot,
       child: Column(
         children: [widget.child],
       ),
@@ -27,11 +26,3 @@ class _BaseFormState extends State<BaseForm> {
 }
 
 
-class DummyForm extends BaseForm {
-  const DummyForm({ Key? key, required Widget child }) : super(key: key, child: child);
-
-  @override
-  Future<void> handlePopOut() async{
-    print('DummyForm handlePopOut');
-  }
-}

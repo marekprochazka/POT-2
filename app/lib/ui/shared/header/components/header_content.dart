@@ -3,6 +3,7 @@ import 'package:app/models/header_icons.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
+import 'package:app/ui/shared/header/components/create_training_plan_form.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/material.dart';
 
 class HeaderContent extends StatelessWidget {
   final String profilePicture;
-  const HeaderContent(this.profilePicture, {Key? key}) : super(key: key);
+  HeaderContent(this.profilePicture, {Key? key}) : super(key: key);
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +101,10 @@ class HeaderContent extends StatelessWidget {
                       callback: () => showModal(
                           context,
                           BaseFormModal(
-                            child: const DummyForm(child: Text('Create new training plan')),
+                            child: CreateTrainingPlanForm(
+                              formKey: _formKey,
+                              child: CreateTrainingPlanFormBody(formKey: _formKey),
+                            ),
                             height: MediaQuery.of(context).size.height * 0.8,
                           )),
                       red: true,
