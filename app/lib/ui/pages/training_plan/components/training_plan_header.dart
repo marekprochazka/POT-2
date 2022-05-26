@@ -26,7 +26,7 @@ class TrainingPlanHeader extends StatelessWidget {
               color: POTColors.primary50, blurRadius: 5, offset: Offset(0, 9))
         ],
         image: DecorationImage(
-          image: CachedNetworkImageProvider(getUrlString(trainingPlan.planImage)),
+          image: CachedNetworkImageProvider(getUrlString(trainingPlan.planImage ?? '')),
           fit: BoxFit.cover,
           )
       ),
@@ -37,7 +37,7 @@ class TrainingPlanHeader extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4.0),
             child: Center(
                 child: Text(
-              trainingPlan.planName,
+              trainingPlan.planName ?? '',
               style: POTTextStyles.navbarTitle,
             )),
           ),

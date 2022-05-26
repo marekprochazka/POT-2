@@ -13,7 +13,7 @@ class BaseFormModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Padding(
-          padding: const EdgeInsets.only(top:20.0),
+          padding: const EdgeInsets.only(top: 20.0),
           child: Dialog(
             elevation: 0,
             clipBehavior: Clip.antiAlias,
@@ -22,12 +22,14 @@ class BaseFormModal extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: SingleChildScrollView(
-              child: Stack(children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  },
-                  child: Container(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Stack(children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                    child: Container(
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: height,
                       decoration: BoxDecoration(
@@ -35,12 +37,19 @@ class BaseFormModal extends StatelessWidget {
                         gradient: POTGradients.defaultGradient,
                       ),
                       child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[child])),
-                )
-              ]),
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: height,
+                            child: child),
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
+              ),
             ),
           ),
         ),

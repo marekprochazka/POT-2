@@ -8,8 +8,17 @@ class BaseTextField extends StatelessWidget {
   final double height;
   final int lines;
   final bool multiline;
+  final String? Function(String?) onChangedCallback;
 
-  const BaseTextField({Key? key, required this.controller, this.validator, this.lines = 1, required this.width, required this.height, this.multiline = false})
+  const BaseTextField(
+      {Key? key,
+      required this.controller,
+      this.validator,
+      this.lines = 1,
+      required this.width,
+      required this.height,
+      this.multiline = false,
+      required this.onChangedCallback})
       : super(key: key);
 
   @override
@@ -24,10 +33,12 @@ class BaseTextField extends StatelessWidget {
         keyboardType: multiline ? TextInputType.multiline : TextInputType.text,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: POTColors.tertiary, width: 1.0),
+              borderSide:
+                  const BorderSide(color: POTColors.tertiary, width: 1.0),
               borderRadius: BorderRadius.circular(15.0)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: POTColors.tertiary, width: 1.0),
+              borderSide:
+                  const BorderSide(color: POTColors.tertiary, width: 1.0),
               borderRadius: BorderRadius.circular(15.0)),
           fillColor: POTColors.white,
           filled: true,
@@ -42,6 +53,7 @@ class BaseTextField extends StatelessWidget {
         },
         onChanged: (value) {
           controller.text = value;
+          onChangedCallback(value);
         },
       ),
     );

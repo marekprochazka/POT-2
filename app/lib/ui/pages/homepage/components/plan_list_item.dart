@@ -20,7 +20,7 @@ class PlanListItem extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: CachedNetworkImageProvider(
-                  getUrlString(trainingPlan.planImage)),
+                  getUrlString(trainingPlan.planImage ?? '')),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(10),
@@ -29,13 +29,13 @@ class PlanListItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
             Text(
-              trainingPlan.planName,
+              trainingPlan.planName ?? '',
               style: POTTextStyles.dynamicText(
                   36, FontWeight.bold, POTColors.white),
             ),
             Flexible(
               child: Text(
-                trainingPlan.description,
+                trainingPlan.description ?? '',
                 style: POTTextStyles.dynamicText(
                     14, FontWeight.bold, POTColors.white,),
                 overflow: TextOverflow.fade,

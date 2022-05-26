@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/models/data/training_plan.dart';
 import 'package:app/models/header_icons.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_modal/base_modal.dart';
@@ -14,6 +15,9 @@ class HeaderContent extends StatelessWidget {
   HeaderContent(this.profilePicture, {Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final TrainingPlan _trainingPlan =
+      TrainingPlan(id: '1', xCreated: 'jo', xModified: 'jo');
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +107,14 @@ class HeaderContent extends StatelessWidget {
                           BaseFormModal(
                             child: CreateTrainingPlanForm(
                               formKey: _formKey,
-                              child: CreateTrainingPlanFormBody(formKey: _formKey),
+                              model: _trainingPlan,
+                              child: CreateTrainingPlanFormBody(
+                                  formKey: _formKey,
+                                  instance: _trainingPlan,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5),
                             ),
-                            height: MediaQuery.of(context).size.height * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.5,
                           )),
                       red: true,
                       textStyle: POTTextStyles.navbarText__active,
