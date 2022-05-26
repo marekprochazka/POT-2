@@ -9,23 +9,32 @@ import 'package:app/ui/shared/header/components/navbar_text.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-class HeaderContent extends StatelessWidget {
+class HeaderContent extends StatefulWidget {
   final String profilePicture;
-  HeaderContent(this.profilePicture, {Key? key}) : super(key: key);
+  const HeaderContent(this.profilePicture, {Key? key}) : super(key: key);
 
+  @override
+  State<HeaderContent> createState() => _HeaderContentState();
+}
+
+class _HeaderContentState extends State<HeaderContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late TrainingPlan? _trainingPlan;
 
   Future<String?> fetchNewTrainingPlan() async {
-    // TODO show loading overlay
+    EasyLoading.show(status: 'Creating new training plan...');
+    // wait for 2 seconds
+    await Future.delayed(const Duration(seconds: 2));
     try {
       _trainingPlan = await TrainingPlan.getNew();
     } catch (err) {
       return err.toString();
     }
-    // TODO hide loading overlay
+    EasyLoading.dismiss();
+    return null;
   }
 
   @override
@@ -44,7 +53,7 @@ class HeaderContent extends StatelessWidget {
                     spreadRadius: 6)
               ]),
               child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(profilePicture),
+                backgroundImage: CachedNetworkImageProvider(widget.profilePicture),
                 radius: 50.0,
               ),
             ),

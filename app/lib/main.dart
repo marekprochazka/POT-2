@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: Environ.fileName);
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;
         return MaterialApp.router(
+          builder: EasyLoading.init(),
           routeInformationParser: router.routeInformationParser,
           routerDelegate: router.routerDelegate,
           debugShowCheckedModeBanner: false,
