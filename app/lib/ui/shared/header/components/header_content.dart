@@ -16,8 +16,17 @@ class HeaderContent extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TrainingPlan _trainingPlan =
-      TrainingPlan(id: '1', xCreated: 'jo', xModified: 'jo');
+  late TrainingPlan? _trainingPlan;
+
+  Future<String?> fetchNewTrainingPlan() async {
+    // TODO show loading overlay
+    try {
+      _trainingPlan = await TrainingPlan.getNew();
+    } catch (err) {
+      return err.toString();
+    }
+    // TODO hide loading overlay
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,20 +111,29 @@ class HeaderContent extends StatelessWidget {
                       width: 180,
                       height: 22,
                       text: 'Create new training plan',
-                      callback: () => showModal(
-                          context,
-                          BaseFormModal(
-                            child: CreateTrainingPlanForm(
-                              formKey: _formKey,
-                              model: _trainingPlan,
-                              child: CreateTrainingPlanFormBody(
+                      callback: () async {
+                        String? err = await fetchNewTrainingPlan();
+                        if (err != null) {
+                          // TODO show error
+                        } else {
+                          showModal(
+                              context,
+                              BaseFormModal(
+                                child: CreateTrainingPlanForm(
                                   formKey: _formKey,
-                                  instance: _trainingPlan,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.5),
-                            ),
-                            height: MediaQuery.of(context).size.height * 0.5,
-                          )),
+                                  model: _trainingPlan!,
+                                  child: CreateTrainingPlanFormBody(
+                                      formKey: _formKey,
+                                      instance: _trainingPlan!,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.5),
+                                ),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                              ));
+                        }
+                      },
                       red: true,
                       textStyle: POTTextStyles.navbarText__active,
                     ),

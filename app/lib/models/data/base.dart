@@ -5,4 +5,5 @@ abstract class BaseModel {
   BaseModel({required this.id, required this.xCreated, required this.xModified});
 
   Future<void> save();
+  Future<void> destroy();
 }

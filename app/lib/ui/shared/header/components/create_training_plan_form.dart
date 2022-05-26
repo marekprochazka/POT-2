@@ -17,7 +17,8 @@ class CreateTrainingPlanForm extends BaseForm {
 
   @override
   Future<void> handlePopOut() async {
-    model.save();
+    print('destroying model of id ${model.id}');
+    model.destroy();
   }
 }
 
@@ -26,7 +27,10 @@ class CreateTrainingPlanFormBody extends StatefulWidget {
   final TrainingPlan instance;
   final double height;
   const CreateTrainingPlanFormBody(
-      {Key? key, required this.formKey, required this.instance, required this.height})
+      {Key? key,
+      required this.formKey,
+      required this.instance,
+      required this.height})
       : super(key: key);
 
   @override
@@ -36,35 +40,29 @@ class CreateTrainingPlanFormBody extends StatefulWidget {
 
 class _CreateTrainingPlanFormBodyState
     extends State<CreateTrainingPlanFormBody> {
-
   final TextEditingController _planName = TextEditingController();
   final TextEditingController _description = TextEditingController();
 
   Widget _buildPlanNameField() {
     return BaseTextField(
-        controller: _planName,
-        validator: (value) {
-          if (value?.isEmpty ?? false) {
-            return 'Please enter a plan name';
-          }
-          return null;
-        },
-        width: 250.0,
-        height: 30.0,
-        onChangedCallback: (String? value) {
-          widget.instance.planName = value;
-        },);
+      controller: _planName,
+      validator: (value) {
+        if (value?.isEmpty ?? false) {
+          return 'Please enter a plan name';
+        }
+        return null;
+      },
+      width: 250.0,
+      height: 30.0,
+      onChangedCallback: (String? value) {
+        widget.instance.planName = value;
+      },
+    );
   }
 
   Widget _buildPlanDescriptionField() {
     return BaseTextField(
         controller: _description,
-        validator: (value) {
-          if (value?.isEmpty ?? false) {
-            return 'Please enter a plan description';
-          }
-          return null;
-        },
         width: 250.0,
         height: 100.0,
         lines: 20,
@@ -81,11 +79,15 @@ class _CreateTrainingPlanFormBodyState
       child: Column(
         children: <Widget>[
           const SizedBox(height: 10.0),
-          Text('Plan name', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
+          Text('Plan name',
+              style: POTTextStyles.dynamicText(
+                  20, FontWeight.bold, POTColors.white)),
           const SizedBox(height: 10.0),
           _buildPlanNameField(),
           const SizedBox(height: 20.0),
-          Text('Plan description', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
+          Text('Plan description',
+              style: POTTextStyles.dynamicText(
+                  20, FontWeight.bold, POTColors.white)),
           const SizedBox(height: 10.0),
           _buildPlanDescriptionField(),
           const Spacer(),
@@ -93,12 +95,25 @@ class _CreateTrainingPlanFormBodyState
             padding: const EdgeInsets.all(15.0),
             child: Row(
               children: <Widget>[
-                POTButton(width: 100.0, height: 30, text: 'Cancel', callback: () => Navigator.pop(context)),
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Cancel',
+                    callback: () {
+                      print('cancelling instance of id ${widget.instance.id}');
+                      widget.instance.destroy();
+                      Navigator.pop(context);
+                    }),
                 const Spacer(),
-                POTButton(width: 100.0, height: 30, text: 'Save', callback: () {
-                  widget.instance.save();
-                  Navigator.pop(context);
-                }),
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Save',
+                    callback: () {
+                      print('saving instance of id ${widget.instance.id}');
+                      widget.instance.save();
+                      Navigator.pop(context);
+                    }),
               ],
             ),
           )
