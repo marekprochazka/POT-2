@@ -1,6 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/models/data/user.dart';
+import 'package:app/providers/is_frozen_state.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +14,21 @@ Future<void> main() async {
   await dotenv.load(fileName: Environ.fileName);
   final prefs = await SharedPreferences.getInstance();
   final loginState = LoginState(prefs);
-  final user = User('Gigachad', 'giga@chad.com', '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png');
+  final user = User('Gigachad', 'giga@chad.com',
+      '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png');
   loginState.checkLoggedIn();
-  runApp(MyApp(loginState: loginState, user: user,));
+  runApp(MyApp(
+    loginState: loginState,
+    user: user,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final LoginState loginState;
   final User user;
 
-  const MyApp({Key? key, required this.loginState, required this.user}) : super(key: key);
+  const MyApp({Key? key, required this.loginState, required this.user})
+      : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -30,15 +36,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginState>(
-            lazy: false, 
-            create: (BuildContext createContext) => loginState),
+            lazy: false, create: (BuildContext createContext) => loginState),
+        ChangeNotifierProvider<IsFrozenState>(
+            lazy: false,
+            create: (BuildContext createContext) => IsFrozenState()),
         Provider<POTRouter>(
           lazy: false,
           create: (BuildContext createContext) => POTRouter(loginState),
         ),
         Provider<User>(
-          lazy: false,
-          create: (BuildContext createContext) => user),
+            lazy: false, create: (BuildContext createContext) => user),
       ],
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;
@@ -49,10 +56,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'POT',
           theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              backgroundColor: POTColors.primary
-            ),
-            primarySwatch: Colors.blue),
+              appBarTheme:
+                  const AppBarTheme(backgroundColor: POTColors.primary),
+              primarySwatch: Colors.blue),
         );
       }),
     );
