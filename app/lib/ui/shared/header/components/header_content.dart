@@ -25,15 +25,16 @@ class HeaderContent extends StatefulWidget {
 class _HeaderContentState extends State<HeaderContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late TrainingPlan? _trainingPlan;
+  late TrainingPlan? _newTrainingPlan;
 
   Future<String?> fetchNewTrainingPlan() async {
     showLoadingPopup(context, 'Creating new training plan...');
     // wait for 2 seconds
     await Future.delayed(const Duration(seconds: 2));
     try {
-      _trainingPlan = await TrainingPlan.getNew();
+      _newTrainingPlan = await TrainingPlan.getNew();
     } catch (err) {
+      hideLoadingPopup(context);
       return err.toString();
     }
     hideLoadingPopup(context);
@@ -124,7 +125,7 @@ class _HeaderContentState extends State<HeaderContent> {
                       height: 22,
                       text: 'Create new training plan',
                       callback: () async {
-                        String? err = await fetchNewTrainingPlan();
+                        final String? err = await fetchNewTrainingPlan();
                         if (err != null) {
                           // TODO show error
                         } else {
@@ -133,10 +134,10 @@ class _HeaderContentState extends State<HeaderContent> {
                               BaseFormModal(
                                 child: CreateTrainingPlanForm(
                                   formKey: _formKey,
-                                  model: _trainingPlan!,
+                                  model: _newTrainingPlan!,
                                   child: CreateTrainingPlanFormBody(
                                       formKey: _formKey,
-                                      instance: _trainingPlan!,
+                                      instance: _newTrainingPlan!,
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.5),

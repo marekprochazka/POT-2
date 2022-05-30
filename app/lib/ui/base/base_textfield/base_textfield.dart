@@ -8,7 +8,8 @@ class BaseTextField extends StatelessWidget {
   final double height;
   final int lines;
   final bool multiline;
-  final String? Function(String?) onChangedCallback;
+  final void Function(String?) onChangedCallback;
+  final bool transparent;
 
   const BaseTextField(
       {Key? key,
@@ -18,7 +19,8 @@ class BaseTextField extends StatelessWidget {
       required this.width,
       required this.height,
       this.multiline = false,
-      required this.onChangedCallback})
+      required this.onChangedCallback,
+      this.transparent = false})
       : super(key: key);
 
   @override
@@ -32,18 +34,28 @@ class BaseTextField extends StatelessWidget {
         maxLines: lines,
         keyboardType: multiline ? TextInputType.multiline : TextInputType.text,
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: POTColors.tertiary, width: 1.0),
-              borderRadius: BorderRadius.circular(15.0)),
-          focusedBorder: OutlineInputBorder(
-              borderSide:
-                  const BorderSide(color: POTColors.tertiary, width: 1.0),
-              borderRadius: BorderRadius.circular(15.0)),
-          fillColor: POTColors.white,
+          enabledBorder: transparent
+              ? const UnderlineInputBorder(
+                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
+                )
+              : OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: POTColors.tertiary, width: 1.0),
+                  borderRadius: BorderRadius.circular(15.0)),
+          focusedBorder: transparent
+              ? const UnderlineInputBorder(
+                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
+                )
+              : OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: POTColors.tertiary, width: 1.0),
+                  borderRadius: BorderRadius.circular(15.0)),
+          fillColor: transparent ? Colors.transparent: POTColors.white,
           filled: true,
         ),
         style:
+        transparent ?
+            POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.white):
             POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.primary),
         validator: (value) {
           if (validator != null) {

@@ -63,25 +63,25 @@ class POTDummyAPI {
   static Future<List<Training>> getTrainings(String planId) async {
     await Future.delayed(const Duration(seconds: 2));
     return [
-      Training(id: '1', trainingName: 'Monday chest', exercises: [
-        ExerciseLite(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description'),
-        ExerciseLite(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description'),
-        ExerciseLite(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2),
+      Training(id: '1', trainingName: 'Monday chest',xCreated: '1', xModified: '1', exercises: [
+        Exercise(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
         ]),
-      Training(id: '2', trainingName: 'Tuesday back', exercises: [
-        ExerciseLite(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description'),
-        ExerciseLite(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description'),
-        ExerciseLite(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2),
+      Training(id: '2', trainingName: 'Tuesday back',xCreated: '1', xModified: '1', exercises: [
+        Exercise(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
         ]),
-      Training(id: '3', trainingName: 'Wednesday Legs', exercises: [
-        ExerciseLite(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description'),
-        ExerciseLite(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description'),
-        ExerciseLite(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2),
+      Training(id: '3', trainingName: 'Wednesday Legs',xCreated: '1', xModified: '1', exercises: [
+        Exercise(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
         ]),
-      Training(id: '4', trainingName: 'Sunday cardio', exercises: [
-        ExerciseLite(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description'),
-        ExerciseLite(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description'),
-        ExerciseLite(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2),
+      Training(id: '4', trainingName: 'Sunday cardio',xCreated: '1', xModified: '1', exercises: [
+        Exercise(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
+        Exercise(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
         ]),
 
     ];
