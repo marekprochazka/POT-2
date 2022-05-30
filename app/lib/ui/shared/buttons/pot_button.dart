@@ -8,6 +8,7 @@ class POTButton extends StatelessWidget {
   final Function() callback;
   final bool red;
   final TextStyle textStyle;
+  final IconData? icon;
 
   const POTButton({
     Key? key,
@@ -17,6 +18,7 @@ class POTButton extends StatelessWidget {
     required this.callback,
     this.red = false,
     this.textStyle =  POTTextStyles.defaultButtonText,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -32,11 +34,25 @@ class POTButton extends StatelessWidget {
         child: SizedBox(
           width: width,
           height: height,
-          child: Center(
-            child: Text(
-              text,
-              style: textStyle,
-            ),
+          child: Row(
+            children: [
+              if (icon != null)
+                Padding(
+                  padding: const EdgeInsets.only(left: 3.0),
+                  child: Icon(
+                    icon,
+                    color: red ? POTColors.tertiary : POTColors.white,
+                  ),
+                ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    text,
+                    style: textStyle,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

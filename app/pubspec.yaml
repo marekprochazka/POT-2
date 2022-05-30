@@ -89,6 +89,9 @@ flutter:
       fonts:
         - asset: icons/HeaderIcons.ttf
 
+    - family: ButtonIcons
+      fonts:
+        - asset: icons/ButtonIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
