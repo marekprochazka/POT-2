@@ -170,6 +170,29 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
               });
             },
           ),
+          Row(
+              children: <Widget>[
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Cancel',
+                    callback: () {
+                      print('cancelling instance of id ${widget.instance.id}');
+                      widget.instance.destroy();
+                      Navigator.pop(context);
+                    }),
+                const Spacer(),
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Save',
+                    callback: () {
+                      print('saving instance of id ${widget.instance.id}');
+                      widget.instance.save();
+                      Navigator.pop(context);
+                    }),
+              ],
+            ),
         ],
       ),
     );
