@@ -5,6 +5,7 @@ import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CreateTrainingForm extends BaseForm {
   final GlobalKey<FormState> formKey;
@@ -57,79 +58,94 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
   }
 
   Widget _buildExcerciseFieldset(int index) {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: POTColors.white,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: Column(
           children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              child: BaseTextField(
-                controller: TextEditingController(
-                    text: widget.instance.exercises![index].exerciseName),
-                validator: (value) {
-                  if (value?.isEmpty ?? false) {
-                    return 'Please enter an exercise name';
-                  }
-                  return null;
-                },
-                width: 250.0,
-                height: 30.0,
-                onChangedCallback: (String? value) {
-                  widget.instance.exercises![index].exerciseName = value;
-                },
-                transparent: true,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: BaseTextField(
+                    controller: TextEditingController(
+                        text: widget.instance.exercises![index].exerciseName),
+                    validator: (value) {
+                      if (value?.isEmpty ?? false) {
+                        return 'Please enter an exercise name';
+                      }
+                      return null;
+                    },
+                    width: 150.0,
+                    height: 30.0,
+                    onChangedCallback: (String? value) {
+                      widget.instance.exercises![index].exerciseName = value;
+                    },
+                    transparent: true,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(left:8.0, right: 8.0),
+              child: Row(children: <Widget>[
+                Text('Overload unit', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white),),
+                const Spacer(),
+                BaseTextField(
+                  controller: TextEditingController(
+                      text: widget.instance.exercises![index].overloadUnit),
+                  validator: (value) {
+                    if (value?.isEmpty ?? false) {
+                      return 'Please enter an overload unit';
+                    }
+                    return null;
+                  },
+                  width: 150.0,
+                  height: 30.0,
+                  onChangedCallback: (String? value) {
+                    widget.instance.exercises![index].overloadUnit = value;
+                  },
+                ),
+              ]),
+            ),
+            const SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.only(left:8.0, right: 8.0),
+              child: Row(
+                children: <Widget>[
+                  Text('Overload type', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white)),
+                  const Spacer(),
+                  BaseTextField(
+                    controller: TextEditingController(
+                        text: widget.instance.exercises![index].overloadType),
+                    validator: (value) {
+                      if (value?.isEmpty ?? false) {
+                        return 'Please enter an overload type';
+                      }
+                      return null;
+                    },
+                    width: 150.0,
+                    height: 30.0,
+                    onChangedCallback: (String? value) {
+                      widget.instance.exercises![index].overloadType = value;
+                    },
+                  ),
+                ],
               ),
             ),
+            const SizedBox(height: 10.0),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left:8.0, right: 8.0),
-          child: Row(children: <Widget>[
-            Text('Overload unit', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white),),
-            const Spacer(),
-            BaseTextField(
-              controller: TextEditingController(
-                  text: widget.instance.exercises![index].overloadUnit),
-              validator: (value) {
-                if (value?.isEmpty ?? false) {
-                  return 'Please enter an overload unit';
-                }
-                return null;
-              },
-              width: 150.0,
-              height: 30.0,
-              onChangedCallback: (String? value) {
-                widget.instance.exercises![index].overloadUnit = value;
-              },
-            ),
-          ]),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left:8.0, right: 8.0),
-          child: Row(
-            children: <Widget>[
-              Text('Overload type', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white)),
-              const Spacer(),
-              BaseTextField(
-                controller: TextEditingController(
-                    text: widget.instance.exercises![index].overloadType),
-                validator: (value) {
-                  if (value?.isEmpty ?? false) {
-                    return 'Please enter an overload type';
-                  }
-                  return null;
-                },
-                width: 150.0,
-                height: 30.0,
-                onChangedCallback: (String? value) {
-                  widget.instance.exercises![index].overloadType = value;
-                },
-              ),
-            ],
-          ),
-        )
-      ],
+      ),
     );
   }
 
@@ -141,12 +157,17 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
         children: <Widget>[
           const SizedBox(height: 10.0),
           Text('Training name', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
+          const SizedBox(height: 10.0),
           _buildTrainingNameField(),
+          const Divider(
+            color: POTColors.white,
+            thickness: 1.0,
+          ),
           const SizedBox(height: 10.0),
           Text('Exercises', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
           const SizedBox(height: 10.0),
           SizedBox(
-            height: widget.height/2,
+            height: widget.height * 0.6,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               physics: const ScrollPhysics(),
@@ -161,7 +182,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             text: 'Add exercise',
             textStyle: POTTextStyles.navbarText__active,
             height: 30,
-            width: 200,
+            width: MediaQuery.of(context).size.width * 0.7,
             red: true,
             callback: () async{
               await widget.instance.addNewExercise();
@@ -170,29 +191,33 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
               });
             },
           ),
-          Row(
-              children: <Widget>[
-                POTButton(
-                    width: 100.0,
-                    height: 30,
-                    text: 'Cancel',
-                    callback: () {
-                      print('cancelling instance of id ${widget.instance.id}');
-                      widget.instance.destroy();
-                      Navigator.pop(context);
-                    }),
-                const Spacer(),
-                POTButton(
-                    width: 100.0,
-                    height: 30,
-                    text: 'Save',
-                    callback: () {
-                      print('saving instance of id ${widget.instance.id}');
-                      widget.instance.save();
-                      Navigator.pop(context);
-                    }),
-              ],
-            ),
+          const SizedBox(height: 10.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                children: <Widget>[
+                  POTButton(
+                      width: 100.0,
+                      height: 30,
+                      text: 'Cancel',
+                      callback: () {
+                        print('cancelling instance of id ${widget.instance.id}');
+                        widget.instance.destroy();
+                        Navigator.pop(context);
+                      }),
+                  const Spacer(),
+                  POTButton(
+                      width: 100.0,
+                      height: 30,
+                      text: 'Save',
+                      callback: () {
+                        print('saving instance of id ${widget.instance.id}');
+                        widget.instance.save();
+                        Navigator.pop(context);
+                      }),
+                ],
+              ),
+          ),
         ],
       ),
     );

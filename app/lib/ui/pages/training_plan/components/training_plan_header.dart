@@ -100,10 +100,10 @@ class _TrainingPlanHeaderState extends State<TrainingPlanHeader> {
                         child: CreateTrainingFormBody(
                           formKey: _formKey,
                           instance: _newTraining!,
-                          height: MediaQuery.of(context).size.height * 0.7,
+                          height: MediaQuery.of(context).size.height * 0.9,
                         )
                       ), 
-                      height: MediaQuery.of(context).size.height * 0.7,));
+                      height: MediaQuery.of(context).size.height * 0.9,));
                   }
                 }, red: true,),
               ),
