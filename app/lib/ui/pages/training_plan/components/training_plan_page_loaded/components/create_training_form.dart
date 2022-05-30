@@ -97,9 +97,13 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             ),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.only(left:8.0, right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: Row(children: <Widget>[
-                Text('Overload unit', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white),),
+                Text(
+                  'Overload unit',
+                  style: POTTextStyles.dynamicText(
+                      14, FontWeight.bold, POTColors.white),
+                ),
                 const Spacer(),
                 BaseTextField(
                   controller: TextEditingController(
@@ -120,10 +124,12 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             ),
             const SizedBox(height: 10.0),
             Padding(
-              padding: const EdgeInsets.only(left:8.0, right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
               child: Row(
                 children: <Widget>[
-                  Text('Overload type', style: POTTextStyles.dynamicText(14, FontWeight.bold, POTColors.white)),
+                  Text('Overload type',
+                      style: POTTextStyles.dynamicText(
+                          14, FontWeight.bold, POTColors.white)),
                   const Spacer(),
                   BaseTextField(
                     controller: TextEditingController(
@@ -157,7 +163,9 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
       child: Column(
         children: <Widget>[
           const SizedBox(height: 10.0),
-          Text('Training name', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
+          Text('Training name',
+              style: POTTextStyles.dynamicText(
+                  20, FontWeight.bold, POTColors.white)),
           const SizedBox(height: 10.0),
           _buildTrainingNameField(),
           const Divider(
@@ -165,7 +173,9 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             thickness: 1.0,
           ),
           const SizedBox(height: 10.0),
-          Text('Exercises', style: POTTextStyles.dynamicText(20, FontWeight.bold, POTColors.white)),
+          Text('Exercises',
+              style: POTTextStyles.dynamicText(
+                  20, FontWeight.bold, POTColors.white)),
           const SizedBox(height: 10.0),
           SizedBox(
             height: widget.height * 0.6,
@@ -185,7 +195,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             height: 30,
             width: MediaQuery.of(context).size.width * 0.7,
             red: true,
-            callback: () async{
+            callback: () async {
               await widget.instance.addNewExercise();
               setState(() {
                 numExercises++;
@@ -197,28 +207,30 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-                children: <Widget>[
-                  POTButton(
-                      width: 100.0,
-                      height: 30,
-                      text: 'Cancel',
-                      callback: () {
-                        print('cancelling instance of id ${widget.instance.id}');
-                        widget.instance.destroy();
-                        Navigator.pop(context);
-                      }),
-                  const Spacer(),
-                  POTButton(
-                      width: 100.0,
-                      height: 30,
-                      text: 'Save',
-                      callback: () {
-                        print('saving instance of id ${widget.instance.id}');
+              children: <Widget>[
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Cancel',
+                    callback: () {
+                      print('cancelling instance of id ${widget.instance.id}');
+                      widget.instance.destroy();
+                      Navigator.pop(context);
+                    }),
+                const Spacer(),
+                POTButton(
+                    width: 100.0,
+                    height: 30,
+                    text: 'Save',
+                    callback: () {
+                      print('saving instance of id ${widget.instance.id}');
+                      if (widget.formKey.currentState!.validate()) {
                         widget.instance.save();
                         Navigator.pop(context);
-                      }),
-                ],
-              ),
+                      }
+                    }),
+              ],
+            ),
           ),
         ],
       ),

@@ -50,6 +50,7 @@ class POTColors {
   static const Color white = Color(0xFFF9FAFE);
 
   static const Color primary50 = Color.fromARGB(120, 36, 38, 130);
+  static const Color error = Color.fromARGB(120, 244, 76, 76);
 }
 
 class POTAssets {}

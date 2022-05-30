@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:flutter/material.dart';
 
-class BaseTextField extends StatelessWidget {
+class BaseTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final double width;
@@ -24,48 +24,62 @@ class BaseTextField extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<BaseTextField> createState() => _BaseTextFieldState();
+}
+
+class _BaseTextFieldState extends State<BaseTextField> {
+  bool _valid = true;
+
+  InputBorder _border() => widget.transparent
+              ? const UnderlineInputBorder(
+                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
+                )
+              : OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: POTColors.tertiary, width: 1.0),
+                  borderRadius: BorderRadius.circular(15.0));
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
-      height: height,
+      width: widget.width,
+      height: widget.height,
       child: TextFormField(
         textAlign: TextAlign.center,
-        minLines: lines,
-        maxLines: lines,
-        keyboardType: multiline ? TextInputType.multiline : TextInputType.text,
+        minLines: widget.lines,
+        maxLines: widget.lines,
+        keyboardType: widget.multiline ? TextInputType.multiline : TextInputType.text,
         decoration: InputDecoration(
-          enabledBorder: transparent
-              ? const UnderlineInputBorder(
-                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
-                )
-              : OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: POTColors.tertiary, width: 1.0),
-                  borderRadius: BorderRadius.circular(15.0)),
-          focusedBorder: transparent
-              ? const UnderlineInputBorder(
-                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
-                )
-              : OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: POTColors.tertiary, width: 1.0),
-                  borderRadius: BorderRadius.circular(15.0)),
-          fillColor: transparent ? Colors.transparent: POTColors.white,
-          filled: true,
+          errorStyle: const TextStyle(height: 0),
+          enabledBorder: _border(),
+          focusedBorder: _border(),
+          errorBorder: _border(),
+          focusedErrorBorder: _border(),
+          fillColor: _valid ? Colors.white: POTColors.error,
+          filled: widget.transparent && _valid? false: true,
+        
         ),
         style:
-        transparent ?
+        widget.transparent ?
             POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.white):
             POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.primary),
+        
         validator: (value) {
-          if (validator != null) {
-            return validator!(value);
+          if (widget.validator != null) {
+            setState(() {
+              _valid = false;
+            });
+            // TODO popup with error message
+            return '';
           }
+          setState(() {
+            _valid = true;
+          });
           return null;
         },
         onChanged: (value) {
-          controller.text = value;
-          onChangedCallback(value);
+          widget.controller.text = value;
+          widget.onChangedCallback(value);
         },
       ),
     );
