@@ -7,6 +7,7 @@ import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/ui/shared/header/components/create_training_plan_form.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
+import 'package:app/utils/loading_popup.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,7 @@ class _HeaderContentState extends State<HeaderContent> {
   late TrainingPlan? _trainingPlan;
 
   Future<String?> fetchNewTrainingPlan() async {
-    Provider.of<IsFrozenState>(context, listen: false).isFrozen = true;
-    EasyLoading.show(status: 'Creating new training plan...');
+    showLoadingPopup(context, 'Creating new training plan...');
     // wait for 2 seconds
     await Future.delayed(const Duration(seconds: 2));
     try {
@@ -36,8 +36,7 @@ class _HeaderContentState extends State<HeaderContent> {
     } catch (err) {
       return err.toString();
     }
-    EasyLoading.dismiss();
-    Provider.of<IsFrozenState>(context, listen: false).isFrozen = false;
+    hideLoadingPopup(context);
     return null;
   }
 
