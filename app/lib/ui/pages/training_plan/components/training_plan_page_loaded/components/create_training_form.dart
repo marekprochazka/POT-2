@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/models/button_icons.dart';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
@@ -190,6 +191,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 numExercises++;
               });
             },
+            icon: ButtonIcons.add_circle_outline,
           ),
           const SizedBox(height: 10.0),
           Padding(

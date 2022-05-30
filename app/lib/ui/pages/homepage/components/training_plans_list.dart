@@ -1,6 +1,7 @@
 import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
+import 'package:app/utils/loading_popup.dart';
 import 'package:flutter/material.dart';
 
 class TrainingPlansList extends StatefulWidget {
@@ -33,10 +34,12 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
             return const Text('No data');
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return const Text('Loading');
+            showLoadingPopup(context, 'Loading training plans...', freeze: false);
+            return const SizedBox();
           case ConnectionState.done:
             // return Text('done');
             if (snapshot.hasData) {
+              hideLoadingPopup(context, freeze: false);
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.55,
                 child: ListView.builder(
