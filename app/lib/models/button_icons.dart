@@ -34,4 +34,7 @@ class ButtonIcons {
   static const IconData minus = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData close = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData settings_applications = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData arrow_downward = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData arrow_upward = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData arrow_forward = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
