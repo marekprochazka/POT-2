@@ -21,7 +21,6 @@ class TrainingPlanPageLoaded extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 14.0),
                   child: Column(
                     children: [
-                      Text('${trainingPlan.planName} id:${trainingPlan.id}', style: POTTextStyles.pageTitle,),
                       TrainingsList(trainings: trainings)
                     ],
                   ),
