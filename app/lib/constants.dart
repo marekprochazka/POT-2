@@ -81,6 +81,11 @@ class POTTextStyles {
       fontSize: 8,
       fontFamily: 'Roboto',
       color: POTColors.white);
+  static const TextStyle excerciseDescription = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+      fontFamily: 'Roboto',
+      color: POTColors.white,);
 
   static TextStyle dynamicText(double size, FontWeight weight, Color color) {
     return TextStyle(

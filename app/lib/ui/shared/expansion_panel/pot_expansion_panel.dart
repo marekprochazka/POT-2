@@ -55,6 +55,7 @@ class _POTExpansionPanelState extends State<POTExpansionPanel> {
               thickness: 1.0,
             ),
           AnimatedContainer(
+            width: double.infinity,
             duration: const Duration(milliseconds: 200),
             height: _isExpanded ? widget.bodyHeight : _currentBodyHeight,
             child: _isExpanded ? widget.bodyChild: const SizedBox(),
