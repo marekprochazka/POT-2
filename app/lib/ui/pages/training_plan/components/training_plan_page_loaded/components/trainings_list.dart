@@ -62,6 +62,7 @@ class _TrainingsListState extends State<TrainingsList> {
                     bodyChild: Column(
                       children: [
                         Expanded(
+                          flex: 5,
                           child: IgnorePointer(
                             ignoring: true,
                             child: ListView.builder(
@@ -92,33 +93,36 @@ class _TrainingsListState extends State<TrainingsList> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              POTButton(
-                                  width: 130,
-                                  height: 25,
-                                  text: 'Write overload',
-                                  textStyle: POTTextStyles.dynamicText(
-                                      13, FontWeight.bold, POTColors.white),
-                                  callback: () {
-                                    showModal(context, const Text('TODO'));
-                                  }),
-                              const Spacer(),
-                              POTButton(
-                                  width: 130,
-                                  height: 25,
-                                  text: 'Training settings',
-                                  textStyle: POTTextStyles.dynamicText(
-                                      13, FontWeight.bold, POTColors.white),
-                                  callback: () {
-                                    showModal(
-                                        context,
-                                        const Text(
-                                            'TODO same as create training'));
-                                  }),
-                            ],
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                POTButton(
+                                    width: 130,
+                                    height: 25,
+                                    text: 'Write overload',
+                                    textStyle: POTTextStyles.dynamicText(
+                                        13, FontWeight.bold, POTColors.white),
+                                    callback: () {
+                                      showModal(context, const Text('TODO'));
+                                    }),
+                                const Spacer(),
+                                POTButton(
+                                    width: 130,
+                                    height: 25,
+                                    text: 'Training settings',
+                                    textStyle: POTTextStyles.dynamicText(
+                                        13, FontWeight.bold, POTColors.white),
+                                    callback: () {
+                                      showModal(
+                                          context,
+                                          const Text(
+                                              'TODO same as create training'));
+                                    }),
+                              ],
+                            ),
                           ),
                         )
                       ],
