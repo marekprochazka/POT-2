@@ -94,4 +94,24 @@ class POTDummyAPI {
 
     ];
   }
+
+  static Future<Training> getTraining(String trainingId) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return Training(
+        id: trainingId,
+        trainingName: 'Monday chest',
+        xCreated: '1',
+        xModified: '1',
+        exercises: [
+          Exercise(id: '1', exerciseName: 'Bench press', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1', overloadType: 'number', overloadUnit: 'kg (without bar)'),
+          Exercise(id: '2', exerciseName: 'Chest flies', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
+          Exercise(id: '3', exerciseName: 'Overhead press', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '4', exerciseName: 'Pullover', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '5', exerciseName: 'Triceps pump', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '6', exerciseName: 'Biceps pump cause why not lol', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '6', exerciseName: 'Biceps pump cause why not lol', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '7', exerciseName: 'Biceps pump cause why not lol', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+          Exercise(id: '8', exerciseName: 'Biceps pump cause why not lol', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+        ]);  
+  }
 }

@@ -10,6 +10,8 @@ class BaseTextField extends StatefulWidget {
   final bool multiline;
   final void Function(String?) onChangedCallback;
   final bool transparent;
+  final String? innitalValue;
+  final String? placeholder;
 
   const BaseTextField(
       {Key? key,
@@ -20,7 +22,9 @@ class BaseTextField extends StatefulWidget {
       required this.height,
       this.multiline = false,
       required this.onChangedCallback,
-      this.transparent = false})
+      this.transparent = false,
+      this.innitalValue,
+      this.placeholder})
       : super(key: key);
 
   @override
@@ -45,11 +49,16 @@ class _BaseTextFieldState extends State<BaseTextField> {
       width: widget.width,
       height: widget.height,
       child: TextFormField(
+        initialValue: widget.innitalValue,
         textAlign: TextAlign.center,
         minLines: widget.lines,
         maxLines: widget.lines,
         keyboardType: widget.multiline ? TextInputType.multiline : TextInputType.text,
         decoration: InputDecoration(
+          hintText: widget.placeholder,
+          hintStyle: POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.tertiary),
+          isDense: true,
+          contentPadding: const EdgeInsets.all(5.0),
           errorStyle: const TextStyle(height: 0),
           enabledBorder: _border(),
           focusedBorder: _border(),
@@ -65,12 +74,14 @@ class _BaseTextFieldState extends State<BaseTextField> {
             POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.primary),
         
         validator: (value) {
+          String? err;
           if (widget.validator != null) {
+            err = widget.validator!(value);
             setState(() {
-              _valid = false;
+              _valid = err == null;
             });
             // TODO popup with error message
-            return '';
+            return err == null ? err: '';
           }
           setState(() {
             _valid = true;

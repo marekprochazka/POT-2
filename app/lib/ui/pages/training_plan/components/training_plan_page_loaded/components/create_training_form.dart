@@ -5,7 +5,6 @@ import 'package:app/models/data/training.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CreateTrainingForm extends BaseForm {
@@ -40,9 +39,9 @@ class CreateTrainingFormBody extends StatefulWidget {
 }
 
 class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
-  int numExercises = 0;
   Widget _buildTrainingNameField() {
     return BaseTextField(
+      innitalValue: widget.instance.trainingName,
       controller: TextEditingController(text: widget.instance.trainingName),
       validator: (value) {
         if (value?.isEmpty ?? false) {
@@ -77,6 +76,9 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 Container(
                   alignment: Alignment.center,
                   child: BaseTextField(
+                    innitalValue:
+                        widget.instance.exercises![index].exerciseName,
+                    placeholder: 'Exercise name',
                     controller: TextEditingController(
                         text: widget.instance.exercises![index].exerciseName),
                     validator: (value) {
@@ -85,7 +87,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                       }
                       return null;
                     },
-                    width: 150.0,
+                    width: 220.0,
                     height: 30.0,
                     onChangedCallback: (String? value) {
                       widget.instance.exercises![index].exerciseName = value;
@@ -94,6 +96,21 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                   ),
                 ),
               ],
+            ),
+            Container(
+              alignment: Alignment.center,
+              child: BaseTextField(
+                innitalValue: widget.instance.exercises![index].description,
+                placeholder: 'Exercise note',
+                controller: TextEditingController(
+                    text: widget.instance.exercises![index].description),
+                width: 220.0,
+                height: 30.0,
+                onChangedCallback: (String? value) {
+                  widget.instance.exercises![index].description = value;
+                },
+                transparent: true,
+              ),
             ),
             const SizedBox(height: 10.0),
             Padding(
@@ -106,6 +123,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 ),
                 const Spacer(),
                 BaseTextField(
+                  innitalValue: widget.instance.exercises![index].overloadUnit,
                   controller: TextEditingController(
                       text: widget.instance.exercises![index].overloadUnit),
                   validator: (value) {
@@ -132,6 +150,8 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                           14, FontWeight.bold, POTColors.white)),
                   const Spacer(),
                   BaseTextField(
+                    innitalValue:
+                        widget.instance.exercises![index].overloadType,
                     controller: TextEditingController(
                         text: widget.instance.exercises![index].overloadType),
                     validator: (value) {
@@ -182,7 +202,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               physics: const ScrollPhysics(),
-              itemCount: numExercises,
+              itemCount: widget.instance.exercises?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
                 return _buildExcerciseFieldset(index);
               },
@@ -197,9 +217,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             red: true,
             callback: () async {
               await widget.instance.addNewExercise();
-              setState(() {
-                numExercises++;
-              });
+              setState(() {});
             },
             icon: ButtonIcons.add_circle_outline,
           ),
@@ -223,10 +241,13 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                     height: 30,
                     text: 'Save',
                     callback: () {
-                      print('saving instance of id ${widget.instance.id}');
                       if (widget.formKey.currentState!.validate()) {
+                        print('saving instance of id ${widget.instance.id}');
+                        print('No error');
                         widget.instance.save();
                         Navigator.pop(context);
+                      } else {
+                        print('error');
                       }
                     }),
               ],
