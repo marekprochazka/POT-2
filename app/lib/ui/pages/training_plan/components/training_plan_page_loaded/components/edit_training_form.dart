@@ -14,6 +14,7 @@ Future<void> editTrainingForm(BuildContext context, String trainingId) async {
   } catch (e) {
     // TODO error popup
     print(e);
+    return;
   }
   print('Training: ${training.trainingName}');
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

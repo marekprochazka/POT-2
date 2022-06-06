@@ -41,7 +41,6 @@ class CreateTrainingFormBody extends StatefulWidget {
 class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
   Widget _buildTrainingNameField() {
     return BaseTextField(
-      innitalValue: widget.instance.trainingName,
       controller: TextEditingController(text: widget.instance.trainingName),
       validator: (value) {
         if (value?.isEmpty ?? false) {
@@ -76,8 +75,6 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 Container(
                   alignment: Alignment.center,
                   child: BaseTextField(
-                    innitalValue:
-                        widget.instance.exercises![index].exerciseName,
                     placeholder: 'Exercise name',
                     controller: TextEditingController(
                         text: widget.instance.exercises![index].exerciseName),
@@ -100,7 +97,6 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             Container(
               alignment: Alignment.center,
               child: BaseTextField(
-                innitalValue: widget.instance.exercises![index].description,
                 placeholder: 'Exercise note',
                 controller: TextEditingController(
                     text: widget.instance.exercises![index].description),
@@ -123,7 +119,6 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 ),
                 const Spacer(),
                 BaseTextField(
-                  innitalValue: widget.instance.exercises![index].overloadUnit,
                   controller: TextEditingController(
                       text: widget.instance.exercises![index].overloadUnit),
                   validator: (value) {
@@ -150,8 +145,6 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                           14, FontWeight.bold, POTColors.white)),
                   const Spacer(),
                   BaseTextField(
-                    innitalValue:
-                        widget.instance.exercises![index].overloadType,
                     controller: TextEditingController(
                         text: widget.instance.exercises![index].overloadType),
                     validator: (value) {

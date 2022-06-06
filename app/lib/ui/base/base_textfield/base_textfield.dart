@@ -10,7 +10,6 @@ class BaseTextField extends StatefulWidget {
   final bool multiline;
   final void Function(String?) onChangedCallback;
   final bool transparent;
-  final String? innitalValue;
   final String? placeholder;
 
   const BaseTextField(
@@ -23,7 +22,6 @@ class BaseTextField extends StatefulWidget {
       this.multiline = false,
       required this.onChangedCallback,
       this.transparent = false,
-      this.innitalValue,
       this.placeholder})
       : super(key: key);
 
@@ -49,7 +47,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
       width: widget.width,
       height: widget.height,
       child: TextFormField(
-        initialValue: widget.innitalValue,
+        controller: widget.controller,
         textAlign: TextAlign.center,
         minLines: widget.lines,
         maxLines: widget.lines,
@@ -95,4 +93,6 @@ class _BaseTextFieldState extends State<BaseTextField> {
       ),
     );
   }
+
+  void refresh() => setState(() {});
 }

@@ -2,6 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/models/data/exercise.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/edit_training_form.dart';
+import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/write_overlaod_form.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/ui/shared/expansion_panel/pot_expansion_panel.dart';
 import 'package:app/utils/show_modal.dart';
@@ -107,7 +108,7 @@ class _TrainingsListState extends State<TrainingsList> {
                                     textStyle: POTTextStyles.dynamicText(
                                         13, FontWeight.bold, POTColors.white),
                                     callback: () {
-                                      showModal(context, const Text('TODO'));
+                                      showWriteOverloadForm(context, widget.trainings[trainingIndex].id);
                                     }),
                                 const Spacer(),
                                 POTButton(
