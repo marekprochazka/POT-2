@@ -62,7 +62,7 @@ class _TrainingsListState extends State<TrainingsList> {
                     bodyChild: Column(
                       children: [
                         Expanded(
-                          flex: 5,
+                          flex: 2,
                           child: IgnorePointer(
                             ignoring: true,
                             child: ListView.builder(

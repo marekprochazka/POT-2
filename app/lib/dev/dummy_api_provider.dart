@@ -79,6 +79,7 @@ class POTDummyAPI {
         Exercise(id: '1', exerciseName: 'Pullover', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
         Exercise(id: '2', exerciseName: 'Low row', order: 1, description: 'Some description', xCreated: '1', xModified: '1'),
         Exercise(id: '3', exerciseName: 'Pullups', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
+        Exercise(id: '4', exerciseName: 'Lateral raises', lastOverloadValue: '10 kg', order: 2, xCreated: '1', xModified: '1'),
         ]),
       Training(id: '3', trainingName: 'Wednesday Legs',xCreated: '1', xModified: '1', exercises: [
         Exercise(id: '1', exerciseName: 'Squat', lastOverloadValue: '10 kg', order: 0, description: 'Some description', xCreated: '1', xModified: '1'),
