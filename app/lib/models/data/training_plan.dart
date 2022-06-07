@@ -1,5 +1,4 @@
 import 'package:app/models/data/base.dart';
-import 'package:app/models/data/training.dart';
 import 'dart:math';
 
 class TrainingPlan extends BaseModel {
@@ -15,6 +14,12 @@ class TrainingPlan extends BaseModel {
       required String xCreated,
       required String xModified})
       : super(id: id, xCreated: xCreated, xModified: xModified);
+
+  TrainingPlan.fromJson(Map<String, dynamic> json)
+      : planName = json['plan_name'],
+        description = json['description'],
+        planImage = json['plan_image'] ?? json['default_image'],
+        super.fromJson(json);
 
   
   static Future<TrainingPlan> getNew() async {

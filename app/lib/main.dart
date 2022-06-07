@@ -1,6 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/models/data/user.dart';
+import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/is_frozen_state.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
@@ -15,7 +16,8 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final loginState = LoginState(prefs);
   final user = User('Gigachad', 'giga@chad.com',
-      '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png');
+      '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png',
+      '3e7dfa7099b87bbf7ae6f2154f2632bd30ed5e24');
   loginState.checkLoggedIn();
   runApp(MyApp(
     loginState: loginState,
@@ -46,6 +48,10 @@ class MyApp extends StatelessWidget {
         ),
         Provider<User>(
             lazy: false, create: (BuildContext createContext) => user),
+        Provider<POTApiProvider>(
+          lazy: false,
+          create: (BuildContext createContext) => POTApiProvider(user.token),
+        ),
       ],
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;

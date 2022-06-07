@@ -1,5 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/training_plan.dart';
+import 'package:app/models/environment.dart';
 import 'package:app/utils/get_url_string.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +21,7 @@ class PlanListItem extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: CachedNetworkImageProvider(
-                  getUrlString(trainingPlan.planImage ?? '')),
+                  getUrlString(trainingPlan.planImage!)),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(10),

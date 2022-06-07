@@ -1,8 +1,10 @@
 import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training_plan.dart';
+import 'package:app/providers/api_provider.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
 import 'package:app/utils/loading_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TrainingPlansList extends StatefulWidget {
   const TrainingPlansList({Key? key}) : super(key: key);
@@ -17,17 +19,16 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
   @override
   void initState() {
     super.initState();
-    futureTrainingPlans = _getTrainingPlan();
   }
 
-  Future<List<TrainingPlan>> _getTrainingPlan() async {
-    return await POTDummyAPI.getPlans();
+  Future<List<TrainingPlan>> _getTrainingPlan(context) async {
+    return await Provider.of<POTApiProvider>(context, listen: false).getPlans();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: futureTrainingPlans,
+      future: _getTrainingPlan(context),
       builder: (context, AsyncSnapshot<List<TrainingPlan>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
