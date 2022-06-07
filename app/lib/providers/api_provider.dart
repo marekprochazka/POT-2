@@ -16,7 +16,7 @@ class POTApiProvider {
   Future<http.Response> _get(String reverseStr, [Map? params]) {
     print('$apiUrl/${reverse(reverseStr, params)}');
     return http.get(
-      Uri.parse('$apiUrl/api/workout/${reverse(reverseStr, params)}'),
+      Uri.parse('$apiUrl/${reverse(reverseStr, params)}'),
       headers: {
         'Authorization': 'TOKEN $userToken',
         'Content-Type': 'application/json',
