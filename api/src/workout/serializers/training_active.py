@@ -7,6 +7,7 @@ from workout.serializers.overload import OverloadSerializer
 
 class TrainingActiveSerializer(BaseSerializer):
     overloads = serializers.SerializerMethodField()
+    training = serializers.CharField(source='training.training_name')
 
     class Meta:
         model = TrainingActive
