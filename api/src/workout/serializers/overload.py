@@ -13,7 +13,7 @@ class OverloadSerializerLite(BaseSerializer):
 class OverloadSerializer(OverloadSerializerLite):
     exercise_id = serializers.CharField(source='exercise.id')
     exercise_name = serializers.CharField(source='exercise.exercise_name')
-    overload_unit = serializers.CharField(source='exercise.overload_type.unit')
+    overload_unit = serializers.CharField(source='exercise.overload_definition.unit')
     default_add_overload_value = serializers.FloatField(source='exercise.default_add_overload_value')
 
     class Meta(OverloadSerializerLite.Meta):

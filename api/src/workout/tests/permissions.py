@@ -15,7 +15,7 @@ class PermissionsTestCases(BaseWorkoutTestCase):
         super(PermissionsTestCases, self).setUp()
         self.setup_training_plans()
         self.setup_trainings()
-        self.setup_overload_types()
+        self.setup_overload_definitions()
         self.setup_exercises()
         self.setup_training_states()
         self.setup_training_active()

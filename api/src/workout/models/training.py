@@ -5,7 +5,7 @@ from django.db import models
 from core.typing.base import QuerysetType
 from workout.models.training_active import TrainingActive
 from workout.models.exercise import Exercise
-from workout.models.types import TypeOverload, TypeTrainingState
+from workout.models.types import OverloadDefinition, TypeTrainingState
 
 
 class Training(BaseModel):
@@ -61,7 +61,7 @@ class Training(BaseModel):
         exercise_instance.order = new_order
         exercise_instance.save()
 
-    def get_all_exercises_of_overload_type(self, type_overload: TypeOverload) -> QuerysetType[Exercise]:
+    def get_all_exercises_of_overload_type(self, type_overload: OverloadDefinition) -> QuerysetType[Exercise]:
         return Exercise.objects.filter(training=self, type_overload=type_overload)
 
     def create_training_active(self, **kwargs) -> TrainingActive:

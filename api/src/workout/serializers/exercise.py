@@ -5,7 +5,7 @@ from rest_framework import serializers
 from typing import List
 from workout.models import Exercise, Training
 from workout.serializers.overload import OverloadSerializerLite
-from workout.serializers.types import TypeOverloadSerializer
+from workout.serializers.types import OverloadDefinitionSerializer
 
 
 class ExerciseSerializer(BaseSerializer):
@@ -14,7 +14,7 @@ class ExerciseSerializer(BaseSerializer):
 
     class Meta:
         model = Exercise
-        fields = ['id', 'exercise_name', 'overload_datatype', 'overload_type', 'order',
+        fields = ['id', 'exercise_name', 'overload_definition', 'order',
                   'description', 'default_add_overload_value', 'overload_values', 'last_overload_value_str']
 
     def get_overload_values(self, obj: Exercise) -> (str, None):
@@ -31,7 +31,7 @@ class ExerciseSerializer(BaseSerializer):
 
     def to_representation(self, instance: Exercise):
         representation = super(ExerciseSerializer, self).to_representation(instance)
-        serializer = TypeOverloadSerializer(instance.overload_type)
+        serializer = OverloadDefinitionSerializer(instance.overload_definition)
         representation.update(dict(overload_type=serializer.data))
         return representation
 
@@ -45,7 +45,7 @@ class ExerciseSerializerLite(BaseSerializer):
 
     def get_last_overload_value_string(self, obj: Exercise) -> (str, None):
         if obj.last_overload_value:
-            return f'{obj.last_overload_value} {obj.overload_type.unit}'
+            return f'{obj.last_overload_value} {obj.overload_definition.unit}'
         return None
 
 

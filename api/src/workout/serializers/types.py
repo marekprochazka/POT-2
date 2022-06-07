@@ -1,9 +1,9 @@
 from core.serializers.base import BaseSerializer
-from workout.models import TypeOverload
+from workout.models import OverloadDefinition
 
 
-class TypeOverloadSerializer(BaseSerializer):
+class OverloadDefinitionSerializer(BaseSerializer):
     class Meta:
-        model = TypeOverload
-        fields = ['id', 'identifier', 'description', 'unit']
+        model = OverloadDefinition
+        fields = ['id', 'unit', 'data_type']
 

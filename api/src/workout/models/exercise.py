@@ -11,8 +11,7 @@ from core.typing.base import QuerysetType
 
 class Exercise(BaseModel):
     exercise_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
-    overload_datatype = models.CharField(verbose_name=_('Overload unit'), max_length=128, null=True, blank=True)
-    overload_type = models.ForeignKey('workout.TypeOverload', on_delete=models.PROTECT, verbose_name=_('Overload type'),
+    overload_definition = models.ForeignKey('workout.OverloadDefinition', on_delete=models.PROTECT, verbose_name=_('Overload type'),
                                       null=True, blank=True)
     training = models.ForeignKey('workout.Training', on_delete=models.CASCADE, verbose_name=_('Training'), null=True,
                                  blank=True, related_name='exercises')
