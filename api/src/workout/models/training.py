@@ -10,7 +10,6 @@ from workout.models.types import TypeOverload, TypeTrainingState
 
 class Training(BaseModel):
     training_name = models.CharField(verbose_name=_('Training name'), max_length=128, null=True, blank=True)
-    description = models.CharField(verbose_name=_('Description'), max_length=1024, null=True, blank=True)
     training_plan = models.ForeignKey('workout.TrainingPlan', on_delete=models.CASCADE, verbose_name=_('Training plan'),
                                       null=True, blank=True, related_name='trainings')
 
