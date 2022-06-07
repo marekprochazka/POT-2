@@ -11,8 +11,9 @@ from core.typing.base import QuerysetType
 
 class Exercise(BaseModel):
     exercise_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
-    overload_definition = models.ForeignKey('workout.OverloadDefinition', on_delete=models.PROTECT, verbose_name=_('Overload type'),
-                                      null=True, blank=True)
+    overload_definition = models.ForeignKey('workout.OverloadDefinition', on_delete=models.PROTECT,
+                                            verbose_name=_('Overload type'),
+                                            null=True, blank=True)
     training = models.ForeignKey('workout.Training', on_delete=models.CASCADE, verbose_name=_('Training'), null=True,
                                  blank=True, related_name='exercises')
     order = models.IntegerField(verbose_name=_('Order'))
@@ -35,7 +36,7 @@ class Exercise(BaseModel):
     @property
     def last_overload_value_str(self) -> str:
         if self.overloads.count() > 0:
-            return f'{str(self.last_overload_value)} {self.overload_type.unit}'
+            return f'{str(self.last_overload_value)} {self.overload_definition.unit}'
         return ''
 
     @property

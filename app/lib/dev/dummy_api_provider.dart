@@ -11,7 +11,6 @@ class POTDummyAPI {
       TrainingPlan(
           id: '1',
           planName: 'Prvni plan',
-          trainings: [],
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
@@ -20,7 +19,6 @@ class POTDummyAPI {
       TrainingPlan(
           id: '2',
           planName: 'Druhy plan',
-          trainings: [],
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
@@ -29,7 +27,6 @@ class POTDummyAPI {
       TrainingPlan(
           id: '3',
           planName: 'Treti plan',
-          trainings: [],
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
@@ -38,7 +35,6 @@ class POTDummyAPI {
       TrainingPlan(
           id: '4',
           planName: 'Ctvrty plan',
-          trainings: [],
           xCreated: '2022-11-1',
           xModified: '2022-11-1',
           planImage:
@@ -54,7 +50,6 @@ class POTDummyAPI {
     return TrainingPlan(
         id: id,
         planName: 'Prvni plan',
-        trainings: [],
         xCreated: '2022-11-1',
         xModified: '2022-11-1',
         planImage:

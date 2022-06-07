@@ -35,6 +35,9 @@ class Training(BaseModel):
     # Exercise related methods
     def add_exercise(self, **kwargs) -> Exercise:
         exercise = Exercise(training=self)
+        overload_definition = OverloadDefinition.objects.create()
+        overload_definition.save()
+        exercise.overload_definition = overload_definition
         for key, value in kwargs.items():
             if hasattr(exercise, key):
                 setattr(exercise, key, value)
@@ -60,9 +63,6 @@ class Training(BaseModel):
                     exercise.save()
         exercise_instance.order = new_order
         exercise_instance.save()
-
-    def get_all_exercises_of_overload_type(self, type_overload: OverloadDefinition) -> QuerysetType[Exercise]:
-        return Exercise.objects.filter(training=self, type_overload=type_overload)
 
     def create_training_active(self, **kwargs) -> TrainingActive:
         training_active = TrainingActive(training=self,

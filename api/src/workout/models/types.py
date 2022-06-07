@@ -12,7 +12,8 @@ class OverloadDataTypes(Enum):
 
 class OverloadDefinition(BaseModel):
     unit = models.CharField(max_length=32, verbose_name=_('Unit'), null=True, blank=True)
-    data_type = models.CharField(max_length=32, verbose_name=_('Data type'), null=True, blank=True)
+    data_type = models.CharField(max_length=32, verbose_name=_('Data type'), null=True, blank=True,
+                                 default=OverloadDataTypes.NUMBER.value)
 
     class Meta:
         verbose_name = _('Overload type')

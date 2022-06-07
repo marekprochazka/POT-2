@@ -5,14 +5,12 @@ import 'dart:math';
 class TrainingPlan extends BaseModel {
   String? planName;
   String? description;
-  List<TrainingLite>? trainings;
   String? planImage;
 
   TrainingPlan(
       {required String id,
       this.planName,
       this.description,
-      this.trainings,
       this.planImage,
       required String xCreated,
       required String xModified})

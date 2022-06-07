@@ -7,14 +7,14 @@ from workout.serializers.training import TrainingSerializerLite
 
 class TrainingPlanSerializer(BaseSerializer):
     id = serializers.UUIDField(read_only=True)
-    trainings = TrainingSerializerLite(read_only=True, many=True)
     x_created = serializers.DateTimeField(read_only=True)
     x_modified = serializers.DateTimeField(read_only=True)
     default_image = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = TrainingPlan
-        fields = ['id', 'plan_name', 'trainings', 'x_created', 'x_modified', 'plan_image', 'default_image']
+        fields = ['id', 'plan_name', 'x_created', 'x_modified', 'plan_image', 'default_image',
+                  'description']
 
     def get_default_image(self, obj):
         return DefaultPlanImage.objects.first().image.url if DefaultPlanImage.objects.first() else None
