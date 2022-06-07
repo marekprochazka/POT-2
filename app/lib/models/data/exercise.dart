@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:app/models/data/base.dart';
+import 'package:app/models/data/overload_definition.dart';
 
 class ExerciseLite {
   final String id;
@@ -21,8 +22,7 @@ class ExerciseLite {
 
 class Exercise extends BaseModel {
   String? exerciseName;
-  String? overloadUnit;
-  String? overloadType;
+  OverloadDefinition overloadDefinition;
   int? order;
   String? description;
   double? defaultAddOverloadValue;
@@ -31,22 +31,20 @@ class Exercise extends BaseModel {
   Exercise({
     required String id,
     this.exerciseName,
-    this.overloadUnit,
-    this.overloadType,
+    required this.overloadDefinition,
     this.order,
     this.description,
     this.defaultAddOverloadValue,
     this.lastOverloadValue,
-    required String xCreated,
-    required String xModified,
+    String? xCreated,
+    String? xModified,
   }) : super(id: id, xCreated: xCreated, xModified: xModified);
 
   static Future<Exercise> getNew() async {
     Random random = Random();
     return Exercise(
       id: '${random.nextInt(1000000)}',
-      xCreated: DateTime.now().toIso8601String(),
-      xModified: DateTime.now().toIso8601String(),
+      overloadDefinition: OverloadDefinition(id: '${random.nextInt(1000000)}'),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:app/models/data/exercise.dart';
 import 'package:app/models/data/overload.dart';
+import 'package:app/models/data/overload_definition.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_active.dart';
 import 'package:app/models/data/training_plan.dart';
@@ -69,6 +70,11 @@ class POTDummyAPI {
             Exercise(
                 id: '1',
                 exerciseName: 'Bench press',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 0,
                 description: 'Some description',
@@ -77,6 +83,11 @@ class POTDummyAPI {
             Exercise(
                 id: '2',
                 exerciseName: 'Chest flies',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 1,
                 description: 'Some description',
                 xCreated: '1',
@@ -84,6 +95,11 @@ class POTDummyAPI {
             Exercise(
                 id: '3',
                 exerciseName: 'Overhead press',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -91,6 +107,11 @@ class POTDummyAPI {
             Exercise(
                 id: '4',
                 exerciseName: 'Pullover',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -98,6 +119,11 @@ class POTDummyAPI {
             Exercise(
                 id: '5',
                 exerciseName: 'Triceps pump',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -105,6 +131,11 @@ class POTDummyAPI {
             Exercise(
                 id: '6',
                 exerciseName: 'Biceps pump cause why not lol',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -112,6 +143,11 @@ class POTDummyAPI {
             Exercise(
                 id: '6',
                 exerciseName: 'Biceps pump cause why not lol',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -119,6 +155,11 @@ class POTDummyAPI {
             Exercise(
                 id: '7',
                 exerciseName: 'Biceps pump cause why not lol',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -126,6 +167,11 @@ class POTDummyAPI {
             Exercise(
                 id: '8',
                 exerciseName: 'Biceps pump cause why not lol',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -133,6 +179,11 @@ class POTDummyAPI {
             Exercise(
                 id: '9',
                 exerciseName: 'Biceps pump cause why not lol',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -148,6 +199,11 @@ class POTDummyAPI {
                 id: '1',
                 exerciseName: 'Pullover',
                 lastOverloadValue: '10 kg',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 0,
                 description: 'Some description',
                 xCreated: '1',
@@ -155,6 +211,11 @@ class POTDummyAPI {
             Exercise(
                 id: '2',
                 exerciseName: 'Low row',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 1,
                 description: 'Some description',
                 xCreated: '1',
@@ -162,6 +223,11 @@ class POTDummyAPI {
             Exercise(
                 id: '3',
                 exerciseName: 'Pullups',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -169,6 +235,11 @@ class POTDummyAPI {
             Exercise(
                 id: '4',
                 exerciseName: 'Lateral raises',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -184,6 +255,11 @@ class POTDummyAPI {
                 id: '1',
                 exerciseName: 'Squat',
                 lastOverloadValue: '10 kg',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 0,
                 description: 'Some description',
                 xCreated: '1',
@@ -191,6 +267,11 @@ class POTDummyAPI {
             Exercise(
                 id: '2',
                 exerciseName: 'Extensions',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 1,
                 description: 'Some description',
                 xCreated: '1',
@@ -199,6 +280,11 @@ class POTDummyAPI {
                 id: '3',
                 exerciseName: 'Curls',
                 lastOverloadValue: '10 kg',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 2,
                 xCreated: '1',
                 xModified: '1'),
@@ -213,6 +299,12 @@ class POTDummyAPI {
                 id: '1',
                 exerciseName: 'Jump rope',
                 lastOverloadValue: '10 kg',
+
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 0,
                 description: 'Some description',
                 xCreated: '1',
@@ -220,6 +312,11 @@ class POTDummyAPI {
             Exercise(
                 id: '2',
                 exerciseName: 'Sprints',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 order: 1,
                 description: 'Some description',
                 xCreated: '1',
@@ -227,6 +324,11 @@ class POTDummyAPI {
             Exercise(
                 id: '3',
                 exerciseName: 'Lunges',
+                overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
                 lastOverloadValue: '10 kg',
                 order: 2,
                 xCreated: '1',
@@ -246,16 +348,24 @@ class POTDummyAPI {
           Exercise(
               id: '1',
               exerciseName: 'Bench press',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 0,
               description: 'Some description',
               xCreated: '1',
-              xModified: '1',
-              overloadType: 'number',
-              overloadUnit: 'kg (without bar)'),
+              xModified: '1',),
           Exercise(
               id: '2',
               exerciseName: 'Chest flies',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               order: 1,
               description: 'Some description',
               xCreated: '1',
@@ -263,6 +373,11 @@ class POTDummyAPI {
           Exercise(
               id: '3',
               exerciseName: 'Overhead press',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -270,6 +385,11 @@ class POTDummyAPI {
           Exercise(
               id: '4',
               exerciseName: 'Pullover',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -277,6 +397,11 @@ class POTDummyAPI {
           Exercise(
               id: '5',
               exerciseName: 'Triceps pump',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -284,6 +409,11 @@ class POTDummyAPI {
           Exercise(
               id: '6',
               exerciseName: 'Biceps pump cause why not lol',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -291,6 +421,11 @@ class POTDummyAPI {
           Exercise(
               id: '6',
               exerciseName: 'Biceps pump cause why not lol',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -298,6 +433,11 @@ class POTDummyAPI {
           Exercise(
               id: '7',
               exerciseName: 'Biceps pump cause why not lol',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',
@@ -305,6 +445,11 @@ class POTDummyAPI {
           Exercise(
               id: '8',
               exerciseName: 'Biceps pump cause why not lol',
+              overloadDefinition: OverloadDefinition(
+                  id: '1',
+                  unit: 'kg',
+                  dataType: 'number'
+                ),
               lastOverloadValue: '10 kg',
               order: 2,
               xCreated: '1',

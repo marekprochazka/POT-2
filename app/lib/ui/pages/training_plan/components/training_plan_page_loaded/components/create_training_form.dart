@@ -120,7 +120,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                 const Spacer(),
                 BaseTextField(
                   controller: TextEditingController(
-                      text: widget.instance.exercises![index].overloadUnit),
+                      text: widget.instance.exercises![index].overloadDefinition.unit),
                   validator: (value) {
                     if (value?.isEmpty ?? false) {
                       return 'Please enter an overload unit';
@@ -130,7 +130,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                   width: 150.0,
                   height: 30.0,
                   onChangedCallback: (String? value) {
-                    widget.instance.exercises![index].overloadUnit = value;
+                    widget.instance.exercises![index].overloadDefinition.unit = value;
                   },
                 ),
               ]),
@@ -145,8 +145,9 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                           14, FontWeight.bold, POTColors.white)),
                   const Spacer(),
                   BaseTextField(
+                    enabled: false,
                     controller: TextEditingController(
-                        text: widget.instance.exercises![index].overloadType),
+                        text: widget.instance.exercises![index].overloadDefinition.dataType),
                     validator: (value) {
                       if (value?.isEmpty ?? false) {
                         return 'Please enter an overload type';
@@ -156,7 +157,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                     width: 150.0,
                     height: 30.0,
                     onChangedCallback: (String? value) {
-                      widget.instance.exercises![index].overloadType = value;
+                      widget.instance.exercises![index].overloadDefinition.dataType = value;
                     },
                   ),
                 ],

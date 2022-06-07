@@ -11,6 +11,7 @@ class BaseTextField extends StatefulWidget {
   final void Function(String?) onChangedCallback;
   final bool transparent;
   final String? placeholder;
+  final bool enabled;
 
   const BaseTextField(
       {Key? key,
@@ -22,7 +23,8 @@ class BaseTextField extends StatefulWidget {
       this.multiline = false,
       required this.onChangedCallback,
       this.transparent = false,
-      this.placeholder})
+      this.placeholder,
+      this.enabled=true})
       : super(key: key);
 
   @override
@@ -47,6 +49,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
       width: widget.width,
       height: widget.height,
       child: TextFormField(
+        enabled: widget.enabled,
         controller: widget.controller,
         textAlign: TextAlign.center,
         minLines: widget.lines,
@@ -61,6 +64,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
           enabledBorder: _border(),
           focusedBorder: _border(),
           errorBorder: _border(),
+          disabledBorder: _border(),
           focusedErrorBorder: _border(),
           fillColor: _valid ? Colors.white: POTColors.error,
           filled: widget.transparent && _valid? false: true,
