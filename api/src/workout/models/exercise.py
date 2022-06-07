@@ -11,6 +11,7 @@ from core.typing.base import QuerysetType
 
 class Exercise(BaseModel):
     exercise_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
+    overload_datatype = models.CharField(verbose_name=_('Overload unit'), max_length=128, null=True, blank=True)
     overload_type = models.ForeignKey('workout.TypeOverload', on_delete=models.PROTECT, verbose_name=_('Overload type'),
                                       null=True, blank=True)
     training = models.ForeignKey('workout.Training', on_delete=models.CASCADE, verbose_name=_('Training'), null=True,
@@ -30,9 +31,13 @@ class Exercise(BaseModel):
 
     @property
     def last_overload_value(self) -> Union[int, None]:
+        return self.get_last_overload_value(-1)
+
+    @property
+    def last_overload_value_str(self) -> str:
         if self.overloads.count() > 0:
-            return self.overloads.last().value
-        return None
+            return f'{str(self.last_overload_value)} {self.overload_type.unit}'
+        return ''
 
     @property
     def num_overloads(self):
@@ -48,6 +53,14 @@ class Exercise(BaseModel):
 
     def get_overloads_history(self) -> QuerysetType:
         return self.overloads.all()
+
+    def get_last_overload_value(self, index=-1) -> Union[int, None]:
+        if self.overloads.count() > 0:
+            value = list(self.overloads.order_by('order'))[index].value
+            if not value:
+                value = self.get_last_overload_value(index - 1)
+            return value
+        return None
 
 
 def update_exercise_order_on_delete(sender, instance: Exercise, using, **kwargs):

@@ -14,8 +14,8 @@ class ExerciseSerializer(BaseSerializer):
 
     class Meta:
         model = Exercise
-        fields = ['id', 'exercise_name', 'overload_type', 'order',
-                  'description', 'default_add_overload_value', 'overload_values', ]
+        fields = ['id', 'exercise_name', 'overload_datatype', 'overload_type', 'order',
+                  'description', 'default_add_overload_value', 'overload_values', 'last_overload_value_str']
 
     def get_overload_values(self, obj: Exercise) -> (str, None):
         return OverloadSerializerLite(obj.overloads_history_list, many=True).data

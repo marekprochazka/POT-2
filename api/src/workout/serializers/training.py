@@ -2,12 +2,12 @@ from core.serializers.base import BaseSerializer
 from workout.models import Training, TrainingPlan
 from rest_framework import serializers
 
-from workout.serializers.exercise import ExerciseSerializerLite
+from workout.serializers.exercise import ExerciseSerializer
 
 
 class TrainingSerializer(BaseSerializer):
     id = serializers.UUIDField(read_only=True)
-    exercises = ExerciseSerializerLite(many=True, read_only=True)
+    exercises = ExerciseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Training

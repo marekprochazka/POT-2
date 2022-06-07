@@ -118,7 +118,7 @@ class _TrainingsListState extends State<TrainingsList> {
                                     textStyle: POTTextStyles.dynamicText(
                                         13, FontWeight.bold, POTColors.white),
                                     callback: () {
-                                      editTrainingForm(context, widget.trainings[trainingIndex].id);
+                                      editTrainingForm(context, widget.trainings[trainingIndex]);
                                     }),
                               ],
                             ),
