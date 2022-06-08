@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 void showModal(BuildContext context, Widget dialog) {
   showGeneralDialog(
+    useRootNavigator: false,
     context: context, 
     barrierLabel: '',
     barrierDismissible: true,

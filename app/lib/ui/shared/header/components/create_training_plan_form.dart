@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-
 class CreateTrainingPlanForm extends BaseForm {
   final GlobalKey<FormState> formKey;
   final BuildContext context;
@@ -124,15 +123,18 @@ class _CreateTrainingPlanFormBodyState
                     height: 30,
                     text: 'Save',
                     callback: () {
-                      try {
-                        widget.instance.save(context);
-                      } on UnauthorizedException catch (e) {
-                        handleUnauthorized(context, e.message);
-                      } catch (e) {
-                        showError(context, e.toString());
+                      if (widget.formKey.currentState!.validate()) {
+                        try {
+                          widget.instance.save(context);
+                        } on UnauthorizedException catch (e) {
+                          handleUnauthorized(context, e.message);
+                        } catch (e) {
+                          showError(context, e.toString());
+                        }
+                        Navigator.pop(context);
+                        Provider.of<PlanListState>(context, listen: false)
+                            .isCurrent = false;
                       }
-                      Navigator.pop(context);
-                      Provider.of<PlanListState>(context, listen: false).isCurrent = false;
                     }),
               ],
             ),
