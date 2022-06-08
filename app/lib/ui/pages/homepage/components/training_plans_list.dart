@@ -1,7 +1,9 @@
 import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/providers/api_provider.dart';
+import 'package:app/providers/handle_unauthorized.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
+import 'package:app/utils/exceptions.dart';
 import 'package:app/utils/loading_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +24,19 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
   }
 
   Future<List<TrainingPlan>> _getTrainingPlan(context) async {
+    try {
     return await Provider.of<POTApiProvider>(context, listen: false).getPlans();
+
+    }
+    on UnauthorizedException catch (e) {
+      handleUnauthorized(context);
+      return [];
+    }
+    catch (e) {
+      hideLoadingPopup(context, freeze: false);
+      print(e.toString());
+      return [];
+    }
   }
 
   @override

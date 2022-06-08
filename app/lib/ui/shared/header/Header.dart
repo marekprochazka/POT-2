@@ -31,7 +31,7 @@ class Header extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4.0),
             child: Center(
                 child: Text(
-              user.username,
+              user.username!,
               style: POTTextStyles.navbarTitle,
             )),
           ),

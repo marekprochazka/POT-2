@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/init.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
@@ -12,24 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {
-  await dotenv.load(fileName: Environ.fileName);
-  final prefs = await SharedPreferences.getInstance();
-  final loginState = LoginState(prefs);
-  final user = User('Gigachad', 'giga@chad.com',
-      '/media/training_plan/2022/03/11/7978a8fa-95b4-42bd-a2cd-e156ed51d85d.png',
-      '3e7dfa7099b87bbf7ae6f2154f2632bd30ed5e24');
-  loginState.checkLoggedIn();
-  runApp(MyApp(
-    loginState: loginState,
-    user: user,
-  ));
+  potInit();
 }
 
-class MyApp extends StatelessWidget {
+class POTEntry extends StatelessWidget {
   final LoginState loginState;
   final User user;
 
-  const MyApp({Key? key, required this.loginState, required this.user})
+  const POTEntry({Key? key, required this.loginState, required this.user})
       : super(key: key);
 
   // This widget is the root of your application.

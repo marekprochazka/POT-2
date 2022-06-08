@@ -18,6 +18,8 @@ class BaseUserAuthSerializer(serializers.Serializer):
         data = {'token': self.token}
         if self.user:
             data.update({'username': self.user.person.username, 'email': self.user.person.email})
+            data.update(
+                {'profile_picture': self.user.person.profile_picture.url if self.user.person.profile_picture else None})
         return data
 
 

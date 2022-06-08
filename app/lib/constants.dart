@@ -40,6 +40,7 @@ class RouteNames {
 
 class PrefsNames {
   static const loggedInKey = 'loggedIn';
+  static const userDatakey = 'userData';
 }
 
 class POTColors {
