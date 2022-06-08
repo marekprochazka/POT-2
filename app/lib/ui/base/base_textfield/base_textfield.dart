@@ -12,6 +12,7 @@ class BaseTextField extends StatefulWidget {
   final bool transparent;
   final String? placeholder;
   final bool enabled;
+  final bool obscureText;
 
   const BaseTextField(
       {Key? key,
@@ -24,7 +25,8 @@ class BaseTextField extends StatefulWidget {
       required this.onChangedCallback,
       this.transparent = false,
       this.placeholder,
-      this.enabled=true})
+      this.enabled=true,
+      this.obscureText = false})
       : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
       width: widget.width,
       height: widget.height,
       child: TextFormField(
+        obscureText: widget.obscureText,
         enabled: widget.enabled,
         controller: widget.controller,
         textAlign: TextAlign.center,
@@ -91,7 +94,7 @@ class _BaseTextFieldState extends State<BaseTextField> {
           return null;
         },
         onChanged: (value) {
-          widget.controller.text = value;
+          widget.controller.value = widget.controller.value.copyWith(text: value);
           widget.onChangedCallback(value);
         },
       ),

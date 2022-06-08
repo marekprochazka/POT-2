@@ -4,7 +4,7 @@ import 'package:app/ui/pages/homepage/home_page.dart';
 import 'package:app/ui/pages/log_in/login_page.dart';
 import 'package:app/ui/pages/messages/messages_page.dart';
 import 'package:app/ui/pages/settings/settings_page.dart';
-import 'package:app/ui/pages/sign_in/login_page.dart';
+import 'package:app/ui/pages/sign_in/signin_page.dart';
 import 'package:app/ui/pages/training_plan/training_plan_page.dart';
 import 'package:app/ui/pages/user_info/user_info_page.dart';
 import 'package:go_router/go_router.dart';

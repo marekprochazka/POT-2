@@ -3,6 +3,7 @@ import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:app/ui/base/base_page/base_page.dart';
+import 'package:app/ui/pages/log_in/login_form.dart';
 import 'package:app/utils/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,8 +14,6 @@ class LogInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Provider.of<POTApiProvider>(context, listen: false).userToken);
-    print(Provider.of<User>(context, listen: false).username);
     return BasePage(
       header: false,
       child: Column(
@@ -26,22 +25,22 @@ class LogInPage extends StatelessWidget {
           TextButton(
               onPressed: () => context.goNamed(RouteNames.signInPage.name),
               child: const Text('Not registred yet')),
-          TextButton(
-              onPressed: () => logIn(context), child: const Text('Log in')),
+          LoginForm(onSubmit: logIn),
         ],
       ),
     );
   }
 
-  void logIn(BuildContext context) async {
+  Future<Map?> logIn(BuildContext context, String email, String password) async {
     try {
-      await User.login(context, 'm.prochazka2002@gmail.com', 'mojeHeslo2002');
+      await User.login(context, email, password);
     }
     on BadRequestException catch (e) {
-      print(e.message);
+      return(e.message);
     }
     catch (e) {
-      print(e);
+      throw e;
     }
+    return null;
   }
 }
