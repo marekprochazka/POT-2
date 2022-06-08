@@ -46,7 +46,7 @@ class POTEntry extends StatelessWidget {
         ),
         ChangeNotifierProvider<PlanListState>(
           lazy: false,
-          create: (BuildContext createContext) => PlanListState(isCurrent:true),
+          create: (BuildContext createContext) => PlanListState(),
         ),
       ],
       child: Builder(builder: (BuildContext context) {

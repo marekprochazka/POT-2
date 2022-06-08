@@ -13,6 +13,11 @@ class OverloadDefinition extends BaseModel {
     this.dataType,
   }) : super(id: id);
 
+  OverloadDefinition.fromJson(Map<String, dynamic> json)
+      : unit = json['unit'],
+        dataType = json['data_type'],
+        super.fromJson(json);
+
   @override
   Future<void> save(BuildContext context) async {
     print('$unit saved');

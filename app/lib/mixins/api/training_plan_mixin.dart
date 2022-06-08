@@ -30,6 +30,18 @@ mixin TrainingPlanMixin on BaseApiProvider {
     }
   }
 
+  Future<TrainingPlan> getPlan(String planId) async {
+    final response = await get('workout:training_plan', params: {'training_plan_id': planId});
+
+    if (response.statusCode == 200) {
+      return TrainingPlan.fromJson(decode(response));
+    } else if (response.statusCode == 401) {
+      throw UnauthorizedException(decode(response));
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
+
   Future<TrainingPlan> updatePlan(TrainingPlan plan) async {
     final response = await patch('workout:training_plan',
         params: {

@@ -1,9 +1,11 @@
 import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_plan.dart';
+import 'package:app/providers/api_provider.dart';
 import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/training_plan_page_loaded.dart';
 import 'package:app/utils/loading_popup.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TrainingPlanPage extends StatefulWidget {
   final String trainingPlanId;
@@ -26,11 +28,11 @@ class _TrainingPlanPageState extends State<TrainingPlanPage> {
   }
 
   Future<TrainingPlan> _getTrainingPlan() async {
-    return await POTDummyAPI.getPlan(widget.trainingPlanId);
+    return await Provider.of<POTApiProvider>(context, listen:false).getPlan(widget.trainingPlanId);
   }
 
   Future<List<Training>> _getTrainings() async {
-    return await POTDummyAPI.getTrainings(widget.trainingPlanId);
+    return await Provider.of<POTApiProvider>(context, listen:false).getTrainings(widget.trainingPlanId);
   }
 
   @override

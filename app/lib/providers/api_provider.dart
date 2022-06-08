@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app/mixins/api/auth_mixin.dart';
+import 'package:app/mixins/api/training_mixin.dart';
 import 'package:app/mixins/api/training_plan_mixin.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/models/data/user.dart';
@@ -62,6 +63,6 @@ class BaseApiProvider {
   }
 }
 
-class POTApiProvider extends BaseApiProvider with AuthMixin, TrainingPlanMixin {
+class POTApiProvider extends BaseApiProvider with AuthMixin, TrainingPlanMixin, TrainingMixin {
   POTApiProvider(String? userToken) : super(userToken);
 }

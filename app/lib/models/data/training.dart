@@ -18,6 +18,13 @@ class Training extends BaseModel{
   Training({required id, this.trainingName, this.exercises, required String xCreated, required String xModified})
       : super(id: id, xCreated: xCreated, xModified: xModified);
 
+  Training.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
+    trainingName = json['training_name'];
+    exercises = (json['exercises'] as List)
+        .map((e) => Exercise.fromJson(e))
+        .toList();
+  }
+
   static Future<Training> getNew() async {
     Random random = Random();
     return Training(

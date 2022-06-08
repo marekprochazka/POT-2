@@ -132,8 +132,7 @@ class _CreateTrainingPlanFormBodyState
                           showError(context, e.toString());
                         }
                         Navigator.pop(context);
-                        Provider.of<PlanListState>(context, listen: false)
-                            .isCurrent = false;
+                        Provider.of<PlanListState>(context, listen: false).notify();
                       }
                     }),
               ],

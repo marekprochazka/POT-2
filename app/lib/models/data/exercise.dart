@@ -41,6 +41,15 @@ class Exercise extends BaseModel {
     String? xModified,
   }) : super(id: id, xCreated: xCreated, xModified: xModified);
 
+  Exercise.fromJson(Map<String, dynamic> json)
+      : exerciseName = json['exercise_name'],
+        overloadDefinition = OverloadDefinition.fromJson(json['overload_definition']),
+        order = json['order'],
+        description = json['description'],
+        defaultAddOverloadValue = json['default_add_overload_value'],
+        lastOverloadValue = json['last_overload_value'],
+        super.fromJson(json);
+
   static Future<Exercise> getNew() async {
     Random random = Random();
     return Exercise(

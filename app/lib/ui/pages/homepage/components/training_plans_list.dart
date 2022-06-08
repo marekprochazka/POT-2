@@ -23,18 +23,15 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) { 
-      Provider.of<PlanListState>(context, listen: false).isCurrent = true;
-     });
+     
   }
+
 
   void addListener() {
     Provider.of<PlanListState>(context, listen: false).addListener(() {
-      if (!Provider.of<PlanListState>(context, listen: false).isCurrent) {
         setState(() {
           futureTrainingPlans = _getTrainingPlan(context);
         });
-      }
     });
   }
 
@@ -48,7 +45,7 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
       handleUnauthorized(context, e.message);
       return [];
     } catch (e) {
-      showError(context, e.toString());
+      showError(context, e.toString()); 
       hideLoadingPopup(context, freeze: false);
       print(e.toString());
       return [];
