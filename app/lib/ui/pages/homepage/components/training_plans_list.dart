@@ -2,9 +2,11 @@ import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/handle_unauthorized.dart';
+import 'package:app/providers/plan_list_state.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
 import 'package:app/utils/exceptions.dart';
 import 'package:app/utils/loading_popup.dart';
+import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,18 +23,32 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) { 
+      Provider.of<PlanListState>(context, listen: false).isCurrent = true;
+     });
+  }
+
+  void addListener() {
+    Provider.of<PlanListState>(context, listen: false).addListener(() {
+      if (!Provider.of<PlanListState>(context, listen: false).isCurrent) {
+        setState(() {
+          futureTrainingPlans = _getTrainingPlan(context);
+        });
+      }
+    });
   }
 
   Future<List<TrainingPlan>> _getTrainingPlan(context) async {
     try {
-    return await Provider.of<POTApiProvider>(context, listen: false).getPlans();
-
-    }
-    on UnauthorizedException catch (e) {
-      handleUnauthorized(context);
+      // Provider.of<PlanListState>(context, listen: false).isCurrent = true;
+      // addListener();
+      return await Provider.of<POTApiProvider>(context, listen: false)
+          .getPlans();
+    } on UnauthorizedException catch (e) {
+      handleUnauthorized(context, e.message);
       return [];
-    }
-    catch (e) {
+    } catch (e) {
+      showError(context, e.toString());
       hideLoadingPopup(context, freeze: false);
       print(e.toString());
       return [];
@@ -41,6 +57,7 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
 
   @override
   Widget build(BuildContext context) {
+    addListener();
     return FutureBuilder(
       future: _getTrainingPlan(context),
       builder: (context, AsyncSnapshot<List<TrainingPlan>> snapshot) {
@@ -49,12 +66,14 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
             return const Text('No data');
           case ConnectionState.active:
           case ConnectionState.waiting:
-            showLoadingPopup(context, 'Loading training plans...', freeze: false);
+            showLoadingPopup(context, 'Loading training plans...',
+                freeze: false);
             return const SizedBox();
           case ConnectionState.done:
             // return Text('done');
             if (snapshot.hasData) {
               hideLoadingPopup(context, freeze: false);
+              // 
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.55,
                 child: ListView.builder(
@@ -63,7 +82,7 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
                   itemCount: snapshot.data?.length ?? 0,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(top:25.0),
+                      padding: const EdgeInsets.only(top: 25.0),
                       child: PlanListItem(trainingPlan: snapshot.data![index]),
                     );
                   },

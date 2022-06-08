@@ -9,17 +9,19 @@ import 'package:flutter/material.dart';
 
 class CreateTrainingForm extends BaseForm {
   final GlobalKey<FormState> formKey;
+  final BuildContext context;
   const CreateTrainingForm(
       {Key? key,
       required Widget child,
       required this.formKey,
-      required BaseModel model})
+      required BaseModel model,
+      required this.context})
       : super(key: key, child: child, formKeyRoot: formKey, model: model);
 
   @override
   Future<void> handlePopOut() async {
     print('destroying model of id ${model.id}');
-    model.destroy();
+    model.destroy(context);
   }
 }
 
@@ -226,7 +228,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                     text: 'Cancel',
                     callback: () {
                       print('cancelling instance of id ${widget.instance.id}');
-                      widget.instance.destroy();
+                      widget.instance.destroy(context);
                       Navigator.pop(context);
                     }),
                 const Spacer(),
@@ -238,7 +240,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                       if (widget.formKey.currentState!.validate()) {
                         print('saving instance of id ${widget.instance.id}');
                         print('No error');
-                        widget.instance.save();
+                        widget.instance.save(context);
                         Navigator.pop(context);
                       } else {
                         print('error');

@@ -1,6 +1,7 @@
 
 
 import 'package:app/models/data/base.dart';
+import 'package:flutter/cupertino.dart';
 
 class OverloadDefinition extends BaseModel {
   String? unit;
@@ -13,12 +14,12 @@ class OverloadDefinition extends BaseModel {
   }) : super(id: id);
 
   @override
-  Future<void> save() async {
+  Future<void> save(BuildContext context) async {
     print('$unit saved');
   }
   
   @override
-  Future<void> destroy() async {
+  Future<void> destroy(BuildContext context) async {
     print('$unit destroyed');
   }
 }

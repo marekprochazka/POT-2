@@ -12,6 +12,7 @@ Future<void> editTrainingForm(BuildContext context, Training training) async {
         child: CreateTrainingForm(
             formKey: formKey,
             model: training,
+            context: context,
             child: CreateTrainingFormBody(
               formKey: formKey,
               instance: training,

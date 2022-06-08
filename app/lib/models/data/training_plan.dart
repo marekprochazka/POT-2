@@ -1,5 +1,9 @@
 import 'package:app/models/data/base.dart';
+import 'package:app/providers/api_provider.dart';
 import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class TrainingPlan extends BaseModel {
   String? planName;
@@ -22,22 +26,17 @@ class TrainingPlan extends BaseModel {
         super.fromJson(json);
 
   
-  static Future<TrainingPlan> getNew() async {
-    Random random = Random();
-    return TrainingPlan(
-      id: '${random.nextInt(1000000)}',
-      xCreated: DateTime.now().toIso8601String(),
-      xModified: DateTime.now().toIso8601String(),
-    );
+  static Future<TrainingPlan> getNew(BuildContext context) async {
+    return await Provider.of<POTApiProvider>(context, listen: false).getNewPlan();
   }
 
   @override
-  Future<void> save() async {
-    print('$planName saved');
+  Future<void> save(BuildContext context) async {
+    await Provider.of<POTApiProvider>(context, listen: false).updatePlan(this);
   }
 
   @override
-  Future<void> destroy() async {
-    print('$planName destroyed');
+  Future<void> destroy(BuildContext context) async {
+    await Provider.of<POTApiProvider>(context, listen: false).deletePlan(id);
   }
 }

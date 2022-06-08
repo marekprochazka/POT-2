@@ -1,4 +1,5 @@
 import 'package:app/models/data/base.dart';
+import 'package:flutter/cupertino.dart';
 
 class Overload extends BaseModel {
   String? value;
@@ -17,11 +18,11 @@ class Overload extends BaseModel {
       : super(id: id);
 
   @override
-  Future<void> save() async {
+  Future<void> save(BuildContext context) async {
     print('$exerciseName saved');
   }
   @override
-  Future<void> destroy() async {
+  Future<void> destroy(BuildContext context) async {
     print('$exerciseName destroyed');
   }
 }

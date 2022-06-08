@@ -124,6 +124,7 @@ class _TrainingPlanHeaderState extends State<TrainingPlanHeader> {
                             child: CreateTrainingForm(
                                 formKey: _formKey,
                                 model: _newTraining!,
+                                context: context,
                                 child: CreateTrainingFormBody(
                                   formKey: _formKey,
                                   instance: _newTraining!,

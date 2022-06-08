@@ -7,7 +7,9 @@ import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/ui/shared/header/components/create_training_plan_form.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
+import 'package:app/utils/exceptions.dart';
 import 'package:app/utils/loading_popup.dart';
+import 'package:app/utils/show_error.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -27,18 +29,21 @@ class _HeaderContentState extends State<HeaderContent> {
 
   late TrainingPlan? _newTrainingPlan;
 
-  Future<String?> fetchNewTrainingPlan() async {
+  Future<bool> fetchNewTrainingPlan() async {
     showLoadingPopup(context, 'Creating new training plan...');
-    // wait for 2 seconds
-    await Future.delayed(const Duration(seconds: 2));
     try {
-      _newTrainingPlan = await TrainingPlan.getNew();
-    } catch (err) {
+      _newTrainingPlan = await TrainingPlan.getNew(context);
+    } on UnauthorizedException catch (err) {
+      showError(context, err.message);
       hideLoadingPopup(context);
-      return err.toString();
+      return false;
+    } catch (err) {
+      showError(context, err.toString());
+      hideLoadingPopup(context);
+      return false;
     }
     hideLoadingPopup(context);
-    return null;
+    return true;
   }
 
   @override
@@ -57,7 +62,8 @@ class _HeaderContentState extends State<HeaderContent> {
                     spreadRadius: 6)
               ]),
               child: CircleAvatar(
-                backgroundImage: CachedNetworkImageProvider(widget.profilePicture),
+                backgroundImage:
+                    CachedNetworkImageProvider(widget.profilePicture),
                 radius: 50.0,
               ),
             ),
@@ -125,16 +131,15 @@ class _HeaderContentState extends State<HeaderContent> {
                       height: 22,
                       text: 'Create new training plan',
                       callback: () async {
-                        final String? err = await fetchNewTrainingPlan();
-                        if (err != null) {
-                          // TODO show error
-                        } else {
+                        final bool ok = await fetchNewTrainingPlan();
+                        if (ok) {
                           showModal(
                               context,
                               BaseFormModal(
                                 child: CreateTrainingPlanForm(
                                   formKey: _formKey,
                                   model: _newTrainingPlan!,
+                                  context: context,
                                   child: CreateTrainingPlanFormBody(
                                       formKey: _formKey,
                                       instance: _newTrainingPlan!,

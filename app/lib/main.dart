@@ -4,6 +4,7 @@ import 'package:app/models/environment.dart';
 import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/is_frozen_state.dart';
+import 'package:app/providers/plan_list_state.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,10 @@ class POTEntry extends StatelessWidget {
         Provider<POTApiProvider>(
           lazy: false,
           create: (BuildContext createContext) => POTApiProvider(user.token),
+        ),
+        ChangeNotifierProvider<PlanListState>(
+          lazy: false,
+          create: (BuildContext createContext) => PlanListState(isCurrent:true),
         ),
       ],
       child: Builder(builder: (BuildContext context) {

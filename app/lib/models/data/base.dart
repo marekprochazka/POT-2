@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 abstract class BaseModel {
   final String id;
   final String? xCreated;
@@ -8,6 +10,6 @@ abstract class BaseModel {
         xCreated = json['x_created'],
         xModified = json['x_modified'];
 
-  Future<void> save();
-  Future<void> destroy();
+  Future<void> save(BuildContext context);
+  Future<void> destroy(BuildContext context);
 }

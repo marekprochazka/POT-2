@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/overload_definition.dart';
+import 'package:flutter/cupertino.dart';
 
 class ExerciseLite {
   final String id;
@@ -49,12 +50,12 @@ class Exercise extends BaseModel {
   }
 
   @override
-  Future<void> save() async {
+  Future<void> save(BuildContext context) async {
     print('$exerciseName saved');
   }
 
   @override
-  Future<void> destroy() async {
+  Future<void> destroy(BuildContext context) async {
     print('$exerciseName destroyed');
   }
 

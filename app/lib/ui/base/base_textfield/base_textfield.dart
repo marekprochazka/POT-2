@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
 
 class BaseTextField extends StatefulWidget {
@@ -25,7 +26,7 @@ class BaseTextField extends StatefulWidget {
       required this.onChangedCallback,
       this.transparent = false,
       this.placeholder,
-      this.enabled=true,
+      this.enabled = true,
       this.obscureText = false})
       : super(key: key);
 
@@ -37,13 +38,12 @@ class _BaseTextFieldState extends State<BaseTextField> {
   bool _valid = true;
 
   InputBorder _border() => widget.transparent
-              ? const UnderlineInputBorder(
-                  borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
-                )
-              : OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: POTColors.tertiary, width: 1.0),
-                  borderRadius: BorderRadius.circular(15.0));
+      ? const UnderlineInputBorder(
+          borderSide: BorderSide(color: POTColors.tertiary, width: 1.0),
+        )
+      : OutlineInputBorder(
+          borderSide: const BorderSide(color: POTColors.tertiary, width: 1.0),
+          borderRadius: BorderRadius.circular(15.0));
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,12 @@ class _BaseTextFieldState extends State<BaseTextField> {
         textAlign: TextAlign.center,
         minLines: widget.lines,
         maxLines: widget.lines,
-        keyboardType: widget.multiline ? TextInputType.multiline : TextInputType.text,
+        keyboardType:
+            widget.multiline ? TextInputType.multiline : TextInputType.text,
         decoration: InputDecoration(
           hintText: widget.placeholder,
-          hintStyle: POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.tertiary),
+          hintStyle: POTTextStyles.dynamicText(
+              16, FontWeight.normal, POTColors.tertiary),
           isDense: true,
           contentPadding: const EdgeInsets.all(5.0),
           errorStyle: const TextStyle(height: 0),
@@ -69,15 +71,13 @@ class _BaseTextFieldState extends State<BaseTextField> {
           errorBorder: _border(),
           disabledBorder: _border(),
           focusedErrorBorder: _border(),
-          fillColor: _valid ? Colors.white: POTColors.error,
-          filled: widget.transparent && _valid? false: true,
-        
+          fillColor: _valid ? Colors.white : POTColors.error,
+          filled: widget.transparent && _valid ? false : true,
         ),
-        style:
-        widget.transparent ?
-            POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.white):
-            POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.primary),
-        
+        style: widget.transparent
+            ? POTTextStyles.dynamicText(16, FontWeight.normal, POTColors.white)
+            : POTTextStyles.dynamicText(
+                16, FontWeight.normal, POTColors.primary),
         validator: (value) {
           String? err;
           if (widget.validator != null) {
@@ -85,8 +85,10 @@ class _BaseTextFieldState extends State<BaseTextField> {
             setState(() {
               _valid = err == null;
             });
-            // TODO popup with error message
-            return err == null ? err: '';
+            if (!_valid) {
+              showError(context, err ?? 'An error occurred');
+            }
+            return err == null ? err : '';
           }
           setState(() {
             _valid = true;
@@ -94,7 +96,8 @@ class _BaseTextFieldState extends State<BaseTextField> {
           return null;
         },
         onChanged: (value) {
-          widget.controller.value = widget.controller.value.copyWith(text: value);
+          widget.controller.value =
+              widget.controller.value.copyWith(text: value);
           widget.onChangedCallback(value);
         },
       ),

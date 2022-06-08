@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/exercise.dart';
+import 'package:flutter/cupertino.dart';
 
 class TrainingLite {
   final String id;
@@ -32,12 +33,12 @@ class Training extends BaseModel{
   }
 
   @override
-  Future<void> save() async {
+  Future<void> save(BuildContext context) async {
     print('$trainingName saved');
   }
 
   @override
-  Future<void> destroy() async {
+  Future<void> destroy(BuildContext context) async {
     print('$trainingName destroyed');
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/overload.dart';
 import 'package:app/models/data/training.dart';
+import 'package:flutter/cupertino.dart';
 
 class TrainingActive extends BaseModel {
   final String trainingName;
@@ -12,11 +13,11 @@ class TrainingActive extends BaseModel {
       : super(id: id);
 
   @override
-  Future<void> save() async {
+  Future<void> save(BuildContext context) async {
     print('$trainingName saved');
   }
   @override
-  Future<void> destroy() async {
+  Future<void> destroy(BuildContext context) async {
     print('$trainingName destroyed');
   }
 

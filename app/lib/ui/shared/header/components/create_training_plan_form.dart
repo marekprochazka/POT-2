@@ -1,24 +1,33 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/training_plan.dart';
+import 'package:app/providers/handle_unauthorized.dart';
+import 'package:app/providers/plan_list_state.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
+import 'package:app/utils/exceptions.dart';
+import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
 
 class CreateTrainingPlanForm extends BaseForm {
   final GlobalKey<FormState> formKey;
+  final BuildContext context;
   const CreateTrainingPlanForm(
       {Key? key,
       required Widget child,
       required this.formKey,
-      required BaseModel model})
+      required BaseModel model,
+      required this.context})
       : super(key: key, child: child, formKeyRoot: formKey, model: model);
 
   @override
   Future<void> handlePopOut() async {
     print('destroying model of id ${model.id}');
-    model.destroy();
+    model.destroy(context);
   }
 }
 
@@ -100,8 +109,13 @@ class _CreateTrainingPlanFormBodyState
                     height: 30,
                     text: 'Cancel',
                     callback: () {
-                      print('cancelling instance of id ${widget.instance.id}');
-                      widget.instance.destroy();
+                      try {
+                        widget.instance.destroy(context);
+                      } on UnauthorizedException catch (e) {
+                        handleUnauthorized(context, e.message);
+                      } catch (e) {
+                        showError(context, e.toString());
+                      }
                       Navigator.pop(context);
                     }),
                 const Spacer(),
@@ -110,9 +124,15 @@ class _CreateTrainingPlanFormBodyState
                     height: 30,
                     text: 'Save',
                     callback: () {
-                      print('saving instance of id ${widget.instance.id}');
-                      widget.instance.save();
+                      try {
+                        widget.instance.save(context);
+                      } on UnauthorizedException catch (e) {
+                        handleUnauthorized(context, e.message);
+                      } catch (e) {
+                        showError(context, e.toString());
+                      }
                       Navigator.pop(context);
+                      Provider.of<PlanListState>(context, listen: false).isCurrent = false;
                     }),
               ],
             ),

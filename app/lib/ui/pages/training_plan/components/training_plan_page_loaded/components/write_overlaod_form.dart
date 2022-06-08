@@ -13,17 +13,19 @@ import 'package:flutter/material.dart';
 
 class WriteOverloadForm extends BaseForm {
   final GlobalKey<FormState> formKey;
+  final BuildContext context;
   const WriteOverloadForm(
       {Key? key,
       required Widget child,
       required this.formKey,
-      required BaseModel model})
+      required BaseModel model,
+      required this.context})
       : super(key: key, child: child, formKeyRoot: formKey, model: model);
 
   @override
   Future<void> handlePopOut() async {
     print('destroying model of id ${model.id}');
-    model.save();
+    model.save(context);
   }
 }
 
@@ -144,7 +146,7 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
                   height: 30,
                   text: 'Save and continue',
                   callback: () {
-                    widget.instance.save();
+                    widget.instance.save(context);
                     Navigator.pop(context);
                   },
                 ),
@@ -185,6 +187,7 @@ Future<void> showWriteOverloadForm(
         child: WriteOverloadForm(
           formKey: formKey,
           model: trainingActive,
+          context: context,
           child: WriteOverloadFormBody(
             formKey: formKey,
             instance: trainingActive,
