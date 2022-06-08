@@ -3,6 +3,7 @@ import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:app/ui/base/base_page/base_page.dart';
+import 'package:app/utils/exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,14 @@ class LogInPage extends StatelessWidget {
   }
 
   void logIn(BuildContext context) async {
-    User user =
-        await User.login(context, 'm.prochazka2002@gmail.com', 'mojeHeslo2002');
+    try {
+      await User.login(context, 'm.prochazka2002@gmail.com', 'mojeHeslo2002');
+    }
+    on BadRequestException catch (e) {
+      print(e.message);
+    }
+    catch (e) {
+      print(e);
+    }
   }
 }

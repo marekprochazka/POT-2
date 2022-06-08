@@ -3,3 +3,9 @@ class UnauthorizedException implements Exception {
 
   final String message;
 }
+
+class BadRequestException implements Exception {
+  BadRequestException(this.message);
+
+  final Map message;
+}

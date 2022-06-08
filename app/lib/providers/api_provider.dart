@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:app/models/data/training_plan.dart';
@@ -16,16 +14,26 @@ class POTApiProvider {
   POTApiProvider(this.userToken);
 
   Map<String, String> getHeaders() {
-return {
-        'Authorization': userToken != null ? 'TOKEN $userToken': '',
-        'Content-Type': 'application/json',
-      };
+    return {
+      'Authorization': userToken != null ? 'TOKEN $userToken' : '',
+      'Content-Type': 'application/json',
+      'chartset': 'utf-8',
+    };
   }
+
+  dynamic _decode(http.Response response) {
+    try {
+      return jsonDecode(utf8.decode(response.bodyBytes));
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  } 
 
   Future<http.Response> _get(String reverseStr, {Map? params}) {
     return http.get(
       Uri.parse('$apiUrl/${reverse(reverseStr, params)}'),
-      headers: getHeaders(),);
+      headers: getHeaders(),
+    );
   }
 
   Future<http.Response> _post(String reverseStr, {Map? params, Map? body}) {
@@ -41,16 +49,13 @@ return {
       'username': username,
       'password': password,
     });
-    print('STATUS: ${response.statusCode}');
     if (response.statusCode == 201) {
-      final user = User.fromJson(json.decode(response.body));
+      final user = User.fromJson(_decode(response));
       userToken = user.token;
       return user;
-    }
-    else if (response.statusCode == 400) {
-      throw Exception(json.decode(response.body));
-    }
-    else {
+    } else if (response.statusCode == 400) {
+      throw BadRequestException(_decode(response));
+    } else {
       throw Exception('Something went wrong');
     }
   }
@@ -59,8 +64,7 @@ return {
     final response = await _get('my_auth:logout');
     if (response.statusCode == 200) {
       userToken = null;
-    }
-    else {
+    } else {
       throw Exception('Something went wrong');
     }
   }
@@ -69,15 +73,14 @@ return {
     final response = await _get('workout:training_plan');
 
     if (response.statusCode == 200) {
-      return (json.decode(response.body) as List)
+      return (_decode(response) as List)
           .map((e) => TrainingPlan.fromJson(e))
           .toList();
     } else if (response.statusCode == 401) {
-      throw UnauthorizedException('Failed to load training plans. Unauthorized');
-    }
-    else {
+      throw UnauthorizedException(
+          'Failed to load training plans. Unauthorized');
+    } else {
       throw Exception('Something went wrong');
     }
   }
-
 }
