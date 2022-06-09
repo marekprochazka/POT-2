@@ -1,13 +1,12 @@
 from .base import *
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+import dj_database_url
 
-DEBUG = False
+DEBUG = True
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 }
 
 sentry_sdk.init(
