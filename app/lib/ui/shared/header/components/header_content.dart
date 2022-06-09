@@ -31,19 +31,9 @@ class _HeaderContentState extends State<HeaderContent> {
 
   Future<bool> fetchNewTrainingPlan() async {
     showLoadingPopup(context, 'Creating new training plan...');
-    try {
-      _newTrainingPlan = await TrainingPlan.getNew(context);
-    } on UnauthorizedException catch (err) {
-      showError(context, err.message);
-      hideLoadingPopup(context);
-      return false;
-    } catch (err) {
-      showError(context, err.toString());
-      hideLoadingPopup(context);
-      return false;
-    }
+    _newTrainingPlan = await TrainingPlan.getNew(context);
     hideLoadingPopup(context);
-    return true;
+    return _newTrainingPlan != null;
   }
 
   @override

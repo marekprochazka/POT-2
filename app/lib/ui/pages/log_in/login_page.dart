@@ -39,9 +39,6 @@ class LogInPage extends StatelessWidget {
     on BadRequestException catch (e) {
       return(e.message);
     }
-    catch (e) {
-      showError(context, e.toString());
-    }
     return null;
   }
 }

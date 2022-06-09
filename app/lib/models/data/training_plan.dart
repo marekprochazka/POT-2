@@ -1,5 +1,6 @@
 import 'package:app/models/data/base.dart';
 import 'package:app/providers/api_provider.dart';
+import 'package:app/utils/handle_api_call.dart';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -25,18 +26,24 @@ class TrainingPlan extends BaseModel {
         planImage = json['plan_image'] ?? json['default_image'],
         super.fromJson(json);
 
-  
-  static Future<TrainingPlan> getNew(BuildContext context) async {
-    return await Provider.of<POTApiProvider>(context, listen: false).getNewPlan();
+  static Future<TrainingPlan?> getNew(BuildContext context) async {
+    return await handleApiCall(context,
+        () => Provider.of<POTApiProvider>(context, listen: false).getNewPlan());
   }
 
   @override
   Future<void> save(BuildContext context) async {
-    await Provider.of<POTApiProvider>(context, listen: false).updatePlan(this);
+    return await handleApiCall(
+        context,
+        () => Provider.of<POTApiProvider>(context, listen: false)
+            .updatePlan(this));
   }
 
   @override
   Future<void> destroy(BuildContext context) async {
-    await Provider.of<POTApiProvider>(context, listen: false).deletePlan(id);
+    return await handleApiCall(
+        context,
+        () =>
+            Provider.of<POTApiProvider>(context, listen: false).deletePlan(id));
   }
 }

@@ -124,15 +124,9 @@ class _CreateTrainingPlanFormBodyState
                     text: 'Save',
                     callback: () async {
                       if (widget.formKey.currentState!.validate()) {
-                        try {
                           await widget.instance.save(context);
                           Provider.of<PlanListState>(context, listen: false).notify();
                           Navigator.pop(context);
-                        } on UnauthorizedException catch (e) {
-                          handleUnauthorized(context, e.message);
-                        } catch (e) {
-                          showError(context, e.toString());
-                        }
                       }
                     }),
               ],

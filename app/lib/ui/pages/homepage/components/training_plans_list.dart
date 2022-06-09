@@ -5,6 +5,7 @@ import 'package:app/providers/handle_unauthorized.dart';
 import 'package:app/providers/plan_list_state.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
 import 'package:app/utils/exceptions.dart';
+import 'package:app/utils/handle_api_call.dart';
 import 'package:app/utils/loading_popup.dart';
 import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
@@ -23,33 +24,25 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
   @override
   void initState() {
     super.initState();
-     
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   void addListener() {
     Provider.of<PlanListState>(context, listen: false).addListener(() {
-        setState(() {
-          futureTrainingPlans = _getTrainingPlan(context);
-        });
+      setState(() {
+        futureTrainingPlans = _getTrainingPlan(context);
+      });
     });
   }
 
   Future<List<TrainingPlan>> _getTrainingPlan(context) async {
-    try {
-      // Provider.of<PlanListState>(context, listen: false).isCurrent = true;
-      // addListener();
-      return await Provider.of<POTApiProvider>(context, listen: false)
-          .getPlans();
-    } on UnauthorizedException catch (e) {
-      handleUnauthorized(context, e.message);
-      return [];
-    } catch (e) {
-      showError(context, e.toString()); 
-      hideLoadingPopup(context, freeze: false);
-      print(e.toString());
-      return [];
-    }
+    List<TrainingPlan>? result = await handleApiCall(context,
+        () => Provider.of<POTApiProvider>(context, listen: false).getPlans());
+    return result ?? [];
   }
 
   @override
@@ -70,7 +63,7 @@ class _TrainingPlansListState extends State<TrainingPlansList> {
             // return Text('done');
             if (snapshot.hasData) {
               hideLoadingPopup(context, freeze: false);
-              // 
+              //
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.55,
                 child: ListView.builder(

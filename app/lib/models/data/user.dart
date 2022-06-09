@@ -1,10 +1,9 @@
-
-
 import 'dart:convert';
 
 import 'package:app/constants.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/login_state.dart';
+import 'package:app/utils/handle_api_call.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,30 +38,39 @@ class User {
     token = user.token;
   }
 
-  static Future<User> login(BuildContext context ,String username, String password) async {
-    final user = await Provider.of<POTApiProvider>(context, listen:false).login(username, password);  
+  static Future<User?> login(
+      BuildContext context, String username, String password) async {
+    final user = await handleApiCall(
+        context,
+        () => Provider.of<POTApiProvider>(context, listen: false)
+            .login(username, password));
+    if (user == null) {
+      return null;
+    }
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(PrefsNames.loggedInKey, true);
-    prefs.setString(PrefsNames.userDatakey, jsonEncode({
-      'username': user.username,
-      'email': user.email,
-      'profile_picture': user._profilePicture,
-      'token': user.token,
-    }));
+    prefs.setString(
+        PrefsNames.userDatakey,
+        jsonEncode({
+          'username': user.username,
+          'email': user.email,
+          'profile_picture': user._profilePicture,
+          'token': user.token,
+        }));
     Provider.of<LoginState>(context, listen: false).loggedIn = true;
     Provider.of<User>(context, listen: false).refactor(user);
     return user;
   }
 
-  Future<void>  logout(BuildContext context, {bool force=false}) async {
+  Future<void> logout(BuildContext context, {bool force = false}) async {
     if (!force) {
-      await Provider.of<POTApiProvider>(context, listen:false).logout();
+      await handleApiCall(context,
+          () => Provider.of<POTApiProvider>(context, listen: false).logout());
     }
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(PrefsNames.loggedInKey, false);
     prefs.remove(PrefsNames.userDatakey);
     Provider.of<LoginState>(context, listen: false).loggedIn = false;
     Provider.of<User>(context, listen: false).token = null;
-
   }
 }
