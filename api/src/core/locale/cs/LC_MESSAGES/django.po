@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-12 08:56+0200\n"
+"PO-Revision-Date: 2022-04-12 08:59+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
+"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"X-Generator: Poedit 3.0\n"
+
+#: .\core\models\base_model.py:10
+msgid "x_created"
+msgstr "vytvořeno"
+
+#: .\core\models\base_model.py:11
+msgid "x_modified"
+msgstr "upraveno"
+
+#: .\core\models\base_model.py:24
+msgid "Identifier"
+msgstr "Identifikátor"
+
+#: .\core\models\base_model.py:26
+msgid "Description"
+msgstr "Popis"
+
+#: .\core\models\base_model.py:27
+msgid "Order"
+msgstr "Pořadí"
+
+#: .\core\models\person.py:23
+msgid "user"
+msgstr "uživatel"
+
+#: .\core\models\person.py:25
+msgid "Profile picture"
+msgstr "Profilový obrázek"
+
+#: .\core\models\person.py:44
+msgid "Person"
+msgstr "Osoba"
+
+#: .\core\models\person.py:45
+msgid "Persons"
+msgstr "Osoby"
+
+#: .\core\models\person.py:58
+msgid "Logout successful"
+msgstr "Odhlášení proběhlo úspěšně"
+
+#: .\core\models\person.py:61
+msgid "Logout failed"
+msgstr "Odhlášení selhalo"
+
+#: .\core\models\type_default_avatar.py:13
+msgid "Avatar image"
+msgstr "Obrázek avatara"
+
+#: .\core\models\type_default_avatar.py:16
+msgid "Type default avatar"
+msgstr "Výchozí avatar"
+
+#: .\core\models\type_default_avatar.py:17
+msgid "Type default avatars"
+msgstr "Výchozí avataři"
+
+#: .\core\views\base.py:20
+msgid "This field may not be blank"
+msgstr "Toto pole je vyžadováno"
