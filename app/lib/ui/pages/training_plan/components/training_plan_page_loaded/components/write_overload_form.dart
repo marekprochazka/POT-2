@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
-import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/overload.dart';
 import 'package:app/models/data/training_active.dart';
+import 'package:app/providers/training_list_state.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
@@ -10,6 +10,7 @@ import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/utils/loading_popup.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class WriteOverloadForm extends BaseForm {
   final GlobalKey<FormState> formKey;
@@ -84,11 +85,17 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
             width: 50.0,
             height: 30.0,
             onChangedCallback: (String? value) => _gO(index).value = value,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return null;
+              }
+              return double.tryParse(value) == null ? 'Overload value must be a number':null;
+            },
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
-          child: Text(_gO(index).overloadUnit,
+          child: Text(_gO(index).overloadUnit ?? '',
               style: POTTextStyles.dynamicText(
                   14, FontWeight.bold, POTColors.white)),
         ),
@@ -145,9 +152,12 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
                   width: 100,
                   height: 30,
                   text: 'Save and continue',
-                  callback: () {
-                    widget.instance.save(context);
-                    Navigator.pop(context);
+                  callback: () async {
+                    if (widget.formKey.currentState!.validate()) {
+                      await widget.instance.writeOverload(context);
+                      Provider.of<TrainingListState>(context, listen: false).notify();
+                      Navigator.pop(context);
+                    }
                   },
                 ),
                 const Spacer(),
@@ -155,9 +165,12 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
                   width: 100,
                   height: 30,
                   text: 'Finish training',
-                  callback: () {
-                    widget.instance.finish();
-                    Navigator.pop(context);
+                  callback: () async {
+                    if (widget.formKey.currentState!.validate()) {
+                      await widget.instance.finish(context);
+                      Provider.of<TrainingListState>(context, listen: false).notify();
+                      Navigator.pop(context);
+                    }
                   },
                 ),
               ],
@@ -172,15 +185,13 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
 Future<void> showWriteOverloadForm(
     BuildContext context, String trainingId) async {
   showLoadingPopup(context, 'Loading...');
-  late final TrainingActive trainingActive;
-  try {
-    trainingActive = await POTDummyAPI.getLastTrainingActive(trainingId);
-  } catch (e) {
-    print(e);
+  final TrainingActive? trainingActive = await TrainingActive.getLast(context, trainingId);
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  print('DEBUG $trainingActive');
+  hideLoadingPopup(context);
+  if (trainingActive == null) {
     return;
   }
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  hideLoadingPopup(context);
   showModal(
       context,
       BaseFormModal(

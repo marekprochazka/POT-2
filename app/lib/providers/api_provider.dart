@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app/constants.dart';
 import 'package:app/mixins/api/auth_mixin.dart';
 import 'package:app/mixins/api/exercise_mixin.dart';
+import 'package:app/mixins/api/training_active_mixin.dart';
 import 'package:app/mixins/api/training_mixin.dart';
 import 'package:app/mixins/api/training_plan_mixin.dart';
 import 'package:app/models/data/training_plan.dart';
@@ -57,6 +58,14 @@ class BaseApiProvider {
     );
   }
 
+  Future<http.Response> put(String reverseStr, {Map? params, dynamic body}) {
+    return http.put(
+      Uri.parse('$apiUrl/${reverse(reverseStr, params)}'),
+      headers: getHeaders(),
+      body: jsonEncode(body ?? {}),
+    );
+  }
+
   Future<http.Response> delete(String reverseStr, {Map? params}) {
     return http.delete(
       Uri.parse('$apiUrl/${reverse(reverseStr, params)}'),
@@ -78,6 +87,11 @@ class BaseApiProvider {
 }
 
 class POTApiProvider extends BaseApiProvider
-    with AuthMixin, TrainingPlanMixin, TrainingMixin, ExerciseMixin {
+    with
+        AuthMixin,
+        TrainingPlanMixin,
+        TrainingMixin,
+        ExerciseMixin,
+        TrainingActiveMixin {
   POTApiProvider(String? userToken) : super(userToken);
 }

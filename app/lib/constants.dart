@@ -111,4 +111,5 @@ class HTTPStatusOK {
   static const int post = 201;
   static const int delete = 204;
   static const int patch = 200;
+  static const int put = 200;
 }

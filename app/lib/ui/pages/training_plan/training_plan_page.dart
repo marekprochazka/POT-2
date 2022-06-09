@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/dev/dummy_api_provider.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/providers/api_provider.dart';

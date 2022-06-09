@@ -7,11 +7,12 @@ from workout.serializers.overload import OverloadSerializer
 
 class TrainingActiveSerializer(BaseSerializer):
     overloads = serializers.SerializerMethodField()
-    training = serializers.CharField(source='training.training_name')
+    training_name = serializers.CharField(source='training.training_name')
+    training_id = serializers.UUIDField(source='training.id')
 
     class Meta:
         model = TrainingActive
-        fields = ('id', 'training', 'state', 'overloads')
+        fields = ('id', 'training_name', 'training_id', 'state', 'overloads')
 
     def get_overloads(self, instance: TrainingActive):
         return OverloadSerializer(instance.overloads_list, many=True).data

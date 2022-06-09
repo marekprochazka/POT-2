@@ -57,7 +57,7 @@ class Exercise(BaseModel):
     def get_last_overload_value(self, index=-1) -> Union[int, None]:
         if self.overloads.count() > 0:
             value = list(self.overloads.order_by('order'))[index].value
-            if not value:
+            if not value and self.num_overloads >= abs(index-1):
                 value = self.get_last_overload_value(index - 1)
             return value
         return None
