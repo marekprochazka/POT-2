@@ -28,16 +28,10 @@ class _TrainingPlanHeaderState extends State<TrainingPlanHeader> {
 
   late Training? _newTraining;
 
-  Future<String?> fetchNewTraining() async {
+  Future<void> fetchNewTraining() async {
     showLoadingPopup(context, 'Creating new training...');
-    try {
-      _newTraining = await Training.getNew();
-    } catch (err) {
-      hideLoadingPopup(context);
-      return err.toString();
-    }
+    _newTraining = await Training.getNew(context, widget.trainingPlan.id);
     hideLoadingPopup(context);
-    return null;
   }
 
   @override
@@ -95,14 +89,13 @@ class _TrainingPlanHeaderState extends State<TrainingPlanHeader> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: POTButton(
-                  width: 150,
-                  height: 26,
-                  text: 'Back to homepage',
-                  textStyle: POTTextStyles.dynamicText(
-                      13, FontWeight.bold, POTColors.white),
-                  callback: () => context.goNamed(RouteNames.homePage.name),
-                  icon: ButtonIcons.arrow_back
-                ),
+                    width: 150,
+                    height: 26,
+                    text: 'Back to homepage',
+                    textStyle: POTTextStyles.dynamicText(
+                        13, FontWeight.bold, POTColors.white),
+                    callback: () => context.goNamed(RouteNames.homePage.name),
+                    icon: ButtonIcons.arrow_back),
               ),
               const Spacer(),
               Padding(
@@ -114,10 +107,8 @@ class _TrainingPlanHeaderState extends State<TrainingPlanHeader> {
                   textStyle: POTTextStyles.dynamicText(
                       13, FontWeight.bold, POTColors.tertiary),
                   callback: () async {
-                    final String? err = await fetchNewTraining();
-                    if (err != null) {
-                      // TODO handle error
-                    } else {
+                    await fetchNewTraining();
+                    if (_newTraining != null) {
                       showModal(
                           context,
                           BaseFormModal(

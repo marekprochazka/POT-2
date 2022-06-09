@@ -5,6 +5,7 @@ import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/is_frozen_state.dart';
 import 'package:app/providers/plan_list_state.dart';
+import 'package:app/providers/training_list_state.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,10 @@ class POTEntry extends StatelessWidget {
           lazy: false,
           create: (BuildContext createContext) => PlanListState(),
         ),
+        ChangeNotifierProvider<TrainingListState>(
+          lazy: false,
+          create: (BuildContext createContext) => TrainingListState(),
+        )
       ],
       child: Builder(builder: (BuildContext context) {
         final router = Provider.of<POTRouter>(context, listen: false).router;

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class PlanListState extends ChangeNotifier {
-  PlanListState();
+class TrainingListState extends ChangeNotifier {
+  TrainingListState();
 
   void notify() {
     notifyListeners();

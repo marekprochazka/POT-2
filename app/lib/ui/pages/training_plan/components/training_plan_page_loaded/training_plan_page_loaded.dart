@@ -21,7 +21,7 @@ class TrainingPlanPageLoaded extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 14.0),
                   child: Column(
                     children: [
-                      TrainingsList(trainings: trainings)
+                      TrainingsList(trainings: trainings, planId: trainingPlan.id,)
                     ],
                   ),
                 ),

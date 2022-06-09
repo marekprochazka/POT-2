@@ -105,3 +105,10 @@ class POTGradients {
               colors: <Color>[POTColors.primary, POTColors.secondary],
               stops: [0.0, 1.0]);
 }
+
+class HTTPStatusOK {
+  static const int get = 200;
+  static const int post = 201;
+  static const int delete = 204;
+  static const int patch = 200;
+}

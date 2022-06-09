@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:app/constants.dart';
 import 'package:app/mixins/api/auth_mixin.dart';
+import 'package:app/mixins/api/exercise_mixin.dart';
 import 'package:app/mixins/api/training_mixin.dart';
 import 'package:app/mixins/api/training_plan_mixin.dart';
 import 'package:app/models/data/training_plan.dart';
@@ -61,8 +63,21 @@ class BaseApiProvider {
       headers: getHeaders(),
     );
   }
+
+  Future<T> handleResponse<T>(Future<http.Response> Function() apiCall,
+      T Function(http.Response) callback, int statusOk) async {
+    final response = await apiCall();
+    if (response.statusCode == statusOk) {
+      return callback(response);
+    } else if (response.statusCode == 401) {
+      throw UnauthorizedException(decode(response));
+    } else {
+      throw Exception('Something went wrong');
+    }
+  }
 }
 
-class POTApiProvider extends BaseApiProvider with AuthMixin, TrainingPlanMixin, TrainingMixin {
+class POTApiProvider extends BaseApiProvider
+    with AuthMixin, TrainingPlanMixin, TrainingMixin, ExerciseMixin {
   POTApiProvider(String? userToken) : super(userToken);
 }

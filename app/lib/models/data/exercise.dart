@@ -2,26 +2,13 @@ import 'dart:math';
 
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/overload_definition.dart';
+import 'package:app/providers/api_provider.dart';
+import 'package:app/utils/handle_api_call.dart';
 import 'package:flutter/cupertino.dart';
-
-class ExerciseLite {
-  final String id;
-  final String exerciseName;
-  final String? lastOverloadValue;
-  final int order;
-  final String? description;
-
-  ExerciseLite({
-    required this.id,
-    required this.exerciseName,
-    this.lastOverloadValue,
-    required this.order,
-    this.description,
-  });
-}
-
+import 'package:provider/provider.dart';
 
 class Exercise extends BaseModel {
+  late String parentId;
   String? exerciseName;
   OverloadDefinition overloadDefinition;
   int? order;
@@ -31,6 +18,7 @@ class Exercise extends BaseModel {
 
   Exercise({
     required String id,
+    required this.parentId,
     this.exerciseName,
     required this.overloadDefinition,
     this.order,
@@ -42,7 +30,8 @@ class Exercise extends BaseModel {
   }) : super(id: id, xCreated: xCreated, xModified: xModified);
 
   Exercise.fromJson(Map<String, dynamic> json)
-      : exerciseName = json['exercise_name'],
+      : parentId = json['parent_id'],
+        exerciseName = json['exercise_name'],
         overloadDefinition = OverloadDefinition.fromJson(json['overload_definition']),
         order = json['order'],
         description = json['description'],
@@ -50,22 +39,25 @@ class Exercise extends BaseModel {
         lastOverloadValue = json['last_overload_value'],
         super.fromJson(json);
 
-  static Future<Exercise> getNew() async {
-    Random random = Random();
-    return Exercise(
-      id: '${random.nextInt(1000000)}',
-      overloadDefinition: OverloadDefinition(id: '${random.nextInt(1000000)}'),
-    );
+  static Future<Exercise?> getNew(BuildContext context, String trainingId) async {
+    return await handleApiCall(context, 
+    () => Provider.of<POTApiProvider>(context, listen: false).getNewExercise(trainingId));
   }
 
   @override
   Future<void> save(BuildContext context) async {
-    print('$exerciseName saved');
+    return await handleApiCall(
+        context,
+        () => Provider.of<POTApiProvider>(context, listen: false)
+            .updateExercise(parentId, this));
   }
 
   @override
   Future<void> destroy(BuildContext context) async {
-    print('$exerciseName destroyed');
+    return await handleApiCall(
+        context,
+        () => Provider.of<POTApiProvider>(context, listen: false)
+            .deleteExercise(parentId, id));
   }
 
 }

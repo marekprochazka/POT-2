@@ -2,10 +2,12 @@ import 'package:app/constants.dart';
 import 'package:app/models/button_icons.dart';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/training.dart';
+import 'package:app/providers/training_list_state.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CreateTrainingForm extends BaseForm {
   final GlobalKey<FormState> formKey;
@@ -212,7 +214,7 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
             width: MediaQuery.of(context).size.width * 0.7,
             red: true,
             callback: () async {
-              await widget.instance.addNewExercise();
+              await widget.instance.addNewExercise(context);
               setState(() {});
             },
             icon: ButtonIcons.add_circle_outline,
@@ -227,7 +229,6 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                     height: 30,
                     text: 'Cancel',
                     callback: () {
-                      print('cancelling instance of id ${widget.instance.id}');
                       widget.instance.destroy(context);
                       Navigator.pop(context);
                     }),
@@ -236,15 +237,12 @@ class _CreateTrainingFormBodyState extends State<CreateTrainingFormBody> {
                     width: 100.0,
                     height: 30,
                     text: 'Save',
-                    callback: () {
+                    callback: () async {
                       if (widget.formKey.currentState!.validate()) {
-                        print('saving instance of id ${widget.instance.id}');
-                        print('No error');
-                        widget.instance.save(context);
+                        await widget.instance.save(context);
+                        Provider.of<TrainingListState>(context, listen: false).notify();
                         Navigator.pop(context);
-                      } else {
-                        print('error');
-                      }
+                      } 
                     }),
               ],
             ),

@@ -21,16 +21,6 @@ class TrainingPlansList extends StatefulWidget {
 class _TrainingPlansListState extends State<TrainingPlansList> {
   late Future<List<TrainingPlan>> futureTrainingPlans;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   void addListener() {
     Provider.of<PlanListState>(context, listen: false).addListener(() {
       setState(() {

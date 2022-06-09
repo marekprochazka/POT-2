@@ -108,13 +108,7 @@ class _CreateTrainingPlanFormBodyState
                     height: 30,
                     text: 'Cancel',
                     callback: () {
-                      try {
-                        widget.instance.destroy(context);
-                      } on UnauthorizedException catch (e) {
-                        handleUnauthorized(context, e.message);
-                      } catch (e) {
-                        showError(context, e.toString());
-                      }
+                      widget.instance.destroy(context);
                       Navigator.pop(context);
                     }),
                 const Spacer(),
@@ -124,9 +118,10 @@ class _CreateTrainingPlanFormBodyState
                     text: 'Save',
                     callback: () async {
                       if (widget.formKey.currentState!.validate()) {
-                          await widget.instance.save(context);
-                          Provider.of<PlanListState>(context, listen: false).notify();
-                          Navigator.pop(context);
+                        await widget.instance.save(context);
+                        Provider.of<PlanListState>(context, listen: false)
+                            .notify();
+                        Navigator.pop(context);
                       }
                     }),
               ],
