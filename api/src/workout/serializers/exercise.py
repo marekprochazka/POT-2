@@ -13,11 +13,12 @@ class ExerciseSerializer(BaseSerializer):
     order = serializers.IntegerField(read_only=True)
     overload_definition = OverloadDefinitionSerializer(required=False)
     last_overload_value = serializers.SerializerMethodField(read_only=True)
+    parent_id = serializers.UUIDField(read_only=True, source='training.id')
 
     class Meta:
         model = Exercise
         fields = ['id', 'exercise_name', 'overload_definition', 'order',
-                  'description', 'default_add_overload_value', 'overload_values', 'last_overload_value']
+                  'description', 'default_add_overload_value', 'overload_values', 'last_overload_value', 'parent_id']
 
     def get_overload_values(self, obj: Exercise) -> (str, None):
         return OverloadSerializerLite(obj.overloads_history_list, many=True).data

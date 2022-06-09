@@ -8,10 +8,11 @@ from workout.serializers.exercise import ExerciseSerializer
 class TrainingSerializer(BaseSerializer):
     id = serializers.UUIDField(read_only=True)
     exercises = ExerciseSerializer(many=True, read_only=True)
+    parent_id = serializers.UUIDField(read_only=True, source='training_plan.id')
 
     class Meta:
         model = Training
-        fields = ['id', 'training_name', 'exercises']
+        fields = ['id', 'training_name', 'exercises', 'parent_id']
 
     def create(self, validated_data) -> Training:
         plan: TrainingPlan = self.context.get('training_plan')
