@@ -30,11 +30,9 @@ class Overload extends BaseModel {
 
   @override
   Future<void> save(BuildContext context) async {
-    print('$exerciseName saved');
   }
 
   @override
   Future<void> destroy(BuildContext context) async {
-    print('$exerciseName destroyed');
   }
 }

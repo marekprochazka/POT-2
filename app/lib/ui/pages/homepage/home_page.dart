@@ -1,9 +1,7 @@
 import 'package:app/constants.dart';
-import 'package:app/providers/login_state.dart';
 import 'package:app/ui/base/base_page/base_page.dart';
 import 'package:app/ui/pages/homepage/components/training_plans_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -18,6 +18,7 @@ analyzer:
     prefer_const_constructors: error
     prefer_const_declarations: error
     exhaustive_cases: error
+    unused_import: error
 
 linter:
   # The lint rules applied to this project can be customized in the
@@ -39,6 +40,7 @@ linter:
     prefer_const_constructors: true
     prefer_const_declarations: true
     exhaustive_cases: true
+    unused_import: true
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

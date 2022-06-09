@@ -1,6 +1,5 @@
 import 'package:app/constants.dart';
 import 'package:app/init.dart';
-import 'package:app/models/environment.dart';
 import 'package:app/models/data/user.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/is_frozen_state.dart';
@@ -9,9 +8,7 @@ import 'package:app/providers/training_list_state.dart';
 import 'package:app/router.dart';
 import 'package:app/providers/login_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 Future<void> main() async {

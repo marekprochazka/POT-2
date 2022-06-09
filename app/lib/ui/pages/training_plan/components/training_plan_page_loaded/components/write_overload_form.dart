@@ -25,7 +25,6 @@ class WriteOverloadForm extends BaseForm {
 
   @override
   Future<void> handlePopOut() async {
-    print('destroying model of id ${model.id}');
     model.save(context);
   }
 }

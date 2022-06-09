@@ -20,11 +20,9 @@ class OverloadDefinition extends BaseModel {
 
   @override
   Future<void> save(BuildContext context) async {
-    print('$unit saved');
   }
   
   @override
   Future<void> destroy(BuildContext context) async {
-    print('$unit destroyed');
   }
 }

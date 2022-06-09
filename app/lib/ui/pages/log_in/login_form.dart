@@ -3,7 +3,6 @@
 import 'package:app/constants.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
-import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
 
 class LoginForm extends StatefulWidget {

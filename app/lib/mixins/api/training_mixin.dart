@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/providers/api_provider.dart';
-import 'package:app/utils/exceptions.dart';
 
 mixin TrainingMixin on BaseApiProvider {
   Future<List<Training>> getTrainings(String planId) async {

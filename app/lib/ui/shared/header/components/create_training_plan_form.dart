@@ -1,15 +1,11 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/base.dart';
 import 'package:app/models/data/training_plan.dart';
-import 'package:app/providers/handle_unauthorized.dart';
 import 'package:app/providers/plan_list_state.dart';
 import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_textfield/base_textfield.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
-import 'package:app/utils/exceptions.dart';
-import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CreateTrainingPlanForm extends BaseForm {
@@ -25,7 +21,6 @@ class CreateTrainingPlanForm extends BaseForm {
 
   @override
   Future<void> handlePopOut() async {
-    print('destroying model of id ${model.id}');
     model.destroy(context);
   }
 }

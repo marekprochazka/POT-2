@@ -2,7 +2,6 @@ import 'package:app/constants.dart';
 import 'package:app/models/button_icons.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_plan.dart';
-import 'package:app/models/header_icons.dart';
 import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/create_training_form.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';

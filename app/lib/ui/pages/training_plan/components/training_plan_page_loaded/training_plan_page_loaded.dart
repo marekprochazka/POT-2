@@ -1,4 +1,3 @@
-import 'package:app/constants.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/ui/base/base_page/base_page.dart';

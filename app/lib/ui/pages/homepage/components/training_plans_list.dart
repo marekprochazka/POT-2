@@ -1,12 +1,9 @@
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/providers/api_provider.dart';
-import 'package:app/providers/handle_unauthorized.dart';
 import 'package:app/providers/plan_list_state.dart';
 import 'package:app/ui/pages/homepage/components/plan_list_item.dart';
-import 'package:app/utils/exceptions.dart';
 import 'package:app/utils/handle_api_call.dart';
 import 'package:app/utils/loading_popup.dart';
-import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

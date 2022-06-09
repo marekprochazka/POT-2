@@ -1,22 +1,14 @@
 import 'dart:async';
 
-import 'package:app/constants.dart';
-import 'package:app/models/data/exercise.dart';
 import 'package:app/models/data/training.dart';
 import 'package:app/providers/api_provider.dart';
 import 'package:app/providers/training_list_state.dart';
-import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/edit_training_form.dart';
 import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/trainings_list_body.dart';
-import 'package:app/ui/pages/training_plan/components/training_plan_page_loaded/components/write_overload_form.dart';
-import 'package:app/ui/shared/buttons/pot_button.dart';
-import 'package:app/ui/shared/expansion_panel/pot_expansion_panel.dart';
 import 'package:app/utils/handle_api_call.dart';
 import 'package:app/utils/loading_popup.dart';
-import 'package:app/utils/show_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 
 
 class TrainingsList extends StatefulWidget {

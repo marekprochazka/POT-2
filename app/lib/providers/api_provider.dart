@@ -1,13 +1,9 @@
 import 'dart:convert';
-
-import 'package:app/constants.dart';
 import 'package:app/mixins/api/auth_mixin.dart';
 import 'package:app/mixins/api/exercise_mixin.dart';
 import 'package:app/mixins/api/training_active_mixin.dart';
 import 'package:app/mixins/api/training_mixin.dart';
 import 'package:app/mixins/api/training_plan_mixin.dart';
-import 'package:app/models/data/training_plan.dart';
-import 'package:app/models/data/user.dart';
 import 'package:app/models/environment.dart';
 import 'package:app/reverse/reverse.dart';
 import 'package:app/utils/exceptions.dart';

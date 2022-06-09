@@ -1,20 +1,14 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/training_plan.dart';
 import 'package:app/models/header_icons.dart';
-import 'package:app/providers/is_frozen_state.dart';
-import 'package:app/ui/base/base_form/base_form.dart';
 import 'package:app/ui/base/base_modal/base_modal.dart';
 import 'package:app/ui/shared/buttons/pot_button.dart';
 import 'package:app/ui/shared/header/components/create_training_plan_form.dart';
 import 'package:app/ui/shared/header/components/navbar_text.dart';
-import 'package:app/utils/exceptions.dart';
 import 'package:app/utils/loading_popup.dart';
-import 'package:app/utils/show_error.dart';
 import 'package:app/utils/show_modal.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:provider/provider.dart';
 
 class HeaderContent extends StatefulWidget {
   final String profilePicture;

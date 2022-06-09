@@ -1,14 +1,10 @@
 import 'package:app/constants.dart';
 import 'package:app/models/data/user.dart';
-import 'package:app/providers/api_provider.dart';
-import 'package:app/providers/login_state.dart';
 import 'package:app/ui/base/base_page/base_page.dart';
 import 'package:app/ui/pages/log_in/login_form.dart';
 import 'package:app/utils/exceptions.dart';
-import 'package:app/utils/show_error.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class LogInPage extends StatelessWidget {
   const LogInPage({Key? key}) : super(key: key);
