@@ -122,17 +122,17 @@ class _CreateTrainingPlanFormBodyState
                     width: 100.0,
                     height: 30,
                     text: 'Save',
-                    callback: () {
+                    callback: () async {
                       if (widget.formKey.currentState!.validate()) {
                         try {
-                          widget.instance.save(context);
+                          await widget.instance.save(context);
+                          Provider.of<PlanListState>(context, listen: false).notify();
+                          Navigator.pop(context);
                         } on UnauthorizedException catch (e) {
                           handleUnauthorized(context, e.message);
                         } catch (e) {
                           showError(context, e.toString());
                         }
-                        Navigator.pop(context);
-                        Provider.of<PlanListState>(context, listen: false).notify();
                       }
                     }),
               ],
