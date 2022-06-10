@@ -13,10 +13,10 @@ def upload_dir_plan_picture(instance, filename):
 
 class TrainingPlan(BaseModel):
     plan_name = models.CharField(verbose_name=_('Plan name'), max_length=128, null=True, blank=True)
-    owner = models.ForeignKey('core.Person', on_delete=models.CASCADE, verbose_name=_('Owner'), null=True, blank=True,
+    owner = models.ForeignKey('core.Person', on_delete=models.CASCADE, verbose_name=_('Owner'),
                               related_name='plans')
     plan_image = models.FileField(null=True, blank=True, upload_to=upload_dir_plan_picture,
-                                    verbose_name=_('Plan picture'))
+                                  verbose_name=_('Plan picture'))
     description = models.TextField(verbose_name=_('Description'), null=True, blank=True)
 
     @property

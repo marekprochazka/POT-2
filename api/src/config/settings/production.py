@@ -1,12 +1,9 @@
 from .base import *
+import dj_database_url
 
-DEBUG=False
+DEBUG = True
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': env.str('DB_NAME'),
-            'USER': env.str('DB_USER'),
-            'PASSWORD': env.str('DB_PASSWORD'),
-            'HOST': env.str('DB_HOST'),
-        }
-    }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+
+}
+

@@ -166,6 +166,7 @@ class _WriteOverloadFormBodyState extends State<WriteOverloadFormBody> {
                   text: 'Finish training',
                   callback: () async {
                     if (widget.formKey.currentState!.validate()) {
+                      await widget.instance.writeOverload(context);
                       await widget.instance.finish(context);
                       Provider.of<TrainingListState>(context, listen: false).notify();
                       Navigator.pop(context);
