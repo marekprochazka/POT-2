@@ -16,7 +16,8 @@ class POTRouter {
 
   late final router = GoRouter(
       refreshListenable: loginState,
-      urlPathStrategy: UrlPathStrategy.path,
+      urlPathStrategy: UrlPathStrategy.hash,
+      
       routes: <GoRoute>[
         GoRoute(
             name: RouteNames.homePage.name,
