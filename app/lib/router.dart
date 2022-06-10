@@ -17,55 +17,58 @@ class POTRouter {
   late final router = GoRouter(
       refreshListenable: loginState,
       urlPathStrategy: UrlPathStrategy.hash,
-      
       routes: <GoRoute>[
         GoRoute(
             name: RouteNames.homePage.name,
             path: RouteNames.homePage.path,
             pageBuilder: (context, state) => NoTransitionPage<void>(
-                key: state.pageKey, child: const HomePage())),
+                key: state.pageKey, child: const HomePage()),
+            routes: [
+              GoRoute(
+                  name: RouteNames.messagesPage.name,
+                  path: RouteNames.messagesPage.path,
+                  pageBuilder: (context, state) => NoTransitionPage<void>(
+                      key: state.pageKey, child: const MessagesPage())),
+              GoRoute(
+                  name: RouteNames.settingsPage.name,
+                  path: RouteNames.settingsPage.path,
+                  pageBuilder: (context, state) => NoTransitionPage<void>(
+                      key: state.pageKey, child: const SettingsPage())),
+              GoRoute(
+                  name: RouteNames.userInfoPage.name,
+                  path: RouteNames.userInfoPage.path,
+                  pageBuilder: (context, state) => NoTransitionPage<void>(
+                      key: state.pageKey, child: const UserInfoPage())),
+              GoRoute(
+                name: RouteNames.trainingPlanPage.name,
+                path: RouteNames.trainingPlanPage.path,
+                pageBuilder: (context, state) => NoTransitionPage<void>(
+                  key: state.pageKey,
+                  child: TrainingPlanPage(
+                    trainingPlanId: state.params['id']!,
+                  ),
+                ),
+              )
+            ]),
         GoRoute(
-            name: RouteNames.messagesPage.name,
-            path: RouteNames.messagesPage.path,
+            name: RouteNames.loginPage.name,
+            path: RouteNames.loginPage.path,
             pageBuilder: (context, state) => NoTransitionPage<void>(
-                key: state.pageKey, child: const MessagesPage())),
-        GoRoute(
-            name: RouteNames.settingsPage.name,
-            path: RouteNames.settingsPage.path,
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-                key: state.pageKey, child: const SettingsPage())),
-        GoRoute(
-            name: RouteNames.userInfoPage.name,
-            path: RouteNames.userInfoPage.path,
-            pageBuilder: (context, state) => NoTransitionPage<void>(
-                key: state.pageKey, child: const UserInfoPage())),
-        GoRoute(
-          name: RouteNames.loginPage.name,
-          path: RouteNames.loginPage.path,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-            key: state.pageKey,
-            child: const LogInPage(), 
-          ),
-        ),
-        GoRoute(
-          name: RouteNames.signInPage.name,
-          path: RouteNames.signInPage.path,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-            key: state.pageKey,
-            child: const SignInPage(), 
-          ),
-        ),
-        GoRoute(
-          name: RouteNames.trainingPlanPage.name,
-          path: RouteNames.trainingPlanPage.path,
-          pageBuilder: (context, state) => NoTransitionPage<void>(
-            key: state.pageKey,
-            child: TrainingPlanPage(trainingPlanId: state.params['id']!,), 
-          ),
-          
-        )
+                  key: state.pageKey,
+                  child: const LogInPage(),
+                ),
+            routes: [
+              GoRoute(
+                name: RouteNames.signInPage.name,
+                path: RouteNames.signInPage.path,
+                pageBuilder: (context, state) => NoTransitionPage<void>(
+                  key: state.pageKey,
+                  child: const SignInPage(),
+                ),
+              ),
+            ]),
       ],
-      errorBuilder: (context, state) => const HomePage(), 
+      errorBuilder: (context, state) => const HomePage(),
       redirect: (state) {
         final loginLocation = state.namedLocation(RouteNames.loginPage.name);
         final loggingIn = state.subloc == loginLocation;

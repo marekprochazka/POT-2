@@ -10,13 +10,13 @@ class Route {
 
 class RouteNames {
   static final homePage = Route(name: 'HOMEPAGE', path: '/');
-  static final errorPage = Route(name: 'ERRORPAGE', path: '/error');
+  static final errorPage = Route(name: 'ERRORPAGE', path: 'error');
   static final loginPage = Route(name: 'LOGINPAGE', path: '/login');
-  static final signInPage = Route(name: 'SIGNINPAGE', path: '/sign/in');
-  static final messagesPage = Route(name: 'MESSAGESPAGE', path: '/messages');
-  static final settingsPage = Route(name: 'SETTINGSPAGE', path: '/settings');
-  static final userInfoPage = Route(name: 'USERINFOPAGE', path: '/userInfo');
-  static final trainingPlanPage = Route(name: 'TRAININGPLANPAGE', path: '/trainingPlan/:id');
+  static final signInPage = Route(name: 'SIGNINPAGE', path: 'signin');
+  static final messagesPage = Route(name: 'MESSAGESPAGE', path: 'messages');
+  static final settingsPage = Route(name: 'SETTINGSPAGE', path: 'settings');
+  static final userInfoPage = Route(name: 'USERINFOPAGE', path: 'userInfo');
+  static final trainingPlanPage = Route(name: 'TRAININGPLANPAGE', path: 'trainingPlan/:id');
 
 
   static String getNameFromPath(String path) {
