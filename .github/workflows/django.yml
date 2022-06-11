@@ -33,6 +33,10 @@ jobs:
         echo "VERSION='local'" >> .env
         echo "SECRET_KEY='total_random_key_456777'" >> .env
         echo "ALLOWED_HOST='*'" >> .env
+    - name: Generate migrations
+      run: |
+        cd api/src
+        python manage.py makemigrations
     - name: Run Tests
       run: |
         cd api/src
