@@ -34,10 +34,10 @@
 | Setup backend                   | ✔      |
 | Make API                        | ✔      |
 | Make authentication             | ✔      |
-| Api hosting                     | ❌      |
-| Setup frontend                  | ❌      |
-| Create Frontend with dummy data | ❌      |
-| Connect Frontend with Api       | ❌      |
+| Api hosting                     | ✔     |
+| Setup frontend                  | ✔      |
+| Create Frontend with dummy data | ✔      |
+| Connect Frontend with Api       | ✔      |
 | Testing phase                   | ❌      |
 | More to come later              | ❌      |
 
