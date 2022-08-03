@@ -26,7 +26,7 @@
 - api version: __1.0.0__
 - app version: __0.0.0__
 
-<img src="https://progress-bar.dev/30/" alt="30%" width="200px">
+<img src="https://progress-bar.dev/66/" alt="66%" width="200px">
 
 | Description                     | Status |
 |---------------------------------|--------|
